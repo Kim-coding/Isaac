@@ -24,7 +24,7 @@ void TextGo::SetString(const std::string& str)
 
 void TextGo::Set(const sf::Font& texture,
 	const std::string& str,
-	int size, 
+	int size,
 	const sf::Color& color)
 {
 	SetFont(texture);

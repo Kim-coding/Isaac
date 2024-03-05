@@ -59,7 +59,7 @@ void SoundMgr::Update(float dt)
 		bool isEndFront = false;
 
 		int backBgmIndex = (frontBgmIndex == 1) ? 0 : 1;
-		
+
 		float backVolume = bgm[backBgmIndex].getVolume();
 		backVolume = Utils::Lerp(backVolume, 0.f, dt * fadeSpeed);
 		bgm[backBgmIndex].setVolume(backVolume);
@@ -93,7 +93,7 @@ void SoundMgr::PlayBgm(std::string id, bool crossFade)
 
 	bgm[frontBgmIndex].setBuffer(RES_MGR_SOUND_BUFFER.Get(id));
 
-	if(crossFade)
+	if (crossFade)
 	{
 		isFading = true;
 		bgm[frontBgmIndex].setVolume(0.f);

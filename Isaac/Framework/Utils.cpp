@@ -36,7 +36,7 @@ float Utils::RandomValue()
 float Utils::RandomRange(float min, float max)
 {
 	float value = RandomValue();
-	value *= max - min;	
+	value *= max - min;
 	value += min;
 	return value;
 }
@@ -45,7 +45,7 @@ sf::Vector2f Utils::RandomOnUnitCircle()
 {
 	sf::Transform rotation;
 	rotation.rotate(RandomRange(0.f, 360.f));
-	return rotation * sf::Vector2f (1.f, 0.f);
+	return rotation * sf::Vector2f(1.f, 0.f);
 }
 
 sf::Vector2f Utils::RandomInUnitCircle()

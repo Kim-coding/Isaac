@@ -51,12 +51,6 @@
     <ClCompile Include="Framework\Framework.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\Spawner.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjects\SpriteGoEffect.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\SoundMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -70,12 +64,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\SceneTitle.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Isaac.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,16 +110,7 @@
     <ClInclude Include="Framework\Framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjects\Spawner.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjects\SpriteGoEffect.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\SoundMgr.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTables\rapidcsv.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="DataTables\DataTable.h">
@@ -143,13 +122,10 @@
     <ClInclude Include="DataTables\StringTable.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="DataTables\rapidcsv.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Animator.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\SceneTitle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Isaac.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

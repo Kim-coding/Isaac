@@ -58,12 +58,12 @@ void InputMgr::UpdateEvent(const sf::Event& ev)
         }
         break;
     case sf::Event::MouseButtonReleased:
-        {
-            sf::Keyboard::Key button = MouseButtonToKey(ev.mouseButton.button);
-            ingList.remove(button);
-            upList.push_back(button);
-        }
-        break;
+    {
+        sf::Keyboard::Key button = MouseButtonToKey(ev.mouseButton.button);
+        ingList.remove(button);
+        upList.push_back(button);
+    }
+    break;
     }
 }
 
@@ -84,7 +84,7 @@ void InputMgr::Update(float dt)
         {
             speed *= 2.f;
         }
- 
+
         axisInfo.value += speed * axisInfo.sensi * dt;
         axisInfo.value = Utils::Clamp(axisInfo.value, -1.f, 1.f);
 

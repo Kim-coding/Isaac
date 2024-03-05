@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "DataTableMgr.h"
-#include "StringTable.h"
-#include "ZombieTable.h"
+//#include "StringTable.h"
 
 DataTableMgr::DataTableMgr()
 {
@@ -16,13 +15,9 @@ void DataTableMgr::Init()
 {
 	Release();
 
-	DataTable* table = new StringTable(DataTable::Types::String);
+	/*DataTable* table = new StringTable(DataTable::Types::String);
 	table->Load();
-	tables.insert({ DataTable::Types::String, table });
-
-	ZombieTable* zombieTable = new ZombieTable(DataTable::Types::Zombie);
-	zombieTable->Load();
-	tables.insert({ DataTable::Types::Zombie, zombieTable });
+	tables.insert({ DataTable::Types::String, table });*/
 }
 
 void DataTableMgr::Release()

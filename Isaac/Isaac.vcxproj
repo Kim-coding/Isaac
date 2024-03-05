@@ -154,18 +154,14 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Isaac.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
     <ClCompile Include="Scenes\SceneDev1.cpp" />
     <ClCompile Include="Scenes\SceneDev2.cpp" />
     <ClCompile Include="GameObjects\SpriteGo.cpp" />
     <ClCompile Include="GameObjects\TextGo.cpp" />
-    <ClCompile Include="GameObjects\Spawner.cpp" />
-    <ClCompile Include="GameObjects\SpriteGoEffect.cpp" />
     <ClCompile Include="Framework\SoundMgr.cpp" />
     <ClCompile Include="DataTables\StringTable.cpp" />
-    <ClCompile Include="Scenes\SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
@@ -180,18 +176,14 @@
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Isaac.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
     <ClInclude Include="Scenes\SceneDev1.h" />
     <ClInclude Include="Scenes\SceneDev2.h" />
     <ClInclude Include="GameObjects\SpriteGo.h" />
     <ClInclude Include="GameObjects\TextGo.h" />
-    <ClInclude Include="GameObjects\Spawner.h" />
-    <ClInclude Include="GameObjects\SpriteGoEffect.h" />
     <ClInclude Include="Framework\SoundMgr.h" />
     <ClInclude Include="DataTables\StringTable.h" />
-    <ClInclude Include="Scenes\SceneTitle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
