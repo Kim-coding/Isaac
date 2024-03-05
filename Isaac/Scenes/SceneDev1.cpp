@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SceneDev1.h"
-#include "AniTest.h"
+
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -19,7 +19,7 @@ void SceneDev1::Init()
 	uiView.setSize(windowSize);
 	uiView.setCenter(centerPos);
 
-	AddGo(new AniTest());
+	/*AddGo(new AniTest());*/
 	Scene::Init();
 	
 }

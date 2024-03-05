@@ -13,6 +13,7 @@
 #include <string>
 #include <queue>
 #include <fstream>
+#include <functional>
 
 // SFML
 #include <SFML/Graphics.hpp>
@@ -30,3 +31,4 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "StringTable.h"
+#include "Animator.h"

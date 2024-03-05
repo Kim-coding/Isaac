@@ -1,8 +1,6 @@
 #pragma once
 #include "GameObject.h"
 
-class SceneGame;
-
 class Spawner : public GameObject
 {
 protected:
@@ -12,7 +10,6 @@ protected:
 
 	float timer = 0.f;
 
-	SceneGame* sceneGame = nullptr;
 	virtual GameObject* Create() = 0;
 
 public:

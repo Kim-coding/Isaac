@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Spawner.h"
-#include "SceneGame.h"
 
 Spawner::Spawner(const std::string& name) : GameObject(name)
 {
@@ -9,10 +8,6 @@ Spawner::Spawner(const std::string& name) : GameObject(name)
 void Spawner::Spawn()
 {
 	sf::Vector2f pos = position + Utils::RandomInRing(radius, 200.f);
-	if (sceneGame != nullptr)
-	{
-		pos = sceneGame->ClampByTileMap(pos);
-	}
 	GameObject* newGo = Create();
 	newGo->Init();
 	newGo->Reset();
@@ -48,7 +43,6 @@ void Spawner::Reset()
 	radius = 250.f;
 	timer = 0.f;
 
-	sceneGame = dynamic_cast<SceneGame*>(SCENE_MGR.GetCurrentScene());
 }
 
 void Spawner::Update(float dt)

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class AnimationLoopTime
+enum class AnimationLoopType
 {
 	Single,        // 1 2 3 
 	Loop,          // 1 2 3 1 2 3
@@ -28,22 +28,32 @@ struct AnimationClip
 {
 	std::string id;
 	std::vector<AnimationFrame> frames;
-	AnimationLoopTime looptype = AnimationLoopTime::Single;
+	AnimationLoopType looptype = AnimationLoopType::Single;
 	int fps = 30;
 
 	int GetTotalFrame() const
 	{
 		return frames.size();
 	}
+
+	bool loadFromFile(const std::string& filePath);
+};
+
+struct AnimationEvent
+{
+	std::string clipId;
+	int frame;
+	std::function<void()> action;             //반환형 void 매개변수 없음
 };
 
 class Animator
 {
 protected:
-	std::unordered_map<std::string, AnimationClip> clips;   //클립을 담아서 출력
-	float speed = 1.f;
-
+	//std::unordered_map<std::string, AnimationClip> clips;   //클립을 담아서 출력
 	std::queue<std::string> queue;
+	std::list<AnimationEvent> eventList;
+
+	float speed = 1.f;
 
 	bool isPlaying = false;
 	AnimationClip* currentClip = nullptr;   //현재 플레이중인 애니매이션
@@ -60,7 +70,10 @@ public:
 	Animator();
 	~Animator();
 
-	void AddClip(const AnimationClip& clip);
+	//void AddClip(const AnimationClip& clip);
+
+	void AddEvent(const std::string& clipId, int frame, std::function<void()> action);
+	void ClearEvent();
 
 	bool IsPlaying() const { return isPlaying; }
 	const std::string& GetCurrentCilpId()
