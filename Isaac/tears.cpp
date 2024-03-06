@@ -1,22 +1,23 @@
 #include "pch.h"
-#include "tears.h"
+#include "Tears.h"
+#include "SceneDev1.h"
 
-tears::tears(const std::string& name)
+Tears::Tears(const std::string& name)
 {
 }
 
-tears::~tears()
+Tears::~Tears()
 {
 }
 
-void tears::Cry(const sf::Vector2f& dir, float s, int d)
+void Tears::Cry(const sf::Vector2f& dir, float s, int d)
 {
 	direction = dir;
 	speed = s;
 	damage = d;
 }
 
-void tears::Init()
+void Tears::Init()
 {
 	SpriteGo::Init();
 	SetTexture("graphics/tear.png");
@@ -25,17 +26,23 @@ void tears::Init()
 	hasHitBox = true;
 }
 
-void tears::Reset()
+void Tears::Reset()
 {
 	SpriteGo::Reset();
+
+	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
+
 }
 
-void tears::Update(float dt)
+void Tears::Update(float dt)
 {
-	SetPosition(position + direction * speed * dt);
-
+	SetPosition(position + direction * speed * dt);     // 甘苞 面倒 贸府
+	if (sceneDev1 != nullptr)                       
+	{
+		
+	}
 }
 
-void tears::FixedUpdate(float dt)
+void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府
 {
 }

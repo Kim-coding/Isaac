@@ -2,6 +2,8 @@
 #include "SpriteGo.h"
 #include "Animator.h"
 
+class SceneDev1;
+
 class PlayerIsaac : public SpriteGo
 {
 public:
@@ -23,7 +25,14 @@ public:
 
 protected:
 	Animator animator;
+	SceneDev1* sceneDev1 = nullptr;
 
+	static std::string IdleDown;
+	static std::string IdleSide;
+	static std::string IdleUp;
+	static std::string MoveDown;
+	static std::string MoveSide;
+	static std::string MoveUp;
 
 	sf::Vector2f direction;
 	float speed = 400.f;
@@ -38,12 +47,12 @@ protected:
 	float noDamageTime = 0.5f;
 	float noDamageTimer = 0.f;
 
-	static std::string IdleDown;
-	static std::string IdleSide;
-	static std::string IdleUp;
-	static std::string MoveDown;
-	static std::string MoveSide;
-	static std::string MoveUp;
+	bool isCrying = false;
+	float cryInterval = 0.5f;
+	float cryTimer = 0.f;
+	float tearsSpeed = 1000.f;
+	int tearsDamage = 10;
+
 
 public:
 	PlayerIsaac(const std::string& name = "");
