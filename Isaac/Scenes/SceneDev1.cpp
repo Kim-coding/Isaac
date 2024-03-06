@@ -11,12 +11,28 @@ SceneDev1::~SceneDev1()
 {
 }
 
+bool SceneDev1::IsInMap(const sf::Vector2f& point)
+{
+	sf::FloatRect rect = spriteGoBackground->GetGlobalBounds();
+	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
+
+	return rect.contains(point);
+}
+
+sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
+{
+	sf::FloatRect rect = spriteGoBackground->GetGlobalBounds();
+	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
+
+	return Utils::Clamp(point, rect);
+}
+
 void SceneDev1::Init()
 {
 	spriteGoBackground = new SpriteGo("StartRoom");
 	spriteGoBackground->SetTexture("graphics/StartRoom.png");
 	spriteGoBackground->SetOrigin(Origins::MC);
-	spriteGoBackground->SetScale({3,3});
+	spriteGoBackground->SetScale({2,2});
 	spriteGoBackground->SetPosition({ 0.f,0.f });
 	AddGo(spriteGoBackground);
 

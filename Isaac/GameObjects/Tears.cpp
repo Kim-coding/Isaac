@@ -21,8 +21,8 @@ void Tears::Init()
 {
 	SpriteGo::Init();
 	SetTexture("graphics/tear.png");
-	SetOrigin(Origins::ML);
-
+	SetOrigin(Origins::MC);
+	SetScale({ 0.4,0.4 });
 	hasHitBox = true;
 }
 
@@ -39,7 +39,11 @@ void Tears::Update(float dt)
 	SetPosition(position + direction * speed * dt);     // 맵과 충돌 처리
 	if (sceneDev1 != nullptr)                       
 	{
-		
+		if (!sceneDev1->IsInMap(position))
+		{
+			SetActive(false);
+			sceneDev1->RemoveGo(this);
+		}
 	}
 }
 

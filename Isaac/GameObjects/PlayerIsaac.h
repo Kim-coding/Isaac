@@ -35,6 +35,7 @@ protected:
 	static std::string MoveUp;
 
 	sf::Vector2f direction;
+	sf::Vector2f attackDirection;
 	float speed = 400.f;
 
 	std::vector<ClipInfo> clipInfos;
@@ -53,6 +54,10 @@ protected:
 	float tearsSpeed = 1000.f;
 	int tearsDamage = 10;
 
+	bool left = false;
+	bool Right = false;
+	bool Up = false;
+	bool Down = false;
 
 public:
 	PlayerIsaac(const std::string& name = "");

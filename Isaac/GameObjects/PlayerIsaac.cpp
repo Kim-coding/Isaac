@@ -31,9 +31,9 @@ void PlayerIsaac::Init()
 {
 	SpriteGo::Init();
 
-	animator.SetTarget(&sprite);
+	SetScale({ 1.5,1.5 });
 
-	SetScale({ 2,2 });
+	animator.SetTarget(&sprite);
 
 	clipInfos.push_back({ IdleSide, MoveSide, true, Utils::GetNormal({-1,-1}) });
 	clipInfos.push_back({ IdleUp, MoveUp, false, {0, -1} });
@@ -76,7 +76,14 @@ void PlayerIsaac::Update(float dt)
 	{
 		direction /= mag;
 	}
-	Translate(direction * speed * dt);
+
+	sf::Vector2f pos = position + direction * speed * dt;
+	if (sceneDev1 != nullptr)
+	{
+		pos = sceneDev1->ClampByMap(pos);
+
+	}
+	SetPosition(pos);
 
 	if (direction.x != 0.f || direction.y != 0.f)    
 	{
@@ -98,8 +105,38 @@ void PlayerIsaac::Update(float dt)
 		animator.Play(clipId);
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Left)|| InputMgr::GetKeyDown(sf::Keyboard::Right)|| 
-		InputMgr::GetKeyDown(sf::Keyboard::Up)|| InputMgr::GetKeyDown(sf::Keyboard::Down))
+	if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+	{
+		isCrying = true;
+		left = true;
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Right))
+	{
+		isCrying = true;
+		Right = true;
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+	{
+		isCrying = true;
+		Up = true;
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		isCrying = true;
+		Down = true;
+	}
+	
+	if (InputMgr::GetKeyUp(sf::Keyboard::Left) || InputMgr::GetKeyUp(sf::Keyboard::Right) ||
+		InputMgr::GetKeyUp(sf::Keyboard::Up) || InputMgr::GetKeyUp(sf::Keyboard::Down))
+	{
+		isCrying = false;
+		left = false;
+		Right = false;
+		Up = false;
+		Down = false;
+
+	}
+	if (isCrying)
 	{
 		cryTimer += dt;
 		if (cryTimer > cryInterval)
@@ -112,28 +149,46 @@ void PlayerIsaac::Update(float dt)
 
 void PlayerIsaac::Cry() //공격
 {
-	Tears* tears = new Tears();
-	tears->Init();
-	tears->Reset();
+	if (left)
+	{
+		Tears* tears = new Tears();
+		tears->Init();
+		tears->Reset();
 
-	tears->SetPosition(position);                      //머리 위치로 변경해야함
-	if (InputMgr::GetKeyDown(sf::Keyboard::Left))      //키 입력에 따른 발사 위치 변경
-	{
+		tears->SetPosition(position);
 		tears->Cry({-1,0}, tearsSpeed, tearsDamage);
+		sceneDev1->AddGo(tears);
 	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Right))
+	if (Right)
 	{
+		Tears* tears = new Tears();
+		tears->Init();
+		tears->Reset();
+
+		tears->SetPosition(position);
 		tears->Cry({ 1,0 }, tearsSpeed, tearsDamage);
+		sceneDev1->AddGo(tears);
 	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+	if (Up)
 	{
+		Tears* tears = new Tears();
+		tears->Init();
+		tears->Reset();
+
+		tears->SetPosition(position);
 		tears->Cry({ 0,-1 }, tearsSpeed, tearsDamage);
+		sceneDev1->AddGo(tears);
 	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+	if (Down)
 	{
+		Tears* tears = new Tears();
+		tears->Init();
+		tears->Reset();
+
+		tears->SetPosition(position);
 		tears->Cry({ 0,1 }, tearsSpeed, tearsDamage);
+		sceneDev1->AddGo(tears);
 	}
-	sceneDev1->AddGo(tears);
 }
 
 void PlayerIsaac::OnDamage(int damage)
