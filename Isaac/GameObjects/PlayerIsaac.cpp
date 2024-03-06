@@ -193,8 +193,25 @@ void PlayerIsaac::Cry() //АјАн
 
 void PlayerIsaac::OnDamage(int damage)
 {
+	if (!isAlive || isNoDamage)
+		return;
+
+	hp -= damage;
+
+	isNoDamage = true;
+	noDamageTimer = 0.f;
+
+	if (hp <= 0)
+	{
+		hp = 0;
+		OnDie();
+	}
 }
 
 void PlayerIsaac::OnDie()
 {
+	if (!isAlive)
+		return;
+
+	isAlive = false;
 }

@@ -35,7 +35,6 @@ protected:
 	static std::string MoveUp;
 
 	sf::Vector2f direction;
-	sf::Vector2f attackDirection;
 	float speed = 400.f;
 
 	std::vector<ClipInfo> clipInfos;
