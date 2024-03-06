@@ -4,7 +4,7 @@
 #include "SceneDev1.h"
 
 std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
-std::string PlayerIsaac::IdleSide = "animators/IdleDown.csv";
+std::string PlayerIsaac::IdleSide = "animators/IdleSide.csv";
 std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
 std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
 std::string PlayerIsaac::MoveSide = "animators/MoveSide.csv";
