@@ -13,10 +13,10 @@ void InputMgr::Init()
     AxisInfo infoH;
     infoH.axis = Axis::Horizontal;
     infoH.positives.push_back(sf::Keyboard::D);
-    infoH.positives.push_back(sf::Keyboard::Right);
+    //infoH.positives.push_back(sf::Keyboard::Right);      //Left,Right,Down,Up => 공격으로 사용할 예정
 
     infoH.negatives.push_back(sf::Keyboard::A);
-    infoH.negatives.push_back(sf::Keyboard::Left);
+    //infoH.negatives.push_back(sf::Keyboard::Left);
 
     infoH.sensi = 8.f;
     infoH.value = 0.f;
@@ -26,9 +26,9 @@ void InputMgr::Init()
     AxisInfo infoV;
     infoV.axis = Axis::Vertical;
     infoV.positives.push_back(sf::Keyboard::S);
-    infoV.positives.push_back(sf::Keyboard::Down);
+    //infoV.positives.push_back(sf::Keyboard::Down);
     infoV.negatives.push_back(sf::Keyboard::W);
-    infoV.negatives.push_back(sf::Keyboard::Up);
+    //infoV.negatives.push_back(sf::Keyboard::Up);
     infoV.sensi = 8.f;
     infoV.value = 0.f;
     axisInfoMap.insert({ infoV.axis, infoV });

@@ -5,7 +5,7 @@ class Scene;
 
 enum class SceneIds
 {
-	None = -1, SceneTitle, SceneDev1, SceneDev2, Count,
+	None = -1, SceneDev1, SceneDev2, Count,
 };
 
 class SceneMgr : public Singleton<SceneMgr>
