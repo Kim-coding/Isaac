@@ -13,16 +13,16 @@ SceneDev1::~SceneDev1()
 
 bool SceneDev1::IsInMap(const sf::Vector2f& point)
 {
-	sf::FloatRect rect = spriteGoBackground->GetGlobalBounds();
-	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
+	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
+	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetScale());
 
 	return rect.contains(point);
 }
 
 sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
 {
-	sf::FloatRect rect = spriteGoBackground->GetGlobalBounds();
-	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
+	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
+	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetScale());
 
 	return Utils::Clamp(point, rect);
 }
@@ -35,6 +35,13 @@ void SceneDev1::Init()
 	spriteGoBackground->SetScale({2,2});
 	spriteGoBackground->SetPosition({ 0.f,0.f });
 	AddGo(spriteGoBackground);
+
+	spriteGoBackgroundfloor = new SpriteGo("StartRoomFloor");
+	spriteGoBackgroundfloor->SetTexture("graphics/StartRoomFloor.png");
+	spriteGoBackgroundfloor->SetOrigin(Origins::MC);
+	spriteGoBackgroundfloor->SetScale({ 2,2 });
+	spriteGoBackgroundfloor->SetPosition({ 0.f,0.f });
+	AddGo(spriteGoBackgroundfloor);
 
 	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = windowSize * 0.5f;

@@ -6,6 +6,8 @@ class SceneDev1;
 
 class PlayerIsaac : public SpriteGo
 {
+	std::map<sf::Keyboard::Key, sf::Vector2f> directionMap;
+
 public:
 	struct ClipInfo
 	{
@@ -69,7 +71,7 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 
-	void Cry();           //발사체 : 눈물 공격
+	void Cry(sf::Vector2f direction);           //발사체 : 눈물 공격
 
 	void OnDamage(int damage);
 	void OnDie();

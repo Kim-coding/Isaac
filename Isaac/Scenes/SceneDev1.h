@@ -6,7 +6,7 @@ class SceneDev1 : public Scene
 {
 protected:
 	SpriteGo* spriteGoBackground;
-
+	SpriteGo* spriteGoBackgroundfloor;
 public:
 	SceneDev1(SceneIds id);
 	virtual ~SceneDev1();

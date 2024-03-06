@@ -4,8 +4,6 @@
 #include "SceneDev1.h"
 
 std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
-std::string PlayerIsaac::IdleSide = "animators/IdleSide.csv";
-std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
 std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
 std::string PlayerIsaac::MoveSide = "animators/MoveSide.csv";
 std::string PlayerIsaac::MoveUp = "animators/MoveUp.csv";
@@ -35,18 +33,25 @@ void PlayerIsaac::Init()
 
 	animator.SetTarget(&sprite);
 
-	clipInfos.push_back({ IdleSide, MoveSide, true, Utils::GetNormal({-1,-1}) });
-	clipInfos.push_back({ IdleUp, MoveUp, false, {0, -1} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, Utils::GetNormal({1,-1}) });
+	clipInfos.push_back({ IdleDown, MoveSide, true, Utils::GetNormal({-1,-1}) });
+	clipInfos.push_back({ IdleDown, MoveUp, false, {0, -1} });
+	clipInfos.push_back({ IdleDown, MoveSide, false, Utils::GetNormal({1,-1}) });
 
-	clipInfos.push_back({ IdleSide, MoveSide, true, {-1, 0} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, {1, 0} });
+	clipInfos.push_back({ IdleDown, MoveSide, true, {-1, 0} });
+	clipInfos.push_back({ IdleDown, MoveSide, false, {1, 0} });
 
-	clipInfos.push_back({ IdleSide, MoveSide, true, Utils::GetNormal({-1,1}) });
+	clipInfos.push_back({ IdleDown, MoveSide, true, Utils::GetNormal({-1,1}) });
 	clipInfos.push_back({ IdleDown, MoveDown, false, {0, 1} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, Utils::GetNormal({1, 1}) });
+	clipInfos.push_back({ IdleDown, MoveSide, false, Utils::GetNormal({1, 1}) });
 
 	cryTimer = cryInterval;
+
+	directionMap = {
+		{sf::Keyboard::Left, {-1, 0}},
+		{sf::Keyboard::Right, {1, 0}},
+		{sf::Keyboard::Up, {0, -1}},
+		{sf::Keyboard::Down, {0, 1}}
+	};
 
 	hasHitBox = true;
 }
@@ -58,7 +63,7 @@ void PlayerIsaac::Reset()
 	SetPosition({0.f,0.f});
 	SetFlipX(false);
 
-	currentClipInfo = clipInfos[6];
+	currentClipInfo = clipInfos[4];
 
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 
@@ -105,90 +110,33 @@ void PlayerIsaac::Update(float dt)
 		animator.Play(clipId);
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+	for (auto& pair : directionMap) //키 입력에 따른 공격방향
 	{
-		isCrying = true;
-		left = true;
-	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Right))
-	{
-		isCrying = true;
-		Right = true;
-	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Up))
-	{
-		isCrying = true;
-		Up = true;
-	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
-	{
-		isCrying = true;
-		Down = true;
-	}
-	
-	if (InputMgr::GetKeyUp(sf::Keyboard::Left) || InputMgr::GetKeyUp(sf::Keyboard::Right) ||
-		InputMgr::GetKeyUp(sf::Keyboard::Up) || InputMgr::GetKeyUp(sf::Keyboard::Down))
-	{
-		isCrying = false;
-		left = false;
-		Right = false;
-		Up = false;
-		Down = false;
-
-	}
-	if (isCrying)
-	{
-		cryTimer += dt;
-		if (cryTimer > cryInterval)
+		if (InputMgr::GetKeyDown(pair.first)) 
 		{
-			Cry();
-			cryTimer = 0.f;
+			isCrying = true;
+			Cry(pair.second);
+			break; 
+		}
+		if (InputMgr::GetKeyUp(pair.first))
+		{
+			isCrying = false;
 		}
 	}
 }
 
-void PlayerIsaac::Cry() //공격
+void PlayerIsaac::Cry(sf::Vector2f direction) 
 {
-	if (left)
-	{
-		Tears* tears = new Tears();
-		tears->Init();
-		tears->Reset();
+	sf::Vector2f pos;              //임시 머리와 몸통을 분리하면 머리 포지션으로 맞춰서 할 예정
+	pos.x = position.x;
+	pos.y = position.y - 50;
 
-		tears->SetPosition(position);
-		tears->Cry({-1,0}, tearsSpeed, tearsDamage);
-		sceneDev1->AddGo(tears);
-	}
-	if (Right)
-	{
-		Tears* tears = new Tears();
-		tears->Init();
-		tears->Reset();
-
-		tears->SetPosition(position);
-		tears->Cry({ 1,0 }, tearsSpeed, tearsDamage);
-		sceneDev1->AddGo(tears);
-	}
-	if (Up)
-	{
-		Tears* tears = new Tears();
-		tears->Init();
-		tears->Reset();
-
-		tears->SetPosition(position);
-		tears->Cry({ 0,-1 }, tearsSpeed, tearsDamage);
-		sceneDev1->AddGo(tears);
-	}
-	if (Down)
-	{
-		Tears* tears = new Tears();
-		tears->Init();
-		tears->Reset();
-
-		tears->SetPosition(position);
-		tears->Cry({ 0,1 }, tearsSpeed, tearsDamage);
-		sceneDev1->AddGo(tears);
-	}
+	Tears* tears = new Tears();
+	tears->Init();
+	tears->Reset();
+	tears->SetPosition(pos);
+	tears->Cry(direction, tearsSpeed, tearsDamage);
+	sceneDev1->AddGo(tears);
 }
 
 void PlayerIsaac::OnDamage(int damage)
