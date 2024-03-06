@@ -73,8 +73,8 @@ void SceneDev1::Update(float dt)
 {
 	Scene::Update(dt);
 
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Space))  //모든 몬스터 처치 + 문과 충돌 시 ~
-	//{
-	//	SceneMgr::Instance().ChangeScene(SceneIds::SceneDev2);
-	//}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	{
+		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
+	}
 }
