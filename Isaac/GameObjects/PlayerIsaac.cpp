@@ -57,32 +57,33 @@ void PlayerIsaac::Reset()
 
 void PlayerIsaac::Update(float dt)
 {
+	SpriteGo::Update(dt);
 	animator.Update(dt);
 
 	direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
 	direction.y = InputMgr::GetAxisRaw(Axis::Vertical);
 
 	float mag = Utils::Magnitude(direction);
-	if (mag > 1.f)            //대각 이동 속도가 빨라지게 되므로
+	if (mag > 1.f)            
 	{
 		direction /= mag;
 	}
-	Translate(direction * speed * dt);
+	Translate(direction * speed * dt);               
 
-	if (direction.x != 0.f || direction.y != 0.f)
+	if (direction.x != 0.f || direction.y != 0.f)     
 	{
-		auto min = std::min_element(clipInfos.begin(), clipInfos.end(),
-			[this](const ClipInfo& lhs, const ClipInfo& rhs)
+		auto min = std::min_element(clipInfos.begin(), clipInfos.end(),  
+			[this](const ClipInfo& lhs, const ClipInfo& rhs)          
 			{
 				return Utils::Distance(direction, lhs.point) < Utils::Distance(direction, rhs.point);
 			});
-		currentClipInfo = *min;
+		currentClipInfo = *min;                                         
 	}
 
-	SetFlipX(currentClipInfo.filpX);
+	SetFlipX(currentClipInfo.filpX);                                 
 
 	const std::string& clipId = (direction.x != 0.f || direction.y != 0.f) ?
-		currentClipInfo.move : currentClipInfo.idle;
+		currentClipInfo.move : currentClipInfo.idle;                 
 
 	if (animator.GetCurrentCilpId() != clipId)
 	{
