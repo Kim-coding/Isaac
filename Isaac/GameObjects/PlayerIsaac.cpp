@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "PlayerIsaac.h"
+#include "tears.h"
 
 std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
 std::string PlayerIsaac::IdleSide = "animators/IdleSide.csv";
@@ -92,6 +93,7 @@ void PlayerIsaac::Update(float dt)
 
 void PlayerIsaac::Cry() //АјАн
 {
+
 }
 
 void PlayerIsaac::OnDamage(int damage)
