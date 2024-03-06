@@ -3,6 +3,8 @@
 #include "Tears.h"
 #include "SceneDev1.h"
 
+std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
+std::string PlayerIsaac::IdleSide = "animators/IdleDown.csv";
 std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
 std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
 std::string PlayerIsaac::MoveSide = "animators/MoveSide.csv";
@@ -63,7 +65,7 @@ void PlayerIsaac::Reset()
 	SetPosition({0.f,0.f});
 	SetFlipX(false);
 
-	currentClipInfo = clipInfos[4];
+	currentClipInfo = clipInfos[6];
 
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 
@@ -116,7 +118,6 @@ void PlayerIsaac::Update(float dt)
 		{
 			isCrying = true;
 			Cry(pair.second);
-			break; 
 		}
 		if (InputMgr::GetKeyUp(pair.first))
 		{

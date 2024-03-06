@@ -14,7 +14,7 @@ SceneDev1::~SceneDev1()
 bool SceneDev1::IsInMap(const sf::Vector2f& point)
 {
 	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
-	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetScale());
+	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
 
 	return rect.contains(point);
 }
