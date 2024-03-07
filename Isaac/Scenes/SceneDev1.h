@@ -7,6 +7,9 @@ class SceneDev1 : public Scene
 protected:
 	SpriteGo* spriteGoBackground;
 	SpriteGo* spriteGoBackgroundfloor;
+	SpriteGo* regularRoom;
+	SpriteGo* regularRoomfloor;
+	SpriteGo* door;
 public:
 	SceneDev1(SceneIds id);
 	virtual ~SceneDev1();
