@@ -53,11 +53,36 @@ void SceneDev1::Init()
 	//spriteGoBackgroundfloor->SetRotation(90);
 	AddGo(spriteGoBackgroundfloor);
 	
+	
+
+	door = new SpriteGo("door");
+	door->SetTexture("graphics/door.png");
+	door->SetOrigin(Origins::TC);
+	door->SetScale({ 2, 2 });
+	door->SetRotation(90);
+	door->SetPosition({ 450.f, 0.f });
+	AddGo(door);
+
+	///////////////////////////////////
 	regularRoom = new SpriteGo("RegularRoom");
 	regularRoom->SetTexture("graphics/Catacombs.png");
 	regularRoom->SetOrigin(Origins::MC);
 	regularRoom->SetScale({ 2, 2 });
-	regularRoom->SetPosition({1000.f,0.f});
+	regularRoom->SetPosition({ -1000.f, 0.f });
+	AddGo(regularRoom);
+
+	regularRoomfloor = new SpriteGo("regularRoomfloor");
+	regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+	regularRoomfloor->SetOrigin(Origins::MC);
+	regularRoomfloor->SetScale({ 2, 2 });
+	regularRoomfloor->SetPosition({ -1000.f, 0.f });
+	AddGo(regularRoomfloor);
+
+	regularRoom = new SpriteGo("RegularRoom");
+	regularRoom->SetTexture("graphics/Catacombs.png");
+	regularRoom->SetOrigin(Origins::MC);
+	regularRoom->SetScale({ 2, 2 });
+	regularRoom->SetPosition({ 1000.f, 0.f });
 	AddGo(regularRoom);
 
 	regularRoomfloor = new SpriteGo("regularRoomfloor");
@@ -66,6 +91,8 @@ void SceneDev1::Init()
 	regularRoomfloor->SetScale({ 2, 2 });
 	regularRoomfloor->SetPosition({ 1000.f, 0.f });
 	AddGo(regularRoomfloor);
+	/////////////////////////////////
+
 
 	//문 생성  :  어떤 방향의 문으로 들어갔는 지 다음 방에게 넘겨 줘야함.
 	//문 위치  :  바닥 각 변의 중앙 값
