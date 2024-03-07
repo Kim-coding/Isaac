@@ -91,9 +91,9 @@ void SceneDev1::Init()
 	AddGo(regularRoomfloor);
 	/////////////////////////////////
 	
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 2; ++i)                           // 문 위치 랜덤 생성
 	{
-		int rand = Utils::RandomRange(0, 4);              //0, 1, 2, 3 선택
+		int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
 		sf::Vector2f doorpos = doorPosition[rand * 90];
 
 		door = new SpriteGo("door");
