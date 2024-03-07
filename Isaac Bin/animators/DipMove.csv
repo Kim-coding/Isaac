@@ -1,0 +1,9 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+DipMove,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Dip.png,8,6,15,19
+graphics/Dip.png,38,6,18,19
+graphics/Dip.png,70,6,30,19
+graphics/Dip.png,10,36,12,25
+graphics/Dip.png,42,36,12,25

@@ -89,10 +89,13 @@ void PlayerIsaac::Update(float dt)
 	sf::Vector2f pos = position + direction * speed * dt;
 	if (sceneDev1 != nullptr)
 	{
-		if (!sceneDev1->IsInMap(position))
+		//문과 충돌 상황
+		if (sceneDev1->crashDoor(pos))
 		{
-			pos = sceneDev1->ClampByMap(pos);
+			std::cout << "crashDoor" << std::endl;
+
 		}
+		pos = sceneDev1->ClampByMap(pos);
 	}
 	SetPosition(pos);
 
@@ -136,6 +139,8 @@ void PlayerIsaac::Cry(sf::Vector2f direction)
 	sf::Vector2f pos;              //임시 머리와 몸통을 분리하면 머리 포지션으로 맞춰서 할 예정
 	pos.x = position.x;
 	pos.y = position.y - 50;
+
+	//animator.Play();
 
 	Tears* tears = new Tears();
 	tears->Init();

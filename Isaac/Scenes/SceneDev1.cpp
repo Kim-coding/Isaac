@@ -14,7 +14,7 @@ SceneDev1::~SceneDev1()
 bool SceneDev1::IsInMap(const sf::Vector2f& point)
 {
 	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
-	rect = Utils::ResizeRect(rect, spriteGoBackground->GetScale());
+	rect = Utils::ResizeRect(rect, spriteGoBackground->GetSize());
 
 	return rect.contains(point);
 }
@@ -22,18 +22,32 @@ bool SceneDev1::IsInMap(const sf::Vector2f& point)
 sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
 {
 	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
-	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetScale());
+	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetSize());
 
 	return Utils::Clamp(point, rect);
+}
+
+bool SceneDev1::crashDoor(const sf::Vector2f point)
+{
+	for (auto& door : doors)
+	{ 
+		sf::FloatRect rect = door->GetGlobalBounds();
+		rect = Utils::ResizeRect(rect, door->GetSize());
+		if (rect.contains(point)) 
+		{
+			return true; 
+		}
+	}
+	return false; 
 }
 
 void SceneDev1::Init()
 {
 	doorPosition = {
-		{0, { 0.f, -280.f}},
-		{90, {450.f, 0.f}},
-		{180, {0.f, 280.f}},
-		{270, { -450.f, 0.f}}
+		{0, { 0.f, -210.f}},
+		{90, {380.f, 0.f}},
+		{180, {0.f, 210.f}},
+		{270, { -380.f, 0.f}}
 	};
 
 
@@ -98,11 +112,12 @@ void SceneDev1::Init()
 
 		door = new SpriteGo("door");
 		door->SetTexture("graphics/door.png");
-		door->SetOrigin(Origins::TC);
+		door->SetOrigin(Origins::BC);
 		door->SetScale({ 2, 2 });
 		door->SetRotation(rand * 90);
 		door->SetPosition(doorpos);
 		AddGo(door);
+		doors.push_back(door);
 	}
 
 	AddGo(new PlayerIsaac());
