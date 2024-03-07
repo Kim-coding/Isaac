@@ -19,9 +19,9 @@ bool SceneDev1::IsInMap(const sf::Vector2f& point)
 	return rect.contains(point);
 }
 
-sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
+sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //시작 방 바닥 경계검사
 {
-	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();
+	sf::FloatRect rect = spriteGoBackgroundfloor->GetGlobalBounds();      
 	rect = Utils::ResizeRect(rect, spriteGoBackgroundfloor->GetSize());
 
 	return Utils::Clamp(point, rect);
@@ -37,8 +37,15 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 		{
 			return true; 
 		}
+
 	}
 	return false; 
+}
+
+void SceneDev1::nextRoom()
+{
+	//카메라 위치 조정
+	//바닥 경계검사 대상 변경
 }
 
 void SceneDev1::Init()
@@ -117,7 +124,7 @@ void SceneDev1::Init()
 		door->SetRotation(rand * 90);
 		door->SetPosition(doorpos);
 		AddGo(door);
-		doors.push_back(door);
+		doors.push_back(door);                            //플레이어 - 문 충돌 처리를 하기 위함
 	}
 
 	AddGo(new PlayerIsaac());

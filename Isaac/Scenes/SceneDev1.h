@@ -13,6 +13,8 @@ protected:
 	SpriteGo* regularRoomfloor;
 	SpriteGo* door;
 
+
+	std::vector<SpriteGo> floor;
 	std::vector<SpriteGo*> doors;
 public:
 	SceneDev1(SceneIds id);
@@ -22,6 +24,7 @@ public:
 	sf::Vector2f ClampByMap(const sf::Vector2f point);
 
 	bool crashDoor(const sf::Vector2f point);
+	void nextRoom();
 
 	void Init() override;
 	void Release() override;

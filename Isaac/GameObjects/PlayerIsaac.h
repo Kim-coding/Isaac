@@ -55,10 +55,7 @@ protected:
 	float tearsSpeed = 1000.f;
 	int tearsDamage = 10;
 
-	bool left = false;
-	bool Right = false;
-	bool Up = false;
-	bool Down = false;
+	bool doorCrash = false;
 
 public:
 	PlayerIsaac(const std::string& name = "");
