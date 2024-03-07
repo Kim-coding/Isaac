@@ -22,7 +22,7 @@ void Tears::Init()
 	SpriteGo::Init();
 	SetTexture("graphics/tear.png");
 	SetOrigin(Origins::MC);
-	SetScale({ 0.4,0.4 });
+	//SetScale({ 0.4,0.4 });
 	hasHitBox = true;
 }
 

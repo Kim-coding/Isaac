@@ -4,6 +4,8 @@ class SpriteGo;
 
 class SceneDev1 : public Scene
 {
+	std::map<int, sf::Vector2f> doorPosition;
+
 protected:
 	SpriteGo* spriteGoBackground;
 	SpriteGo* spriteGoBackgroundfloor;

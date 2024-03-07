@@ -55,6 +55,8 @@ void PlayerIsaac::Init()
 		{sf::Keyboard::Down, {0, 1}}
 	};
 
+
+
 	hasHitBox = true;
 }
 
@@ -87,10 +89,13 @@ void PlayerIsaac::Update(float dt)
 	sf::Vector2f pos = position + direction * speed * dt;
 	if (sceneDev1 != nullptr)
 	{
-		pos = sceneDev1->ClampByMap(pos);
-
+		if (!sceneDev1->IsInMap(position))
+		{
+			pos = sceneDev1->ClampByMap(pos);
+		}
 	}
 	SetPosition(pos);
+
 
 	if (direction.x != 0.f || direction.y != 0.f)    
 	{

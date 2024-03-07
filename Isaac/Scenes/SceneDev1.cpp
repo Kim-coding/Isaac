@@ -29,6 +29,14 @@ sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
 
 void SceneDev1::Init()
 {
+	doorPosition = {
+		{0, { 0.f, -280.f}},
+		{90, {450.f, 0.f}},
+		{180, {0.f, 280.f}},
+		{270, { -450.f, 0.f}}
+	};
+
+
 	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = windowSize * 0.5f;
 	worldView.setSize(windowSize);
@@ -52,16 +60,6 @@ void SceneDev1::Init()
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	//spriteGoBackgroundfloor->SetRotation(90);
 	AddGo(spriteGoBackgroundfloor);
-	
-	
-
-	door = new SpriteGo("door");
-	door->SetTexture("graphics/door.png");
-	door->SetOrigin(Origins::TC);
-	door->SetScale({ 2, 2 });
-	door->SetRotation(90);
-	door->SetPosition({ 450.f, 0.f });
-	AddGo(door);
 
 	///////////////////////////////////
 	regularRoom = new SpriteGo("RegularRoom");
@@ -92,28 +90,20 @@ void SceneDev1::Init()
 	regularRoomfloor->SetPosition({ 1000.f, 0.f });
 	AddGo(regularRoomfloor);
 	/////////////////////////////////
-
-
-	//문 생성  :  어떤 방향의 문으로 들어갔는 지 다음 방에게 넘겨 줘야함.
-	//문 위치  :  바닥 각 변의 중앙 값
-	int rand = Utils::RandomRange(2, 5);  //2, 3 ,4 : 문의 개수
-	switch (rand)
+	
+	for (int i = 0; i < 2; ++i)
 	{
-	case 2:
+		int rand = Utils::RandomRange(0, 4);              //0, 1, 2, 3 선택
+		sf::Vector2f doorpos = doorPosition[rand * 90];
+
 		door = new SpriteGo("door");
-		//door->SetTexture();
-		door->SetOrigin(Origins::BC);
-		//door->SetPosition();        
-
-		break;
-	case 3:
-
-		break;
-	case 4:
-
-		break;
+		door->SetTexture("graphics/door.png");
+		door->SetOrigin(Origins::TC);
+		door->SetScale({ 2, 2 });
+		door->SetRotation(rand * 90);
+		door->SetPosition(doorpos);
+		AddGo(door);
 	}
-
 
 	AddGo(new PlayerIsaac());
 	Scene::Init();
