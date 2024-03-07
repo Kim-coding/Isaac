@@ -91,13 +91,15 @@ void PlayerIsaac::Update(float dt)
 	sf::Vector2f pos = position + direction * speed * dt;
 	if (sceneDev1->crashDoor(pos))	//문과 충돌 
 	{
-		//std::cout << "crashDoor" << std::endl;
-		// 문과 충돌 시 방 이동 구현 할 자리
 		sceneDev1->nextRoom();
 	}
-	else if (sceneDev1 != nullptr)  //벽과 충돌
+	else if (!doorCrash && sceneDev1 != nullptr)  //벽과 충돌
 	{
 		pos = sceneDev1->ClampByMap(pos);
+	}
+	else
+	{
+
 	}
 	SetPosition(pos);
 
