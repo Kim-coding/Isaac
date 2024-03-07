@@ -60,6 +60,12 @@ void SceneDev1::Init()
 	regularRoom->SetPosition({1000.f,0.f});
 	AddGo(regularRoom);
 
+	regularRoomfloor = new SpriteGo("regularRoomfloor");
+	regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+	regularRoomfloor->SetOrigin(Origins::MC);
+	regularRoomfloor->SetScale({ 2, 2 });
+	regularRoomfloor->SetPosition({ 1000.f, 0.f });
+	AddGo(regularRoomfloor);
 
 	//문 생성  :  어떤 방향의 문으로 들어갔는 지 다음 방에게 넘겨 줘야함.
 	//문 위치  :  바닥 각 변의 중앙 값
