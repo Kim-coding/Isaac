@@ -6,7 +6,8 @@ class SceneDev1;
 
 class PlayerIsaac : public SpriteGo
 {
-	std::map<sf::Keyboard::Key, sf::Vector2f> directionMap;
+	std::map<sf::Keyboard::Key, sf::Vector2f> tearDirection;
+	std::map<sf::Keyboard::Key, std::string> cryDirection;
 
 public:
 	struct ClipInfo
@@ -30,10 +31,12 @@ protected:
 	SceneDev1* sceneDev1 = nullptr;
 
 	static std::string IdleDown;
-	static std::string IdleSide;
+	static std::string IdleRight;
+	static std::string IdleLeft;
 	static std::string IdleUp;
 	static std::string MoveDown;
-	static std::string MoveSide;
+	static std::string MoveRight;
+	static std::string MoveLeft;
 	static std::string MoveUp;
 
 	sf::Vector2f direction;

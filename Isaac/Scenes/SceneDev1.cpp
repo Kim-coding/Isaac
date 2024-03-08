@@ -31,6 +31,9 @@ sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //시작 방 바닥 경
 
 bool SceneDev1::crashDoor(const sf::Vector2f point)
 {
+	if (!monsterList.empty()) 
+		return false;            // 몬스터가 남아있다면 문과 충돌 X
+
 	for (auto& door : doors)
 	{ 
 		sf::FloatRect rect = door->GetGlobalBounds();
@@ -67,23 +70,25 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 				currentFloor = Rooms[doorIndex / 2];
 				sf::Vector2f centerPosition = currentFloor->GetPosition() + (currentFloor->GetSize() / 2.0f);
 				worldView.setCenter(centerPosition);
+
+				if (currentFloor != spriteGoBackgroundfloor)     // 시작 방이 아닌 방에서 몬스터 생성
+				{
+					sf::Vector2f pos;
+					pos.x = (currentFloor->GetSize().x) * 2;
+					pos.y = (currentFloor->GetSize().y) * 2;
+					auto dip = new Dip("monster");
+					dip->Init();
+					dip->Reset();
+
+					dip->SetPosition(pos);
+					AddGo(dip);
+				}
+				
 			}
 
 		}
 	}
 
-	/*if (currentFloor == regularRoomfloor)
-	{
-		currentFloor = spriteGoBackgroundfloor;
-		sf::Vector2f centerPosition = spriteGoBackgroundfloor->GetPosition() + (spriteGoBackgroundfloor->GetSize() / 2.0f);
-		worldView.setCenter(centerPosition);
-	}
-	else
-	{
-		currentFloor = regularRoomfloor;
-		sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
-		worldView.setCenter(centerPosition);
-	}*/
 }
 
 
@@ -119,7 +124,8 @@ void SceneDev1::Init()
 	uiView.setCenter(centerPos);
 
 	//방
-	spriteGoBackground = new SpriteGo("StartRoom");
+
+	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
 	spriteGoBackground->SetTexture("graphics/StartRoom.png");
 	spriteGoBackground->SetOrigin(Origins::MC);
 	spriteGoBackground->SetScale({2,2});
@@ -179,12 +185,14 @@ void SceneDev1::Init()
 		door->SetPosition(nextdoorpos);
 		AddGo(door);
 		doors.push_back(door);
-	}
-	
+	}  
 
 	AddGo(new PlayerIsaac("Isaac"));
-	AddGo(new Charger("monster"));
-	AddGo(new Dip("monster"));
+	for (int i = 0; i < 2; ++i)
+	{
+		AddGo(new Charger("monster"));
+		AddGo(new Dip("monster"));
+	}
 	Scene::Init();
 }
 
@@ -209,69 +217,21 @@ void SceneDev1::Update(float dt)
 	
 	FindGoAll("monster", monsterList, Layers::World);
 
+	std::string doorTexture = monsterList.empty() ? "graphics/door.png" : "graphics/closeDoor.png";
+
+	for (auto& door : doors) {
+		door->SetTexture(doorTexture);
+	}
+
+
 	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))  
 	{
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 	}
 
-	switch (currStatus)
-	{
-	case Status::Awake:
-		UpdateAwake(dt);
-		break;
-	case Status::Game:
-		UpdateGame(dt);
-		break;
-	case Status::NextRoom:
-		UpdateNextRome(dt);
-		break;
-	case Status::Pause:
-		UpdatePause(dt);
-		break;
-	}
-}
-
-void SceneDev1::UpdateAwake(float dt)
-{
-}
-
-void SceneDev1::UpdateGame(float dt)
-{
-
-}
-
-void SceneDev1::UpdateNextRome(float dt)
-{
-	//Status::NextRoom에 들어오고 방이 충돌하지 않을 때까지 유지
-
-
-}
-
-void SceneDev1::UpdatePause(float dt)
-{
 }
 
 void SceneDev1::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-}
-
-void SceneDev1::SetStatus(Status newStatus)
-{
-	Status prevStatus = currStatus;
-	currStatus = newStatus;
-
-	switch (currStatus)
-	{
-	case Status::Awake:
-		break;
-	case Status::Game:
-
-		break;
-	case Status::NextRoom:
-
-		break;
-	case Status::Pause:
-		break;
-	}
 }

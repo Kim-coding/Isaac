@@ -4,10 +4,12 @@
 #include "SceneDev1.h"
 
 std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
-std::string PlayerIsaac::IdleSide = "animators/IdleSide.csv";
+std::string PlayerIsaac::IdleRight = "animators/IdleRight.csv";
+std::string PlayerIsaac::IdleLeft = "animators/IdleLeft.csv";
 std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
 std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
-std::string PlayerIsaac::MoveSide = "animators/MoveSide.csv";
+std::string PlayerIsaac::MoveRight = "animators/MoveRight.csv";
+std::string PlayerIsaac::MoveLeft = "animators/MoveLeft.csv";
 std::string PlayerIsaac::MoveUp = "animators/MoveUp.csv";
 
 PlayerIsaac::PlayerIsaac(const std::string& name)
@@ -35,26 +37,32 @@ void PlayerIsaac::Init()
 
 	animator.SetTarget(&sprite);
 
-	clipInfos.push_back({ IdleDown, MoveSide, true, Utils::GetNormal({-1,-1}) });
+	clipInfos.push_back({ IdleDown, MoveLeft, false, Utils::GetNormal({-1,-1}) });
 	clipInfos.push_back({ IdleDown, MoveUp, false, {0, -1} });
-	clipInfos.push_back({ IdleDown, MoveSide, false, Utils::GetNormal({1,-1}) });
+	clipInfos.push_back({ IdleDown, MoveRight, false, Utils::GetNormal({1,-1}) });
 
-	clipInfos.push_back({ IdleDown, MoveSide, true, {-1, 0} });
-	clipInfos.push_back({ IdleDown, MoveSide, false, {1, 0} });
+	clipInfos.push_back({ IdleDown, MoveLeft, false, {-1, 0} });
+	clipInfos.push_back({ IdleDown, MoveRight, false, {1, 0} });
 
-	clipInfos.push_back({ IdleDown, MoveSide, true, Utils::GetNormal({-1,1}) });
+	clipInfos.push_back({ IdleDown, MoveLeft, false, Utils::GetNormal({-1,1}) });
 	clipInfos.push_back({ IdleDown, MoveDown, false, {0, 1} });
-	clipInfos.push_back({ IdleDown, MoveSide, false, Utils::GetNormal({1, 1}) });
+	clipInfos.push_back({ IdleDown, MoveRight, false, Utils::GetNormal({1, 1}) });
 
 	cryTimer = cryInterval;
 
-	directionMap = {
+	tearDirection = {
 		{sf::Keyboard::Left, {-1, 0}},
 		{sf::Keyboard::Right, {1, 0}},
 		{sf::Keyboard::Up, {0, -1}},
 		{sf::Keyboard::Down, {0, 1}}
 	};
-
+	cryDirection =
+	{
+		{sf::Keyboard::Left, IdleLeft},
+		{sf::Keyboard::Right, IdleRight},
+		{sf::Keyboard::Up, IdleUp},
+		{sf::Keyboard::Down, IdleDown }
+	};
 
 
 	hasHitBox = true;
@@ -90,7 +98,7 @@ void PlayerIsaac::Update(float dt)
 	if (sceneDev1->crashDoor(pos) && !timer /*&& !monsterCount*/)	//문과 충돌 //타이머 //몬스터 수 체크 후 0이면 충돌 가능
 	{
 		sceneDev1->nextRoom(pos);
-		timer = 0.3;
+		timer = 0.3f;
 		doorCrash = true;
 	}
 	else if (sceneDev1 != nullptr && !doorCrash)  //벽과 충돌
@@ -131,7 +139,16 @@ void PlayerIsaac::Update(float dt)
 		animator.Play(clipId);
 	}
 
-	for (auto& pair : directionMap) //키 입력에 따른 공격방향
+
+	for (auto& pair : cryDirection)
+	{
+		if (InputMgr::GetKey(pair.first))
+		{
+			animator.Play(pair.second);
+		}
+	}
+
+	for (auto& pair : tearDirection) //키 입력에 따른 공격방향
 	{
 		if (InputMgr::GetKeyDown(pair.first)) 
 		{
@@ -143,6 +160,7 @@ void PlayerIsaac::Update(float dt)
 			isCrying = false;
 		}
 	}
+	
 }
 
 void PlayerIsaac::Cry(sf::Vector2f direction) 
