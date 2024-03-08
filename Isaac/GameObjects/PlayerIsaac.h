@@ -49,6 +49,9 @@ protected:
 	float noDamageTime = 0.5f;
 	float noDamageTimer = 0.f;
 
+	float timer = 0.f;
+	float timerInterval = 3.f;
+
 	bool isCrying = false;
 	float cryInterval = 0.5f;
 	float cryTimer = 0.f;

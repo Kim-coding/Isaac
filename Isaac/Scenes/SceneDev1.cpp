@@ -11,47 +11,6 @@ SceneDev1::~SceneDev1()
 {
 }
 
-void SceneDev1::SetGrid()
-{
-	grid.clear();
-	grid.setPrimitiveType(sf::Lines);
-	grid.resize((col + 1 + row + 1) * 2);
-
-	sf::Vector2f startLine = { 0.f, 0.f };
-	sf::Vector2f endLine = startLine;
-
-	int gridIndex = 0;
-
-	for (int i = 0; i < row + 1; ++i) //가로격자
-	{
-		startLine = { offsetX ,offsetY + (i * size) };
-		endLine = { (float)FRAMEWORK.GetWindowSize().x - offsetX, startLine.y };
-
-		grid[gridIndex].color = sf::Color::Red;
-		grid[gridIndex].position = startLine;
-		grid[gridIndex + 1].color = sf::Color::Red;
-		grid[gridIndex + 1].position = endLine;
-
-		gridIndex += 2;
-	}
-
-	startLine = { 0.f, 0.f };
-	endLine = startLine;
-
-	for (int i = 0; i < col + 1; ++i) //세로격자
-	{
-		startLine = { offsetX + (i * size), offsetY };
-		endLine = { startLine.x, (float)FRAMEWORK.GetWindowSize().y - offsetY };
-
-		grid[gridIndex].color = sf::Color::Red;
-		grid[gridIndex].position = startLine;
-		grid[gridIndex + 1].color = sf::Color::Red;
-		grid[gridIndex + 1].position = endLine;
-
-		gridIndex += 2;
-	}
-}
-
 bool SceneDev1::IsInMap(const sf::Vector2f& point)
 {
 	sf::FloatRect rect = currentFloor->GetGlobalBounds();
@@ -97,6 +56,7 @@ void SceneDev1::nextRoom()
 		sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
 		worldView.setCenter(centerPosition);
 	}
+
 }
 
 void SceneDev1::Init()
@@ -107,7 +67,12 @@ void SceneDev1::Init()
 		{180, {0.f, 210.f}},
 		{270, { -380.f, 0.f}}
 	};
-
+	nextDoorPosition = {
+		{0, { 0.f, -440.f}},
+		{90, {620.f, 0.f}},
+		{180, {0.f, 440.f}},
+		{270, { -620.f, 0.f}}
+	};
 
 	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = windowSize * 0.5f;
@@ -136,7 +101,7 @@ void SceneDev1::Init()
 	currentFloor = spriteGoBackgroundfloor;
 
 	///////////////////////////////////
-	regularRoom = new SpriteGo("RegularRoom");
+	regularRoom = new SpriteGo("RegularRoom");               //왼쪽 방
 	regularRoom->SetTexture("graphics/Catacombs.png");
 	regularRoom->SetOrigin(Origins::MC);
 	regularRoom->SetScale({ 2, 2 });
@@ -150,7 +115,7 @@ void SceneDev1::Init()
 	regularRoomfloor->SetPosition({ -1000.f, 0.f });
 	AddGo(regularRoomfloor);
 
-	regularRoom = new SpriteGo("RegularRoom");
+	regularRoom = new SpriteGo("RegularRoom");               //오른쪽 방
 	regularRoom->SetTexture("graphics/Catacombs.png");
 	regularRoom->SetOrigin(Origins::MC);
 	regularRoom->SetScale({ 2, 2 });
@@ -163,12 +128,42 @@ void SceneDev1::Init()
 	regularRoomfloor->SetScale({ 2, 2 });
 	regularRoomfloor->SetPosition({ 1000.f, 0.f });
 	AddGo(regularRoomfloor);
+
+	regularRoom = new SpriteGo("RegularRoom");               //아래 방
+	regularRoom->SetTexture("graphics/Catacombs.png");
+	regularRoom->SetOrigin(Origins::MC);
+	regularRoom->SetScale({ 2, 2 });
+	regularRoom->SetPosition({ 0.f, 650.f });
+	AddGo(regularRoom);
+
+	regularRoomfloor = new SpriteGo("regularRoomfloor");
+	regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+	regularRoomfloor->SetOrigin(Origins::MC);
+	regularRoomfloor->SetScale({ 2, 2 });
+	regularRoomfloor->SetPosition({ 0.f, 650.f });
+	AddGo(regularRoomfloor);
+
+	regularRoom = new SpriteGo("RegularRoom");               //위 방
+	regularRoom->SetTexture("graphics/Catacombs.png");
+	regularRoom->SetOrigin(Origins::MC);
+	regularRoom->SetScale({ 2, 2 });
+	regularRoom->SetPosition({ 0.f, -650.f });
+	AddGo(regularRoom);
+
+	regularRoomfloor = new SpriteGo("regularRoomfloor");
+	regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+	regularRoomfloor->SetOrigin(Origins::MC);
+	regularRoomfloor->SetScale({ 2, 2 });
+	regularRoomfloor->SetPosition({ 0.f, -650.f });
+	AddGo(regularRoomfloor);
+
 	/////////////////////////////////
 	
 	for (int i = 0; i < 2; ++i)                           // 문 위치 랜덤 생성
 	{
 		int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
 		sf::Vector2f doorpos = doorPosition[rand * 90];
+		sf::Vector2f nextdoorpos = nextDoorPosition[rand * 90];
 
 		door = new SpriteGo("door");
 		door->SetTexture("graphics/door.png");
@@ -177,17 +172,19 @@ void SceneDev1::Init()
 		door->SetRotation(rand * 90);
 		door->SetPosition(doorpos);
 		AddGo(door);
-		doors.push_back(door);                            //플레이어 - 문 충돌 처리를 하기 위함
+		doors.push_back(door);                          
+	
+		door = new SpriteGo("door");                       //생성된 문에 맞게 다음 문 생성.
+		door->SetTexture("graphics/door.png");
+		door->SetOrigin(Origins::BC);
+		door->SetScale({ 2, 2 });
+		door->SetRotation(rand * 90 + 180);
+		door->SetPosition(nextdoorpos);
+		AddGo(door);
+		doors.push_back(door);
 	}
 
-	door = new SpriteGo("door");
-	door->SetTexture("graphics/door.png");
-	door->SetOrigin(Origins::BC);
-	door->SetScale({ 2, 2 });
-	door->SetRotation(270);
-	door->SetPosition({620,0});
-	AddGo(door);
-	doors.push_back(door);
+	
 
 	AddGo(new PlayerIsaac());
 	Scene::Init();
@@ -217,55 +214,50 @@ void SceneDev1::Update(float dt)
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 		currentFloor = spriteGoBackgroundfloor;
 	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::F1))
+
+	switch (currStatus)
 	{
-		SetGrid();
-	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::F2))
-	{
-		grid.clear();
+	case Status::Awake:
+		UpdateAwake(dt);
+		break;
+	case Status::Game:
+		UpdateGame(dt);
+		break;
+	case Status::Pause:
+		UpdatePause(dt);
+		break;
 	}
 }
 
-void SceneDev1::SetMap()
+void SceneDev1::UpdateAwake(float dt)
 {
-	for (int i = 0; i < mapLayout.size(); ++i) //10번 반복
-	{
-		for (int j = 0; j < mapLayout[i].length(); ++j) //20번 반복
-		{
-			char mapObjChar = mapLayout[i][j];
+}
 
-			MapObject mapObj;
+void SceneDev1::UpdateGame(float dt)
+{
+}
 
-			switch (mapObjChar)
-			{
-			case'E': mapObj = MapObject::empty;
-				break;
-			case'W': mapObj = MapObject::wall;
-				break;
-			default: mapObj = MapObject::empty;
-				break;
-			}
-			int index = i * col + j;
-		}
-	}
+void SceneDev1::UpdatePause(float dt)
+{
 }
 
 void SceneDev1::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-
-	window.draw(grid);
 }
 
-
-bool SceneDev1::CheckInteraction(int index, sf::Keyboard::Key key)
+void SceneDev1::SetStatus(Status newStatus)
 {
-	/*if (mapObj[index] == MapObject::wall)
+	Status prevStatus = currStatus;
+	currStatus = newStatus;
+
+	switch (currStatus)
 	{
-		player->currentIndex = player->prevIndex;
-		return false;
+	case Status::Awake:
+		break;
+	case Status::Game:
+		break;
+	case Status::Pause:
+		break;
 	}
-	mapObj[player->prevIndex] = MapObject::empty;
-	return true;*/
 }
