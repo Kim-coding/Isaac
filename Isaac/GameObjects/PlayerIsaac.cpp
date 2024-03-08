@@ -86,35 +86,30 @@ void PlayerIsaac::Update(float dt)
 		direction /= mag;
 	}
 
-
-
 	sf::Vector2f pos = position + direction * speed * dt;
-	if (sceneDev1->crashDoor(pos) && !doorCrash)	//문과 충돌 
+	if (sceneDev1->crashDoor(pos) && !timer /*&& !monsterCount*/)	//문과 충돌 //타이머 //몬스터 수 체크 후 0이면 충돌 가능
 	{
-		doorCrash = true;
 		sceneDev1->nextRoom();
+		timer = 0.3;
+		doorCrash = true;
 	}
-	else if (!doorCrash && sceneDev1 != nullptr)  //벽과 충돌
+	else if (sceneDev1 != nullptr && !doorCrash)  //벽과 충돌
 	{
-		
 		pos = sceneDev1->ClampByMap(pos);
+		timer -= dt;
 	}
 	else
 	{
-
+		doorCrash = false;
 	}
-	if (doorCrash)
-	{
-		timer += dt;
-		if (timer > timerInterval)
-		{
-			doorCrash = false;
-		}
-	}
-
 	SetPosition(pos);
 
-	
+	if (timer < 0.f) 
+	{
+		timer = 0.f;
+	}
+
+
 
 	if (direction.x != 0.f || direction.y != 0.f)    
 	{
@@ -152,7 +147,7 @@ void PlayerIsaac::Update(float dt)
 
 void PlayerIsaac::Cry(sf::Vector2f direction) 
 {
-	sf::Vector2f pos;              //임시 머리와 몸통을 분리하면 머리 포지션으로 맞춰서 할 예정
+	sf::Vector2f pos;            
 	pos.x = position.x;
 	pos.y = position.y - 30;
 

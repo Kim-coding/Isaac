@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Tears.h"
+#include "Monster.h"
 #include "SceneDev1.h"
 
 Tears::Tears(const std::string& name)
@@ -49,4 +50,22 @@ void Tears::Update(float dt)
 
 void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府
 {
+	const std::list<GameObject*>& list = sceneDev1->GetMonsterList();
+
+	for (auto go : list)
+	{
+		if (!go->GetActive())
+			continue;
+
+		if (GetGlobalBounds().intersects(go->GetGlobalBounds()))
+		{
+			SetActive(false);
+			sceneDev1->RemoveGo(this);
+
+			Monster* charger = dynamic_cast<Monster*>(go);
+			if (charger != nullptr)
+				charger->OnDamage(damage);
+
+		}
+	}
 }

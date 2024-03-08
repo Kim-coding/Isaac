@@ -167,6 +167,7 @@
     <ClCompile Include="Framework\SoundMgr.cpp" />
     <ClCompile Include="DataTables\StringTable.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="SpriteGoEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
@@ -181,7 +182,7 @@
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="GameObjects\PlayerIsaac.h" />
-    <ClInclude Include="GameObjects\tears.h" />
+    <ClInclude Include="GameObjects\Tears.h" />
     <ClInclude Include="GameObjects\TileMap.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="pch.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Framework\SoundMgr.h" />
     <ClInclude Include="DataTables\StringTable.h" />
     <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="SpriteGoEffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
