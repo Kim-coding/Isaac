@@ -18,7 +18,6 @@ protected:
 
 	SpriteGo* currentFloor;
 
-	PlayerIsaac* player;
 	Charger* charger;
 
 	std::vector<SpriteGo*> doors;
@@ -26,6 +25,8 @@ protected:
 	std::list<GameObject*> monsterList;
 
 public:
+	PlayerIsaac* player;
+
 	SceneDev1(SceneIds id);
 	virtual ~SceneDev1();
 

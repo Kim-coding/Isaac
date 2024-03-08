@@ -86,7 +86,7 @@ void Charger::Update(float dt)
         }
         directionChangeTimer = 1.f;
     }
-   
+
     directionChangeTimer -= dt;
 	
     if (sceneDev1 != nullptr) 
