@@ -37,27 +37,42 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 		rect = Utils::ResizeRect(rect, door->GetSize());
 		if (rect.contains(point)) 
 		{
-			//size_t doorIndex = std::distance(doors.begin(), std::find(doors.begin(), doors.end(), door));
-
 			return true; 
 		}
 	}
 	return false; 
 }
 
-//void SceneDev1::MoveToNextRoom(size_t doorIndex)
-//{
-//	size_t nextRoomIndex = (doorIndex + 1) % doors.size();
-//
-//	currentFloor = regularRoomfloor;
-//
-//	sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
-//	worldView.setCenter(centerPosition);
-//}
 
-void SceneDev1::nextRoom()
+void SceneDev1::nextRoom(const sf::Vector2f point)
 {
-	if (currentFloor == regularRoomfloor)
+	for (auto& door : doors)
+	{
+		sf::FloatRect rect = door->GetGlobalBounds();
+		rect = Utils::ResizeRect(rect, door->GetSize());
+		if (rect.contains(point))
+		{
+			//충돌한 문 인덱스 찾기
+			//인덱스번호 홀수 -> 시작방
+			//인덱스/2 -> Rooms[인덱스/2]에 저장된 해당 방으로
+			size_t doorIndex = std::distance(doors.begin(), std::find(doors.begin(), doors.end(), door));
+			if (doorIndex % 2 == 1)
+			{
+				currentFloor = spriteGoBackgroundfloor;
+				sf::Vector2f centerPosition = spriteGoBackgroundfloor->GetPosition() + (spriteGoBackgroundfloor->GetSize() / 2.0f);
+				worldView.setCenter(centerPosition);
+			}
+			else
+			{
+				currentFloor = Rooms[doorIndex / 2];
+				sf::Vector2f centerPosition = currentFloor->GetPosition() + (currentFloor->GetSize() / 2.0f);
+				worldView.setCenter(centerPosition);
+			}
+
+		}
+	}
+
+	/*if (currentFloor == regularRoomfloor)
 	{
 		currentFloor = spriteGoBackgroundfloor;
 		sf::Vector2f centerPosition = spriteGoBackgroundfloor->GetPosition() + (spriteGoBackgroundfloor->GetSize() / 2.0f);
@@ -68,7 +83,7 @@ void SceneDev1::nextRoom()
 		currentFloor = regularRoomfloor;
 		sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
 		worldView.setCenter(centerPosition);
-	}
+	}*/
 }
 
 
@@ -145,6 +160,7 @@ void SceneDev1::Init()
 		regularRoomfloor->SetPosition(Roompos);
 		regularRoomfloor->sortLayer = -1;
 		AddGo(regularRoomfloor);
+		Rooms.push_back(regularRoomfloor);
 
 		door = new SpriteGo("door");
 		door->SetTexture("graphics/door.png");

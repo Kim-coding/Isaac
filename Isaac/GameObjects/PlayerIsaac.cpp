@@ -89,7 +89,7 @@ void PlayerIsaac::Update(float dt)
 	sf::Vector2f pos = position + direction * speed * dt;
 	if (sceneDev1->crashDoor(pos) && !timer /*&& !monsterCount*/)	//문과 충돌 //타이머 //몬스터 수 체크 후 0이면 충돌 가능
 	{
-		sceneDev1->nextRoom();
+		sceneDev1->nextRoom(pos);
 		timer = 0.3;
 		doorCrash = true;
 	}

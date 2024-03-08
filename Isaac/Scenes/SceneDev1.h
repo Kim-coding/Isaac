@@ -34,6 +34,7 @@ protected:
 	Charger* charger;
 
 	std::vector<SpriteGo*> doors;
+	std::vector<SpriteGo*> Rooms;
 	std::list<GameObject*> monsterList;
 
 public:
@@ -46,8 +47,7 @@ public:
 	sf::Vector2f ClampByMap(const sf::Vector2f point);
 
 	bool crashDoor(const sf::Vector2f point);
-	//void MoveToNextRoom(size_t doorIndex);
-	void nextRoom();
+	void nextRoom(const sf::Vector2f point);
 
 	void Init() override;
 	void Release() override;
