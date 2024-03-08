@@ -4,7 +4,7 @@
 
 class SceneDev1;
 
-class Monster : public SpriteGo
+class Charger : public SpriteGo
 {
 protected:
 	Animator animator;
@@ -33,8 +33,8 @@ protected:
 	bool isAlive = true;
 
 public:
-	Monster(const std::string& name = "");
-	~Monster() override;
+	Charger(const std::string& name = "");
+	~Charger() override;
 
 	void Init() override;
 	void Release() override;

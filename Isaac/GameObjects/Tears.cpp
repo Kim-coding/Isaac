@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Tears.h"
-#include "Monster.h"
+#include "Charger.h"
+#include "Dip.h"
 #include "SceneDev1.h"
 
 Tears::Tears(const std::string& name)
@@ -62,9 +63,19 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府
 			SetActive(false);
 			sceneDev1->RemoveGo(this);
 
-			Monster* charger = dynamic_cast<Monster*>(go);
+			Charger* charger = dynamic_cast<Charger*>(go);
 			if (charger != nullptr)
 				charger->OnDamage(damage);
+
+		}
+		if (GetGlobalBounds().intersects(go->GetGlobalBounds()))
+		{
+			SetActive(false);
+			sceneDev1->RemoveGo(this);
+
+			Dip* dip = dynamic_cast<Dip*>(go);
+			if (dip != nullptr)
+				dip->OnDamage(damage);
 
 		}
 	}

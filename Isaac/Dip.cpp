@@ -1,60 +1,53 @@
 #include "pch.h"
-#include "Monster.h"
+#include "Dip.h"
 #include "SceneDev1.h"
 #include "SpriteGoEffect.h"
+#include "PlayerIsaac.h"
 
-std::string Monster::ChargerDashDown = "animators/ChargerDashDown.csv";
-std::string Monster::ChargerDashSide = "animators/ChargerDashSide.csv";
-std::string Monster::ChargerDashUp = "animators/ChargerDashUp.csv";
-std::string Monster::ChargerMoveDown = "animators/ChargerMoveDown.csv";
-std::string Monster::ChargerMoveSide = "animators/ChargerMoveSide.csv";
-std::string Monster::ChargerMoveUp = "animators/ChargerMoveUp.csv";
+std::string Dip::DipMove = "animators/DipMove.csv";
 
-
-Monster::Monster(const std::string& name)
+Dip::Dip(const std::string& name)
 	:SpriteGo(name)
 {
 }
 
-Monster::~Monster()
+Dip::~Dip()
 {
 }
 
-void Monster::Init()
+void Dip::Init()
 {
 	SpriteGo::Init();
-    
+
 	animator.SetTarget(&sprite);
-    hasHitBox = true;
+	hasHitBox = true;
 }
 
-void Monster::Release()
+void Dip::Release()
 {
 	SpriteGo::Release();
-
 }
 
-void Monster::Reset()
+void Dip::Reset()
 {
 	SpriteGo::Reset();
-	animator.Play(ChargerMoveDown);
+	animator.Play(DipMove);
 	SetOrigin(Origins::MC);
-	SetPosition({ 100.f,100.f });
+	SetPosition({ -100.f,100.f });
 	SetFlipX(false);
 
-    hp = maxHp;
+	hp = maxHp;
 
-    sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
-
+	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 }
 
-void Monster::Update(float dt)
+void Dip::Update(float dt)
 {
-	SpriteGo::Update(dt);
-	animator.Update(dt);
-	int randomDirection = Utils::RandomRange(0, 4);
-	
-    SetScale({ 3, 3 });
+    SpriteGo::Update(dt);
+    animator.Update(dt);
+    int randomDirection = Utils::RandomRange(0, 4);
+
+    SetScale({ 1.5, 1.5 });
     sf::Vector2f pos = position + direction * speed * dt;
     if (directionChangeTimer <= 0)
     {
@@ -63,47 +56,44 @@ void Monster::Update(float dt)
         case 0: // 위쪽 방향
             direction.x = 0;
             direction.y = -1;
-            animator.Play(ChargerMoveUp);
+            animator.Play(DipMove);
             break;
         case 1: // 아래쪽 방향
             direction.x = 0;
             direction.y = 1;
-            animator.Play(ChargerMoveDown);
+            animator.Play(DipMove);
             break;
         case 2: // 왼쪽 방향
             direction.x = -1;
             direction.y = 0;
             SetFlipX(true);
-            animator.Play(ChargerMoveSide);
+            animator.Play(DipMove);
             break;
         case 3: // 오른쪽 방향
             direction.x = 1;
             direction.y = 0;
             SetFlipX(false);
-            animator.Play(ChargerMoveSide);
-            break;
-        default:
+            animator.Play(DipMove);
             break;
         }
-        directionChangeTimer = 1.f;
+        directionChangeTimer = 1.5f;
     }
-   
+
     directionChangeTimer -= dt;
-	
-    if (sceneDev1 != nullptr) 
+
+    if (sceneDev1 != nullptr)
     {
         pos = sceneDev1->ClampByMap(pos); //벽과 충돌
     }
     SetPosition(pos);
 }
 
-void Monster::FixedUpdate(float dt)
+void Dip::FixedUpdate(float dt)
 {
 	SpriteGo::FixedUpdate(dt);
-
 }
 
-void Monster::OnDamage(int damage)
+void Dip::OnDamage(int damage)
 {
     if (!isAlive)
         return;
@@ -116,7 +106,7 @@ void Monster::OnDamage(int damage)
     }
 }
 
-void Monster::OnDie()
+void Dip::OnDie()
 {
     if (!isAlive)
         return;
@@ -128,7 +118,7 @@ void Monster::OnDie()
     SpriteGoEffect* effectBlood = new SpriteGoEffect();
     effectBlood->Init();
     effectBlood->SetOrigin(Origins::MC);
-    effectBlood->SetTexture("graphics/blood.png");
+    effectBlood->SetTexture("graphics/dipBlood.png");
     effectBlood->Reset();
     effectBlood->sortLayer = -1;
     effectBlood->sortOrder = 1;

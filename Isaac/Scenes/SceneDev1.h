@@ -2,7 +2,7 @@
 
 class SpriteGo;
 class PlayerIsaac;
-class Monster;
+class Charger;
 
 class SceneDev1 : public Scene
 {
@@ -31,7 +31,7 @@ protected:
 	SpriteGo* currentFloor;
 
 	PlayerIsaac* player;
-	Monster* charger;
+	Charger* charger;
 
 	std::vector<SpriteGo*> doors;
 	std::list<GameObject*> monsterList;
@@ -46,6 +46,7 @@ public:
 	sf::Vector2f ClampByMap(const sf::Vector2f point);
 
 	bool crashDoor(const sf::Vector2f point);
+	//void MoveToNextRoom(size_t doorIndex);
 	void nextRoom();
 
 	void Init() override;

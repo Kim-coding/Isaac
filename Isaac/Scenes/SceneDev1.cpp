@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "SceneDev1.h"
 #include "PlayerIsaac.h"
-#include "Monster.h"
+#include "Charger.h"
 #include "SpriteGo.h"
+#include "Dip.h"
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -36,12 +37,23 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 		rect = Utils::ResizeRect(rect, door->GetSize());
 		if (rect.contains(point)) 
 		{
+			//size_t doorIndex = std::distance(doors.begin(), std::find(doors.begin(), doors.end(), door));
+
 			return true; 
 		}
-		SetStatus(Status::NextRoom);
 	}
 	return false; 
 }
+
+//void SceneDev1::MoveToNextRoom(size_t doorIndex)
+//{
+//	size_t nextRoomIndex = (doorIndex + 1) % doors.size();
+//
+//	currentFloor = regularRoomfloor;
+//
+//	sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
+//	worldView.setCenter(centerPosition);
+//}
 
 void SceneDev1::nextRoom()
 {
@@ -57,9 +69,10 @@ void SceneDev1::nextRoom()
 		sf::Vector2f centerPosition = regularRoomfloor->GetPosition() + (regularRoomfloor->GetSize() / 2.0f);
 		worldView.setCenter(centerPosition);
 	}
-
-
 }
+
+
+
 
 void SceneDev1::Init()
 {
@@ -110,48 +123,52 @@ void SceneDev1::Init()
 	currentFloor = spriteGoBackgroundfloor;
 
 	/////////////////////////////////
+	for (int i = 0; i < 3; ++i)
+	{
+		int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
+		sf::Vector2f doorpos = doorPosition[rand * 90];
+		sf::Vector2f nextdoorpos = nextDoorPosition[rand * 90];
+		sf::Vector2f Roompos = Room[rand];
+
+		regularRoom = new SpriteGo("RegularRoom");
+		regularRoom->SetTexture("graphics/Catacombs.png");
+		regularRoom->SetOrigin(Origins::MC);
+		regularRoom->SetScale({ 2, 2 });
+		regularRoom->SetPosition(Roompos);
+		regularRoom->sortLayer = -1;
+		AddGo(regularRoom);
+
+		regularRoomfloor = new SpriteGo("regularRoomfloor");
+		regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+		regularRoomfloor->SetOrigin(Origins::MC);
+		regularRoomfloor->SetScale({ 2, 2 });
+		regularRoomfloor->SetPosition(Roompos);
+		regularRoomfloor->sortLayer = -1;
+		AddGo(regularRoomfloor);
+
+		door = new SpriteGo("door");
+		door->SetTexture("graphics/door.png");
+		door->SetOrigin(Origins::BC);
+		door->SetScale({ 2, 2 });
+		door->SetRotation(rand * 90);
+		door->SetPosition(doorpos);
+		AddGo(door);
+		doors.push_back(door);                          
 	
-	int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
-	sf::Vector2f doorpos = doorPosition[rand * 90];
-	sf::Vector2f nextdoorpos = nextDoorPosition[rand * 90];
-	sf::Vector2f Roompos = Room[rand];
-
-	regularRoom = new SpriteGo("RegularRoom");
-	regularRoom->SetTexture("graphics/Catacombs.png");
-	regularRoom->SetOrigin(Origins::MC);
-	regularRoom->SetScale({ 2, 2 });
-	regularRoom->SetPosition(Roompos);
-	regularRoom->sortLayer = -1;
-	AddGo(regularRoom);
-
-	regularRoomfloor = new SpriteGo("regularRoomfloor");
-	regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
-	regularRoomfloor->SetOrigin(Origins::MC);
-	regularRoomfloor->SetScale({ 2, 2 });
-	regularRoomfloor->SetPosition(Roompos);
-	regularRoomfloor->sortLayer = -1;
-	AddGo(regularRoomfloor);
-
-	door = new SpriteGo("door");
-	door->SetTexture("graphics/door.png");
-	door->SetOrigin(Origins::BC);
-	door->SetScale({ 2, 2 });
-	door->SetRotation(rand * 90);
-	door->SetPosition(doorpos);
-	AddGo(door);
-	doors.push_back(door);                          
+		door = new SpriteGo("door");                       //생성된 문에 맞게 다음 문 생성.
+		door->SetTexture("graphics/door.png");
+		door->SetOrigin(Origins::BC);
+		door->SetScale({ 2, 2 });
+		door->SetRotation(rand * 90 + 180);
+		door->SetPosition(nextdoorpos);
+		AddGo(door);
+		doors.push_back(door);
+	}
 	
-	door = new SpriteGo("door");                       //생성된 문에 맞게 다음 문 생성.
-	door->SetTexture("graphics/door.png");
-	door->SetOrigin(Origins::BC);
-	door->SetScale({ 2, 2 });
-	door->SetRotation(rand * 90 + 180);
-	door->SetPosition(nextdoorpos);
-	AddGo(door);
-	doors.push_back(door);
 
 	AddGo(new PlayerIsaac("Isaac"));
-	AddGo(new Monster("Charger"));
+	AddGo(new Charger("monster"));
+	AddGo(new Dip("monster"));
 	Scene::Init();
 }
 
@@ -174,12 +191,11 @@ void SceneDev1::Update(float dt)
 {
 	Scene::Update(dt);
 	
-	FindGoAll("Charger", monsterList, Layers::World);
+	FindGoAll("monster", monsterList, Layers::World);
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))  
 	{
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
-		currentFloor = spriteGoBackgroundfloor;
 	}
 
 	switch (currStatus)
