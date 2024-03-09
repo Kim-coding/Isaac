@@ -2,10 +2,9 @@
 #include "AttackFly.h"
 #include "SceneDev1.h"
 #include "SpriteGoEffect.h"
-#include "PlayerIsaac.h"      //플레이어 추적
 
 AttackFly::AttackFly(const std::string& name)
-	:MonsterMgr(name, 30, 150.f)
+	:MonsterMgr(name, 50, 10, 150.f)
 {
 }
 
@@ -28,7 +27,6 @@ void AttackFly::Reset()
 	SetPosition({100,100});
 	SetOrigin(Origins::MC);
 
-	player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 }
 
 void AttackFly::Update(float dt)

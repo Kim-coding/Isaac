@@ -2,7 +2,6 @@
 #include "Charger.h"
 #include "SceneDev1.h"
 #include "SpriteGoEffect.h"
-#include "PlayerIsaac.h"      //플레이어가 몬스터 진행 방향에 있으면 dash
 
 std::string Charger::ChargerDashDown = "animators/ChargerDashDown.csv";
 std::string Charger::ChargerDashSide = "animators/ChargerDashSide.csv";
@@ -13,7 +12,7 @@ std::string Charger::ChargerMoveUp = "animators/ChargerMoveUp.csv";
 
 
 Charger::Charger(const std::string& name)
-	:MonsterMgr(name, 100, 100.f)
+	:MonsterMgr(name, 100, 10, 100.f)
 {
 }
 
@@ -37,9 +36,6 @@ void Charger::Reset()
 	animator.Play(ChargerMoveDown);
 	SetOrigin(Origins::MC);
 	SetFlipX(false);
-
-
-    player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 }
 
 void Charger::Update(float dt)

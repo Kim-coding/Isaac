@@ -7,7 +7,7 @@
 std::string Dip::DipMove = "animators/DipMove.csv";
 
 Dip::Dip(const std::string& name)
-	:MonsterMgr(name, 40, 100.f)
+	:MonsterMgr(name, 40, 5, 100.f)
 {
 }
 

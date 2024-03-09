@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+OnDieMove,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/GameOverIsaac.png,602,1253,99,72
+graphics/GameOverIsaac.png,745,1253,99,72

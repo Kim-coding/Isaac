@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PlayerIsaac.h"
 #include "Tears.h"
+#include "SpriteGoEffect.h"
 #include "SceneDev1.h"
 
 std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
@@ -75,6 +76,7 @@ void PlayerIsaac::Reset()
 	SetPosition({0.f,0.f});
 	SetFlipX(false);
 
+	isAlive = true;
 	currentClipInfo = clipInfos[6];
 
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
@@ -83,6 +85,9 @@ void PlayerIsaac::Reset()
 
 void PlayerIsaac::Update(float dt)
 {
+	if (!isAlive)
+		return;
+
 	animator.Update(dt);
 
 	direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
@@ -181,13 +186,10 @@ void PlayerIsaac::Cry(sf::Vector2f direction)
 
 void PlayerIsaac::OnDamage(int damage)
 {
-	if (!isAlive || isNoDamage)
+	if (!isAlive)
 		return;
 
 	hp -= damage;
-
-	isNoDamage = true;
-	noDamageTimer = 0.f;
 
 	if (hp <= 0)
 	{
@@ -202,4 +204,10 @@ void PlayerIsaac::OnDie()
 		return;
 
 	isAlive = false;
+	animator.Stop();
+
+	
+	SceneMgr::Instance().ChangeScene(SceneIds::SceneDev2);
+
+	
 }

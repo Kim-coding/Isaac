@@ -1,14 +1,10 @@
 #pragma once
 #include "MonsterMgr.h"
 #include "Animator.h"
-#include "PlayerIsaac.h"
-
-class SceneDev1;
 
 class Charger : public MonsterMgr
 {
 protected:
-	PlayerIsaac* player = nullptr;
 
 	static std::string ChargerDashDown;
 	static std::string ChargerDashSide;

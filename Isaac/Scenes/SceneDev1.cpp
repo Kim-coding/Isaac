@@ -5,6 +5,7 @@
 #include "SpriteGo.h"
 #include "Dip.h"
 #include "AttackFly.h"
+#include "BoomFly.h"
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -197,6 +198,7 @@ void SceneDev1::Init()
 
 	AddGo(new PlayerIsaac("Isaac"));
 	AddGo(new AttackFly("monster"));
+	AddGo(new BoomFly("monster"));
 	Scene::Init();
 }
 

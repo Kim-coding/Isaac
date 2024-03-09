@@ -3,8 +3,8 @@
 #include "Animator.h"
 #include "SceneDev1.h"
 
-MonsterMgr::MonsterMgr(const std::string& name, int maxHp, float speed)
-	:SpriteGo(name), maxHp(maxHp), speed(speed)
+MonsterMgr::MonsterMgr(const std::string& name, int maxHp, int damage, float speed)
+	:SpriteGo(name), maxHp(maxHp), damage(damage), speed(speed)
 {
 }
 
@@ -28,6 +28,8 @@ void MonsterMgr::Reset()
 {
 	SpriteGo::Reset();
 	hp = maxHp;
+
+	player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 }
 
@@ -39,7 +41,15 @@ void MonsterMgr::Update(float dt)
 
 void MonsterMgr::FixedUpdate(float dt)
 {
-	SpriteGo::FixedUpdate(dt);
+	AttackTimer += dt;
+	if (AttackTimer > AttackInterval)
+	{
+		if (GetGlobalBounds().intersects(player->GetGlobalBounds()))
+		{
+			player->OnDamage(damage);
+		}
+	}
+	
 }
 
 void MonsterMgr::OnDamage(int damage)

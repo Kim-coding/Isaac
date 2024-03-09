@@ -39,13 +39,14 @@ protected:
 	static std::string MoveLeft;
 	static std::string MoveUp;
 
+
 	sf::Vector2f direction;
 	float speed = 400.f;
 
 	std::vector<ClipInfo> clipInfos;
 	ClipInfo currentClipInfo;
 	
-	int maxHp = 1000;
+	int maxHp = 10;
 	int hp;
 	bool isAlive = true;
 	bool isNoDamage = false;

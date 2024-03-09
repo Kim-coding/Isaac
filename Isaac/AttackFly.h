@@ -1,12 +1,9 @@
 #pragma once
 #include "MonsterMgr.h"
-#include "PlayerIsaac.h"
 
 class AttackFly : public MonsterMgr
 {
 protected:
-	PlayerIsaac* player = nullptr;
-
 	sf::Vector2f direction;
 
 public:
