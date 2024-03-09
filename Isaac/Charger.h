@@ -1,15 +1,13 @@
 #pragma once
-#include "SpriteGo.h"
+#include "MonsterMgr.h"
 #include "Animator.h"
 #include "PlayerIsaac.h"
 
 class SceneDev1;
 
-class Charger : public SpriteGo
+class Charger : public MonsterMgr
 {
 protected:
-	Animator animator;
-	SceneDev1* sceneDev1 = nullptr;
 	PlayerIsaac* player = nullptr;
 
 	static std::string ChargerDashDown;
@@ -28,28 +26,22 @@ protected:
 	int damage;
 	float attackInterval;
 
-	int maxHp = 100;
-	int hp;
-	float speed = 100.f;
 
-	bool isAlive = true;
+	float dashTimer = 0.f;
+	float dashInterval = 2.f;
+
 	bool isDash = false;
-
-	float dashTimer;
-	float dashInterval = 2;
 
 public:
 	Charger(const std::string& name = "");
 	~Charger() override;
 
 	void Init() override;
-	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void FixedUpdate(float dt) override;
 
-	void OnDamage(int damage);
-	void OnDie();
+	void OnDie() override;
 
 };
 

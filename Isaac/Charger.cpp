@@ -13,7 +13,7 @@ std::string Charger::ChargerMoveUp = "animators/ChargerMoveUp.csv";
 
 
 Charger::Charger(const std::string& name)
-	:SpriteGo(name)
+	:MonsterMgr(name, 100, 100.f)
 {
 }
 
@@ -23,37 +23,29 @@ Charger::~Charger()
 
 void Charger::Init()
 {
-	SpriteGo::Init();
+    MonsterMgr::Init();
     
 	animator.SetTarget(&sprite);
     SetScale({ 3, 3 });
     hasHitBox = true;
 }
 
-void Charger::Release()
-{
-	SpriteGo::Release();
-
-}
 
 void Charger::Reset()
 {
-	SpriteGo::Reset();
+    MonsterMgr::Reset();
 	animator.Play(ChargerMoveDown);
 	SetOrigin(Origins::MC);
-	SetPosition({ 100.f,100.f });
 	SetFlipX(false);
 
-    hp = maxHp;
 
-    sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
     player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 }
 
 void Charger::Update(float dt)
 {
-	SpriteGo::Update(dt);
-	animator.Update(dt);
+    MonsterMgr::Update(dt);
+	//animator.Update(dt);
 	int randomDirection = Utils::RandomRange(0, 4);
 	
     sf::Vector2f pos = position + direction * speed * dt;
@@ -134,21 +126,8 @@ void Charger::Update(float dt)
 void Charger::FixedUpdate(float dt)
 {
 	SpriteGo::FixedUpdate(dt);
-
 }
 
-void Charger::OnDamage(int damage)
-{
-    if (!isAlive)
-        return;
-
-    hp -= damage;
-
-    if (hp < 0)
-    {
-        OnDie();
-    }
-}
 
 void Charger::OnDie()
 {

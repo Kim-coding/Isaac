@@ -7,7 +7,7 @@
 std::string Dip::DipMove = "animators/DipMove.csv";
 
 Dip::Dip(const std::string& name)
-	:SpriteGo(name)
+	:MonsterMgr(name, 40, 100.f)
 {
 }
 
@@ -17,33 +17,25 @@ Dip::~Dip()
 
 void Dip::Init()
 {
-	SpriteGo::Init();
+    MonsterMgr::Init();
 
 	animator.SetTarget(&sprite);
 	hasHitBox = true;
 }
 
-void Dip::Release()
-{
-	SpriteGo::Release();
-}
-
 void Dip::Reset()
 {
-	SpriteGo::Reset();
+    MonsterMgr::Reset();
 	animator.Play(DipMove);
 	SetOrigin(Origins::MC);
 	SetPosition({ -100.f,100.f });
 	SetFlipX(false);
 
-	hp = maxHp;
-
-	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 }
 
 void Dip::Update(float dt)
 {
-    SpriteGo::Update(dt);
+    MonsterMgr::Update(dt);
     animator.Update(dt);
     int randomDirection = Utils::RandomRange(0, 4);
 
@@ -90,20 +82,7 @@ void Dip::Update(float dt)
 
 void Dip::FixedUpdate(float dt)
 {
-	SpriteGo::FixedUpdate(dt);
-}
-
-void Dip::OnDamage(int damage)
-{
-    if (!isAlive)
-        return;
-
-    hp -= damage;
-
-    if (hp < 0)
-    {
-        OnDie();
-    }
+    MonsterMgr::FixedUpdate(dt);
 }
 
 void Dip::OnDie()

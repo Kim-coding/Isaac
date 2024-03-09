@@ -3,7 +3,8 @@
 #include "Animator.h"
 #include "SceneDev1.h"
 
-MonsterMgr::MonsterMgr(const std::string& name)
+MonsterMgr::MonsterMgr(const std::string& name, int maxHp, float speed)
+	:SpriteGo(name), maxHp(maxHp), speed(speed)
 {
 }
 
@@ -26,13 +27,14 @@ void MonsterMgr::Release()
 void MonsterMgr::Reset()
 {
 	SpriteGo::Reset();
-
+	hp = maxHp;
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 }
 
 void MonsterMgr::Update(float dt)
 {
 	SpriteGo::Update(dt);
+	animator.Update(dt);
 }
 
 void MonsterMgr::FixedUpdate(float dt)

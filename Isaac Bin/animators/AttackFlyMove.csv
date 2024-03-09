@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+AttackFlyMove,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/AttackFly.png,0,0,20,17
+graphics/AttackFly.png,23,0,26,17

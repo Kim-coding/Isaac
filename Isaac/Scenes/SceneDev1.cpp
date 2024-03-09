@@ -4,6 +4,7 @@
 #include "Charger.h"
 #include "SpriteGo.h"
 #include "Dip.h"
+#include "AttackFly.h"
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -21,7 +22,7 @@ bool SceneDev1::IsInMap(const sf::Vector2f& point)
 	return rect.contains(point);
 }
 
-sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //시작 방 바닥 경계검사
+sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //방 바닥 경계검사
 {
 	sf::FloatRect rect = currentFloor->GetGlobalBounds();
 	rect = Utils::ResizeRect(rect, currentFloor->GetSize());
@@ -73,15 +74,22 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 				if (currentFloor != spriteGoBackgroundfloor)     // 시작 방이 아닌 방에서 몬스터 생성
 				{
-					sf::Vector2f pos;
-					pos.x = (currentFloor->GetSize().x) * 2;
-					pos.y = (currentFloor->GetSize().y) * 2;
-					auto dip = new Dip("monster");
+					sf::Vector2f roomSize = currentFloor->GetSize();
+					sf::Vector2f roomPosition = currentFloor->GetPosition();
+
+					sf::Vector2f pos = roomPosition + (roomSize / 2.0f);
+
+					Dip* dip = new Dip("monster");
 					dip->Init();
 					dip->Reset();
-
 					dip->SetPosition(pos);
 					AddGo(dip);
+					
+					Charger* charger = new Charger("monster");
+					charger->Init();
+					charger->Reset();
+					charger->SetPosition(pos);
+					AddGo(charger);
 				}
 				
 			}
@@ -188,11 +196,7 @@ void SceneDev1::Init()
 	}  
 
 	AddGo(new PlayerIsaac("Isaac"));
-	for (int i = 0; i < 2; ++i)
-	{
-		AddGo(new Charger("monster"));
-		AddGo(new Dip("monster"));
-	}
+	AddGo(new AttackFly("monster"));
 	Scene::Init();
 }
 

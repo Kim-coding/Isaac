@@ -1,27 +1,21 @@
 #pragma once
 #include "MonsterMgr.h"
+#include "PlayerIsaac.h"
 
-class Dip : public MonsterMgr
+class AttackFly : public MonsterMgr
 {
 protected:
-	static std::string DipMove;
-
-	float directionChangeTimer;
+	PlayerIsaac* player = nullptr;
 
 	sf::Vector2f direction;
 
-	int damage;
-	float attackInterval;
-
 public:
-	Dip(const std::string& name = "");
-	~Dip() override;
+	AttackFly(const std::string& name = "");
+	~AttackFly() override;
 
 	void Init() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void FixedUpdate(float dt) override;
-
-	void OnDie() override;
 };
 

@@ -7,22 +7,23 @@ class Animator;
 class MonsterMgr : public SpriteGo
 {
 protected:
-	bool isAlive = true;
+	Animator animator;
+	SceneDev1* sceneDev1 = nullptr;
 
 	int maxHp;
 	int hp;
+	float speed;
 
-	Animator animator;
-	SceneDev1* sceneDev1;
+	bool isAlive = true;
 public:
-	MonsterMgr(const std::string& name = "");
-	~MonsterMgr() override;
+	MonsterMgr(const std::string& name,int maxHp, float speed);
+	~MonsterMgr();
 
-	virtual void Init() override;
-	virtual void Release() override;
-	virtual void Reset() override;
-	virtual void Update(float dt) override;
-	virtual void FixedUpdate(float dt) override;
+	virtual void Init() ;
+	virtual void Release() ;
+	virtual void Reset() ;
+	virtual void Update(float dt) ;
+	virtual void FixedUpdate(float dt) ;
 
 	virtual void OnDamage(int damage);
 	virtual void OnDie();

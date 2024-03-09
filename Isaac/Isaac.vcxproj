@@ -138,6 +138,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="AttackFly.cpp" />
+    <ClCompile Include="BoomFly.cpp" />
     <ClCompile Include="DataTables\DataTableMgr.cpp" />
     <ClCompile Include="DataTables\DataTable.cpp" />
     <ClCompile Include="Dip.cpp" />
@@ -173,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="AttackFly.h" />
+    <ClInclude Include="BoomFly.h" />
     <ClInclude Include="DataTables\DataTableMgr.h" />
     <ClInclude Include="DataTables\DataTable.h" />
     <ClInclude Include="DataTables\rapidcsv.h" />
@@ -200,6 +204,9 @@
     <ClInclude Include="DataTables\StringTable.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="SpriteGoEffect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
