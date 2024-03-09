@@ -1,6 +1,7 @@
 #pragma once
 #include "SpriteGo.h"
 #include "Animator.h"
+#include "PlayerIsaac.h"
 
 class SceneDev1;
 
@@ -9,6 +10,7 @@ class Charger : public SpriteGo
 protected:
 	Animator animator;
 	SceneDev1* sceneDev1 = nullptr;
+	PlayerIsaac* player = nullptr;
 
 	static std::string ChargerDashDown;
 	static std::string ChargerDashSide;
@@ -31,6 +33,10 @@ protected:
 	float speed = 100.f;
 
 	bool isAlive = true;
+	bool isDash = false;
+
+	float dashTimer;
+	float dashInterval = 2;
 
 public:
 	Charger(const std::string& name = "");

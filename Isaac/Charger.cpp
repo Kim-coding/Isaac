@@ -26,6 +26,7 @@ void Charger::Init()
 	SpriteGo::Init();
     
 	animator.SetTarget(&sprite);
+    SetScale({ 3, 3 });
     hasHitBox = true;
 }
 
@@ -46,7 +47,7 @@ void Charger::Reset()
     hp = maxHp;
 
     sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
-
+    player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 }
 
 void Charger::Update(float dt)
@@ -55,9 +56,8 @@ void Charger::Update(float dt)
 	animator.Update(dt);
 	int randomDirection = Utils::RandomRange(0, 4);
 	
-    SetScale({ 3, 3 });
     sf::Vector2f pos = position + direction * speed * dt;
-    if (directionChangeTimer <= 0)
+    if (!isDash && directionChangeTimer <= 0)
     {
         switch (randomDirection)
         {
@@ -88,7 +88,42 @@ void Charger::Update(float dt)
     }
 
     directionChangeTimer -= dt;
-	
+
+    sf::Vector2f toPlayer = player->GetPosition() - GetPosition();
+    sf::Vector2f normalizedToPlayer = Utils::GetNormal(toPlayer);
+
+    float angleCos = direction.x * normalizedToPlayer.x + direction.y * normalizedToPlayer.y;
+
+    if (angleCos > 0.95f)
+    {
+        isDash = true;
+        speed = 500;
+
+        if (direction.y == -1)
+        {
+            animator.Play(ChargerDashUp);
+        }
+        else if(direction.y == 1)
+        {
+            animator.Play(ChargerDashDown);
+        }
+        else
+        {
+            animator.Play(ChargerDashSide);
+        }
+    }
+
+    if (isDash)
+    {
+        dashTimer += dt;
+        if (dashTimer > dashInterval)
+        {
+            speed /= 10;
+            isDash = false;
+            dashTimer = 0.f;
+        }
+    }
+
     if (sceneDev1 != nullptr) 
     {
         pos = sceneDev1->ClampByMap(pos); //벽과 충돌
