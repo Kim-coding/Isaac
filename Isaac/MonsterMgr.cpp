@@ -47,6 +47,7 @@ void MonsterMgr::FixedUpdate(float dt)
 		if (GetGlobalBounds().intersects(player->GetGlobalBounds()))
 		{
 			player->OnDamage(damage);
+			AttackTimer = 0.f;
 		}
 	}
 	

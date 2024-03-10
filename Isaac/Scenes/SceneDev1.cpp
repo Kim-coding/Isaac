@@ -31,6 +31,7 @@ sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //¹æ ¹Ù´Ú °æ°è°Ë»
 	return Utils::Clamp(point, rect);
 }
 
+
 bool SceneDev1::crashDoor(const sf::Vector2f point)
 {
 	if (!monsterList.empty()) 
@@ -47,6 +48,7 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 	}
 	return false; 
 }
+
 
 
 void SceneDev1::nextRoom(const sf::Vector2f point)
@@ -229,15 +231,81 @@ void SceneDev1::Update(float dt)
 		door->SetTexture(doorTexture);
 	}
 
+	switch (currStatus)
+	{
+	case Status::Game:
+		UpdateGame(dt);
+		break;
+	case Status::GameOver:
+		UpdateGameOver(dt);
+		break;
+	case Status::Pause:
+		UpdatePause(dt);
+		break;
+	}
+}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))  
+void SceneDev1::UpdateGame(float dt)
+{
+	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	{
+		SetStatus(Status::Pause);
+		return;
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
 	{
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 	}
+	if (SCENE_MGR.GetDeveloperMode() && InputMgr::GetKeyDown(sf::Keyboard::Delete))
+	{
+		for (auto go : monsterList)
+		{
+			MonsterMgr* monster = dynamic_cast<MonsterMgr*>(go);
+			monster->OnDie();
+		}
+	}
+}
 
+void SceneDev1::UpdateGameOver(float dt)
+{
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	{
+		Release();
+		Init();
+		SetStatus(Status::Game);
+		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
+		
+	}
+}
+
+void SceneDev1::UpdatePause(float dt)
+{
+	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	{
+		SetStatus(Status::Game);
+	}
 }
 
 void SceneDev1::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+}
+
+void SceneDev1::SetStatus(Status newStatus)
+{
+	Status prevStatus = currStatus;
+	currStatus = newStatus;
+
+	switch (currStatus)
+	{
+	case SceneDev1::Status::Game:
+		FRAMEWORK.SetTimeScale(1.f);
+		break;
+	case SceneDev1::Status::GameOver:
+		FRAMEWORK.SetTimeScale(0.f);
+		break;
+	case SceneDev1::Status::Pause:
+		FRAMEWORK.SetTimeScale(0.f);
+		break;
+	}
 }

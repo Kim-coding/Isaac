@@ -9,7 +9,17 @@ class SceneDev1 : public Scene
 	std::map<int, sf::Vector2f> doorPosition;
 	std::map<int, sf::Vector2f> nextDoorPosition;
 	std::map<int, sf::Vector2f> Room;
+public:
+	enum class Status
+	{
+		Game,
+		GameOver,
+		Pause
+	};
+
 protected:
+	Status currStatus = Status::Game;
+
 	SpriteGo* spriteGoBackgroundfloor;
 	SpriteGo* regularRoom;
 	SpriteGo* regularRoomfloor;
@@ -45,7 +55,13 @@ public:
 	void Exit() override;
 
 	void Update(float dt) override;
+	void UpdateGame(float dt);
+	void UpdateGameOver(float dt);
+	void UpdatePause(float dt);
 
 	void Draw(sf::RenderWindow& window) override;
+
+	void SetStatus(Status newStatus);
+	Status GetStatus() { return currStatus; }
 };
 

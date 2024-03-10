@@ -38,6 +38,7 @@ protected:
 	static std::string MoveRight;
 	static std::string MoveLeft;
 	static std::string MoveUp;
+	static std::string DamageMove;
 
 
 	sf::Vector2f direction;
@@ -46,7 +47,7 @@ protected:
 	std::vector<ClipInfo> clipInfos;
 	ClipInfo currentClipInfo;
 	
-	int maxHp = 10;
+	int maxHp = 100;
 	int hp;
 	bool isAlive = true;
 	bool isNoDamage = false;

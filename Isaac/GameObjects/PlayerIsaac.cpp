@@ -12,6 +12,7 @@ std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
 std::string PlayerIsaac::MoveRight = "animators/MoveRight.csv";
 std::string PlayerIsaac::MoveLeft = "animators/MoveLeft.csv";
 std::string PlayerIsaac::MoveUp = "animators/MoveUp.csv";
+std::string PlayerIsaac::DamageMove = "animators/DamegeMove.csv";
 
 PlayerIsaac::PlayerIsaac(const std::string& name)
 	:SpriteGo(name)
@@ -33,6 +34,7 @@ void PlayerIsaac::TestStaic()
 void PlayerIsaac::Init()
 {
 	SpriteGo::Init();
+	hp = maxHp;
 
 	SetScale({ 1.5,1.5 });
 
@@ -50,7 +52,7 @@ void PlayerIsaac::Init()
 	clipInfos.push_back({ IdleDown, MoveRight, false, Utils::GetNormal({1, 1}) });
 
 	cryTimer = cryInterval;
-
+	
 	tearDirection = {
 		{sf::Keyboard::Left, {-1, 0}},
 		{sf::Keyboard::Right, {1, 0}},
@@ -78,6 +80,7 @@ void PlayerIsaac::Reset()
 
 	isAlive = true;
 	currentClipInfo = clipInfos[6];
+	hp = maxHp;
 
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 
@@ -174,8 +177,6 @@ void PlayerIsaac::Cry(sf::Vector2f direction)
 	pos.x = position.x;
 	pos.y = position.y - 30;
 
-	//animator.Play();
-
 	Tears* tears = new Tears();
 	tears->Init();
 	tears->Reset();
@@ -190,7 +191,8 @@ void PlayerIsaac::OnDamage(int damage)
 		return;
 
 	hp -= damage;
-
+	animator.Stop();
+	animator.Play(DamageMove);
 	if (hp <= 0)
 	{
 		hp = 0;
@@ -207,7 +209,5 @@ void PlayerIsaac::OnDie()
 	animator.Stop();
 
 	
-	SceneMgr::Instance().ChangeScene(SceneIds::SceneDev2);
-
-	
+	sceneDev1->SetStatus(SceneDev1::Status::GameOver);
 }
