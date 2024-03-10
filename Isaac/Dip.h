@@ -4,7 +4,7 @@
 class Dip : public MonsterMgr
 {
 protected:
-	static std::string DipMove;
+	//static std::string DipMove;
 
 	float directionChangeTimer;
 

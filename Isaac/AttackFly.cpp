@@ -12,13 +12,6 @@ AttackFly::~AttackFly()
 {
 }
 
-void AttackFly::Init()
-{
-	MonsterMgr::Init();
-
-	animator.SetTarget(&sprite);
-	hasHitBox = true;
-}
 
 void AttackFly::Reset()
 {
@@ -31,7 +24,6 @@ void AttackFly::Reset()
 
 void AttackFly::Update(float dt)
 {
-	MonsterMgr::Update(dt);
 	animator.Update(dt);
 
 	direction = player->GetPosition() - position;

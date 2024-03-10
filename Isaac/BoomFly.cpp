@@ -86,8 +86,19 @@ void BoomFly::Update(float dt)
 
 void BoomFly::FixedUpdate(float dt)
 {
-	MonsterMgr::FixedUpdate(dt);
+    MonsterMgr::FixedUpdate(dt);
 
+
+    AttackTimer += dt;
+    if (AttackTimer > AttackInterval)
+    {
+        if (GetGlobalBounds().intersects(player->GetGlobalBounds()))
+        {
+            player->OnDamage(damage);
+            AttackTimer = 0.f;
+        }
+    }
+    
 }
 
 void BoomFly::OnDie()
@@ -111,4 +122,13 @@ void BoomFly::OnDie()
     effectBlood->SetRotation(Utils::RandomRange(0.f, 360.f));
 
     sceneDev1->AddGo(effectBlood);
+
+    const float damageRadius = 100.0f; // Æø¹ß ¹üÀ§
+    float distanceToPlayer = Utils::Distance(position, player->GetPosition());
+
+    if (distanceToPlayer <= damageRadius)
+    {
+        int BoomDamage = damage * 2; 
+        player->OnDamage(BoomDamage);
+    }
 }

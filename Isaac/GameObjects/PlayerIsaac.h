@@ -47,7 +47,7 @@ protected:
 	std::vector<ClipInfo> clipInfos;
 	ClipInfo currentClipInfo;
 	
-	int maxHp = 100;
+	int maxHp = 60;
 	int hp;
 	bool isAlive = true;
 	bool isNoDamage = false;
@@ -73,6 +73,7 @@ public:
 	void TestStaic();
 
 	void Init() override;
+	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 

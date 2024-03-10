@@ -115,6 +115,7 @@ void Charger::Update(float dt)
     if (sceneDev1 != nullptr) 
     {
         pos = sceneDev1->ClampByMap(pos); //벽과 충돌
+
     }
     SetPosition(pos);
 }

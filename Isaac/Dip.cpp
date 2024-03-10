@@ -4,7 +4,7 @@
 #include "SpriteGoEffect.h"
 #include "PlayerIsaac.h"
 
-std::string Dip::DipMove = "animators/DipMove.csv";
+//std::string Dip::DipMove = "animators/DipMove.csv";
 
 Dip::Dip(const std::string& name)
 	:MonsterMgr(name, 40, 5, 100.f)
@@ -26,7 +26,7 @@ void Dip::Init()
 void Dip::Reset()
 {
     MonsterMgr::Reset();
-	animator.Play(DipMove);
+	animator.Play("animators/DipMove.csv");
 	SetOrigin(Origins::MC);
 	SetPosition({ -100.f,100.f });
 	SetFlipX(false);
@@ -37,45 +37,32 @@ void Dip::Update(float dt)
 {
     MonsterMgr::Update(dt);
     animator.Update(dt);
-    int randomDirection = Utils::RandomRange(0, 4);
+    float randomDirectionX = Utils::RandomValue();    // 0.0f ~ 1.0f
+    float randomDirectionY = Utils::RandomValue();
 
     SetScale({ 1.5, 1.5 });
     sf::Vector2f pos = position + direction * speed * dt;
     if (directionChangeTimer <= 0)
     {
-        switch (randomDirection)
-        {
-        case 0: // 위쪽 방향
-            direction.x = 0;
-            direction.y = -1;
-            animator.Play(DipMove);
-            break;
-        case 1: // 아래쪽 방향
-            direction.x = 0;
-            direction.y = 1;
-            animator.Play(DipMove);
-            break;
-        case 2: // 왼쪽 방향
-            direction.x = -1;
-            direction.y = 0;
-            SetFlipX(true);
-            animator.Play(DipMove);
-            break;
-        case 3: // 오른쪽 방향
-            direction.x = 1;
-            direction.y = 0;
-            SetFlipX(false);
-            animator.Play(DipMove);
-            break;
-        }
-        directionChangeTimer = 1.5f;
-    }
+        direction.x = randomDirectionX;
+        direction.y = randomDirectionY;
 
+        directionChangeTimer = 2.f;
+    }
     directionChangeTimer -= dt;
 
     if (sceneDev1 != nullptr)
     {
-        pos = sceneDev1->ClampByMap(pos); //벽과 충돌
+        sf::Vector2f roomBound = sceneDev1->ClampByMap(pos);
+
+        if (pos != roomBound)
+        {
+            if (pos.x == roomBound.x)  //y축 경계와 충돌
+                direction.y *= -1;
+            if (pos.y == roomBound.y)  //x축 경계와 충돌
+                direction.x *= -1;
+
+        }
     }
     SetPosition(pos);
 }

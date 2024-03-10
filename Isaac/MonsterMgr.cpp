@@ -28,6 +28,7 @@ void MonsterMgr::Reset()
 {
 	SpriteGo::Reset();
 	hp = maxHp;
+	isAlive = true;
 
 	player = dynamic_cast<PlayerIsaac*>(SCENE_MGR.GetCurrentScene()->FindGo("Isaac"));
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());

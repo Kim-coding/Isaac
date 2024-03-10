@@ -93,6 +93,12 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 					charger->Reset();
 					charger->SetPosition(pos);
 					AddGo(charger);
+
+					BoomFly* boomFly = new BoomFly("monster");
+					boomFly->Init();
+					boomFly->Reset();
+					boomFly->SetPosition(pos);
+					AddGo(boomFly);
 				}
 				
 			}
@@ -126,13 +132,6 @@ void SceneDev1::Init()
 		{2, {0, 650} },
 		{3, {-1000,0}}
 	};
-
-	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
-	sf::Vector2f centerPos = windowSize * 0.5f;
-	worldView.setSize(windowSize);
-	worldView.setCenter({ 0.f, 0.f });
-	uiView.setSize(windowSize);
-	uiView.setCenter(centerPos);
 
 	//¹æ
 
@@ -197,10 +196,11 @@ void SceneDev1::Init()
 		AddGo(door);
 		doors.push_back(door);
 	}  
+	player = new PlayerIsaac("Isaac");
+	player->sortLayer = 1;
+	AddGo(player);
 
-	AddGo(new PlayerIsaac("Isaac"));
 	AddGo(new AttackFly("monster"));
-	AddGo(new BoomFly("monster"));
 	Scene::Init();
 }
 
@@ -212,6 +212,17 @@ void SceneDev1::Release()
 void SceneDev1::Enter()
 {
 	Scene::Enter();
+	SetStatus(Status::Game);
+
+	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
+	sf::Vector2f centerPos = windowSize * 0.5f;
+	worldView.setSize(windowSize);
+	worldView.setCenter({ 0.f, 0.f });
+	uiView.setSize(windowSize);
+	uiView.setCenter(centerPos);
+
+	player->SetPosition({ 0.f,0.f });
+
 }
 
 void SceneDev1::Exit()
@@ -227,7 +238,8 @@ void SceneDev1::Update(float dt)
 
 	std::string doorTexture = monsterList.empty() ? "graphics/door.png" : "graphics/closeDoor.png";
 
-	for (auto& door : doors) {
+	for (auto& door : doors) 
+	{
 		door->SetTexture(doorTexture);
 	}
 
@@ -268,14 +280,15 @@ void SceneDev1::UpdateGame(float dt)
 
 void SceneDev1::UpdateGameOver(float dt)
 {
-	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	/*if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		Release();
 		Init();
-		SetStatus(Status::Game);
-		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 		
-	}
+		Enter();
+		SetStatus(Status::Game);
+
+	}*/
 }
 
 void SceneDev1::UpdatePause(float dt)

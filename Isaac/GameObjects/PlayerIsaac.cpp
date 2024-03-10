@@ -71,11 +71,15 @@ void PlayerIsaac::Init()
 	hasHitBox = true;
 }
 
+void PlayerIsaac::Release()
+{
+	SpriteGo::Release();
+}
+
 void PlayerIsaac::Reset()
 {
-	animator.Play(IdleDown);
+	animator.Play("animators/IdleDown.csv");
 	SetOrigin(Origins::BC);
-	SetPosition({0.f,0.f});
 	SetFlipX(false);
 
 	isAlive = true;
@@ -191,13 +195,27 @@ void PlayerIsaac::OnDamage(int damage)
 		return;
 
 	hp -= damage;
+	timer = 0.5f;
+
 	animator.Stop();
 	animator.Play(DamageMove);
+	
 	if (hp <= 0)
 	{
 		hp = 0;
 		OnDie();
 	}
+
+	SpriteGoEffect* effectBlood = new SpriteGoEffect();
+	effectBlood->Init();
+	effectBlood->SetOrigin(Origins::MC);
+	effectBlood->SetTexture("graphics/blood.png");
+	effectBlood->Reset();
+	effectBlood->sortLayer = -1;
+	effectBlood->sortOrder = 1;
+	effectBlood->SetPosition(position);
+
+	sceneDev1->AddGo(effectBlood);
 }
 
 void PlayerIsaac::OnDie()
