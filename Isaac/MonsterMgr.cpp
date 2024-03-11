@@ -26,7 +26,6 @@ void MonsterMgr::Release()
 
 void MonsterMgr::Reset()
 {
-	SpriteGo::Reset();
 	hp = maxHp;
 	isAlive = true;
 

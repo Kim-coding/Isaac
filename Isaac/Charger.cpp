@@ -122,7 +122,7 @@ void Charger::Update(float dt)
 
 void Charger::FixedUpdate(float dt)
 {
-	SpriteGo::FixedUpdate(dt);
+    MonsterMgr::FixedUpdate(dt);
 }
 
 
