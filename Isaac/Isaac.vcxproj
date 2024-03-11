@@ -142,6 +142,7 @@
     <ClCompile Include="BoomFly.cpp" />
     <ClCompile Include="DataTables\DataTableMgr.cpp" />
     <ClCompile Include="DataTables\DataTable.cpp" />
+    <ClCompile Include="Dinga.cpp" />
     <ClCompile Include="Dip.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp">
@@ -162,6 +163,7 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SceneMapTool.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
     <ClCompile Include="Scenes\SceneDev1.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="DataTables\StringTable.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="SpriteGoEffect.cpp" />
+    <ClCompile Include="UiHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="DataTables\DataTableMgr.h" />
     <ClInclude Include="DataTables\DataTable.h" />
     <ClInclude Include="DataTables\rapidcsv.h" />
+    <ClInclude Include="Dinga.h" />
     <ClInclude Include="Dip.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\Defines.h" />
@@ -194,6 +198,7 @@
     <ClInclude Include="Charger.h" />
     <ClInclude Include="MonsterMgr.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SceneMapTool.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
     <ClInclude Include="Scenes\SceneDev1.h" />
@@ -204,6 +209,7 @@
     <ClInclude Include="DataTables\StringTable.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="SpriteGoEffect.h" />
+    <ClInclude Include="UiHud.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

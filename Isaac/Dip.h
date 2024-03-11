@@ -10,7 +10,6 @@ protected:
 
 	sf::Vector2f direction;
 
-	int damage;
 	float attackInterval;
 
 public:

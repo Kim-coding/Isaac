@@ -96,6 +96,15 @@
     <ClCompile Include="BoomFly.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="UiHud.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Dinga.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMapTool.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Defines.h">
@@ -186,6 +195,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="BoomFly.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UiHud.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Dinga.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMapTool.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -47,10 +47,9 @@ void SceneTitle::Exit()
 void SceneTitle::Update(float dt)
 {
 	Scene::Update(dt);
-	timer += dt;
-	if (timer > changSceneTime)
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		timer = 0.f;
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneDev1);
 	}
 }

@@ -6,6 +6,8 @@
 #include "Dip.h"
 #include "AttackFly.h"
 #include "BoomFly.h"
+#include "Dinga.h"
+#include "UiHud.h"
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -206,6 +208,11 @@ void SceneDev1::Init()
 	player = new PlayerIsaac("Isaac");
 	player->sortLayer = 1;
 	AddGo(player);
+
+	AddGo(new Dinga("monster"));
+
+	uiHud = new UiHud("UI HUD");
+	AddGo(uiHud, Layers::Ui);
 
 	Scene::Init();
 }

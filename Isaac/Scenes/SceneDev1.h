@@ -2,6 +2,7 @@
 
 class SpriteGo;
 class PlayerIsaac;
+class UiHud;
 
 
 class SceneDev1 : public Scene
@@ -23,6 +24,7 @@ protected:
 	SpriteGo* spriteGoBackgroundfloor;
 	SpriteGo* regularRoom;
 	SpriteGo* regularRoomfloor;
+	UiHud* uiHud = nullptr;
 
 	SpriteGo* door;
 
@@ -51,6 +53,8 @@ public:
 	
 	void Enter() override;
 	void Exit() override;
+
+	UiHud* GetHud() const { return uiHud; }
 
 	void Update(float dt) override;
 	void UpdateGame(float dt);
