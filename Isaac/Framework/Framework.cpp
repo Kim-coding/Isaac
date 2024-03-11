@@ -50,18 +50,18 @@ void Framework::Do()
 
         SOUND_MGR.Update(GetDT());
 
-        SCENE_MGR.Update(GetDT());
-
-        float fdt = fixedDeltaTime.asSeconds();
-
-        if (fdt > fixedUpdateTime)
+        if (SCENE_MGR.Update(GetDT()))
         {
-            SCENE_MGR.FixedUpdate(fdt);
-            fixedDeltaTime = sf::Time::Zero;
+            SCENE_MGR.LateUpdate(GetDT());
+            float fdt = fixedDeltaTime.asSeconds();
+
+           if (fdt > fixedUpdateTime)
+           {
+              SCENE_MGR.FixedUpdate(fdt);
+              fixedDeltaTime = sf::Time::Zero;
+           }
         }
-
-        SCENE_MGR.LateUpdate(GetDT());
-
+  
         window.clear();
         SCENE_MGR.Draw(window);
         window.display();

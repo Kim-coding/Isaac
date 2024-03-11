@@ -17,7 +17,7 @@ protected:
 
 	SceneIds startScene = SceneIds::SceneTitle;
 	SceneIds currentScene = startScene;
-
+	SceneIds nextScene = SceneIds::None;
 	bool isDeveloperMode = false;
 
 	SceneMgr() = default;
@@ -32,7 +32,7 @@ public:
 	Scene* GetCurrentScene() { return scenes[(int)currentScene]; }
 	bool GetDeveloperMode() { return isDeveloperMode; }
 
-	void Update(float dt);
+	bool Update(float dt);
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);
 	void Draw(sf::RenderWindow& window);

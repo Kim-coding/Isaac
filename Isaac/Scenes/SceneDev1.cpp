@@ -99,6 +99,13 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 					boomFly->Reset();
 					boomFly->SetPosition(pos);
 					AddGo(boomFly);
+
+
+					AttackFly* attackFly = new AttackFly("monster");
+					attackFly->Init();
+					attackFly->Reset();
+					attackFly->SetPosition(pos);
+					AddGo(attackFly);
 				}
 				
 			}
@@ -151,10 +158,10 @@ void SceneDev1::Init()
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
 
-	currentFloor = spriteGoBackgroundfloor;
 
 	/////////////////////////////////
-	for (int i = 0; i < 3; ++i)
+	int roomNum = Utils::RandomRange(1, 4);
+	for (int i = 0; i < roomNum; ++i)
 	{
 		int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
 		sf::Vector2f doorpos = doorPosition[rand * 90];
@@ -200,7 +207,6 @@ void SceneDev1::Init()
 	player->sortLayer = 1;
 	AddGo(player);
 
-	AddGo(new AttackFly("monster"));
 	Scene::Init();
 }
 
@@ -221,8 +227,9 @@ void SceneDev1::Enter()
 	uiView.setSize(windowSize);
 	uiView.setCenter(centerPos);
 
-	player->SetPosition({ 0.f,0.f });
+	currentFloor = spriteGoBackgroundfloor;
 
+	player->SetPosition({ 0.f,0.f });
 }
 
 void SceneDev1::Exit()
@@ -280,15 +287,17 @@ void SceneDev1::UpdateGame(float dt)
 
 void SceneDev1::UpdateGameOver(float dt)
 {
-	/*if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	for (auto obj : monsterList)    //플레이어가 사망 시 남아있는 몬스터 삭제  // 이전에는 생성된 몬스터가 죽지 않고 재 시작 시 시작방으로 넘어옴.
 	{
-		Release();
-		Init();
-		
-		Enter();
-		SetStatus(Status::Game);
+		gameObjects.remove(obj);
+		delete obj;
+	}
+	monsterList.clear();
 
-	}*/
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	{
+		SCENE_MGR.ChangeScene(SceneIds::SceneDev1);
+	}
 }
 
 void SceneDev1::UpdatePause(float dt)

@@ -58,7 +58,7 @@ protected:
 	float timerInterval = 3.f;
 
 	bool isCrying = false;
-	float cryInterval = 0.5f;
+	float cryInterval = 0.2f;
 	float cryTimer = 0.f;
 	float tearsSpeed = 1000.f;
 	int tearsDamage = 10;

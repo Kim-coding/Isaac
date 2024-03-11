@@ -50,16 +50,14 @@ void PlayerIsaac::Init()
 	clipInfos.push_back({ IdleDown, MoveLeft, false, Utils::GetNormal({-1,1}) });
 	clipInfos.push_back({ IdleDown, MoveDown, false, {0, 1} });
 	clipInfos.push_back({ IdleDown, MoveRight, false, Utils::GetNormal({1, 1}) });
-
-	cryTimer = cryInterval;
 	
-	tearDirection = {
+	tearDirection = {                   //눈물 방향
 		{sf::Keyboard::Left, {-1, 0}},
 		{sf::Keyboard::Right, {1, 0}},
 		{sf::Keyboard::Up, {0, -1}},
 		{sf::Keyboard::Down, {0, 1}}
 	};
-	cryDirection =
+	cryDirection =                      //눈물 방향에 따른 바라보는 방향 변경
 	{
 		{sf::Keyboard::Left, IdleLeft},
 		{sf::Keyboard::Right, IdleRight},
@@ -160,16 +158,14 @@ void PlayerIsaac::Update(float dt)
 		}
 	}
 
+	cryTimer += dt;
 	for (auto& pair : tearDirection) //키 입력에 따른 공격방향
 	{
-		if (InputMgr::GetKeyDown(pair.first)) 
+		if (InputMgr::GetKey(pair.first) && cryTimer > cryInterval) 
 		{
 			isCrying = true;
 			Cry(pair.second);
-		}
-		if (InputMgr::GetKeyUp(pair.first))
-		{
-			isCrying = false;
+			cryTimer = 0;
 		}
 	}
 	
@@ -198,7 +194,7 @@ void PlayerIsaac::OnDamage(int damage)
 	timer = 0.5f;
 
 	animator.Stop();
-	animator.Play(DamageMove);
+	animator.Play(DamageMove);    //공격을 받을 때 마다 애니메이션을 변경하고 싶었음.
 	
 	if (hp <= 0)
 	{
@@ -224,8 +220,5 @@ void PlayerIsaac::OnDie()
 		return;
 
 	isAlive = false;
-	animator.Stop();
-
-	
 	sceneDev1->SetStatus(SceneDev1::Status::GameOver);
 }

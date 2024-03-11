@@ -71,6 +71,17 @@ void Scene::Enter()
 	}
 }
 
+void Scene::Exit()
+{
+	for (auto obj : removeGameObjects)
+	{
+		gameObjects.remove(obj);
+		uiGameObjects.remove(obj);
+		delete obj;
+	}
+	removeGameObjects.clear();
+}
+
 void Scene::Update(float dt)
 {
 	for (auto obj : gameObjects)

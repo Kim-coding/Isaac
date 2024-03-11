@@ -2,7 +2,7 @@
 
 class SpriteGo;
 class PlayerIsaac;
-class Charger;
+
 
 class SceneDev1 : public Scene
 {
@@ -27,8 +27,6 @@ protected:
 	SpriteGo* door;
 
 	SpriteGo* currentFloor;
-
-	Charger* charger;
 
 	std::vector<SpriteGo*> doors;
 	std::vector<SpriteGo*> Rooms;
