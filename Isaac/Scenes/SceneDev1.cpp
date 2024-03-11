@@ -147,7 +147,6 @@ void SceneDev1::Init()
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
 	spriteGoBackground->SetTexture("graphics/StartRoom.png");
 	spriteGoBackground->SetOrigin(Origins::MC);
-	spriteGoBackground->SetScale({2,2});
 	spriteGoBackground->SetPosition({ 0.f, 0.f });
 	spriteGoBackground->sortLayer = -1;
 	AddGo(spriteGoBackground);
@@ -155,7 +154,6 @@ void SceneDev1::Init()
 	spriteGoBackgroundfloor = new SpriteGo("StartRoomFloor");
 	spriteGoBackgroundfloor->SetTexture("graphics/StartRoomFloor.png");
 	spriteGoBackgroundfloor->SetOrigin(Origins::MC);
-	spriteGoBackgroundfloor->SetScale({ 2, 2 });
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
@@ -173,7 +171,6 @@ void SceneDev1::Init()
 		regularRoom = new SpriteGo("RegularRoom");
 		regularRoom->SetTexture("graphics/Catacombs.png");
 		regularRoom->SetOrigin(Origins::MC);
-		regularRoom->SetScale({ 2, 2 });
 		regularRoom->SetPosition(Roompos);
 		regularRoom->sortLayer = -1;
 		AddGo(regularRoom);
@@ -181,7 +178,6 @@ void SceneDev1::Init()
 		regularRoomfloor = new SpriteGo("regularRoomfloor");
 		regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
 		regularRoomfloor->SetOrigin(Origins::MC);
-		regularRoomfloor->SetScale({ 2, 2 });
 		regularRoomfloor->SetPosition(Roompos);
 		regularRoomfloor->sortLayer = -1;
 		AddGo(regularRoomfloor);
@@ -190,7 +186,6 @@ void SceneDev1::Init()
 		door = new SpriteGo("door");
 		door->SetTexture("graphics/door.png");
 		door->SetOrigin(Origins::BC);
-		door->SetScale({ 2, 2 });
 		door->SetRotation(rand * 90);
 		door->SetPosition(doorpos);
 		AddGo(door);
@@ -199,7 +194,6 @@ void SceneDev1::Init()
 		door = new SpriteGo("door");                       //생성된 문에 맞게 다음 문 생성.
 		door->SetTexture("graphics/door.png");
 		door->SetOrigin(Origins::BC);
-		door->SetScale({ 2, 2 });
 		door->SetRotation(rand * 90 + 180);
 		door->SetPosition(nextdoorpos);
 		AddGo(door);

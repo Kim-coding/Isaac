@@ -8,7 +8,9 @@ class SceneMapTool : public Scene
 {
 protected:
 	SpriteGo* backGround;
-	TextGo button;
+	SpriteGo* button;
+	TextGo buttonText;
+
 	sf::Texture imageTexture;
 	sf::Sprite imageSprite;
 
@@ -26,6 +28,8 @@ public:
 	void Exit();
 
 	void Update(float dt);
+	void SaveScene(const std::string& filePath);
+
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);
 	void Draw(sf::RenderWindow& window);

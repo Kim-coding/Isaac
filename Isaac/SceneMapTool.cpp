@@ -9,19 +9,15 @@
 
 std::string ConvertLPCWSTRToString(LPCWSTR lpcwszStr)
 {
-	// Determine the length of the converted string 
 	int strLength
 		= WideCharToMultiByte(CP_UTF8, 0, lpcwszStr, -1,
 			nullptr, 0, nullptr, nullptr);
 
-	// Create a std::string with the determined length 
 	std::string str(strLength, 0);
 
-	// Perform the conversion from LPCWSTR to std::string 
 	WideCharToMultiByte(CP_UTF8, 0, lpcwszStr, -1, &str[0],
 		strLength, nullptr, nullptr);
 
-	// Return the converted std::string 
 	return str;
 }
 
@@ -43,15 +39,19 @@ void SceneMapTool::Init()
 	backGround->sortLayer = -1;
 	AddGo(backGround);
 
-	/*sf::Font& font = RES_MGR_FONT.Get("fonts/Isaac.ttf");
-	button.Set(font, "BackGround", 30, sf::Color::White);
-	button.SetOrigin(Origins::TL);
-	button.SetPosition({ 5, 5 });*/
+	button = new SpriteGo("button");
+	button->SetTexture("graphics/button.png");
+	button->SetOrigin(Origins::TL);
+	button->SetPosition({ -500.f, -350.f });
+	button->sortLayer = -1;
+	AddGo(button);
+
+	sf::Font& font = RES_MGR_FONT.Get("fonts/Isaac.ttf");
+	buttonText.Set(font, "background", 25, sf::Color::Blue);
+	buttonText.SetOrigin(Origins::TL);
+	buttonText.SetPosition({ 0,0 });
 
 
-
-
-	
 	Scene::Init();
 }
 
@@ -113,29 +113,67 @@ void SceneMapTool::Update(float dt)
 {
 	Scene::Update(dt);
 
+	sf::Vector2i mousePos = (sf::Vector2i)InputMgr::GetMousePos();
+	sf::Vector2f mouseWorldPos = SCENE_MGR.GetCurrentScene()->ScreenToWorld(mousePos);
+
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Space)) 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		std::wstring filePathW = SelectFile();
-		if (!filePathW.empty()) 
+		if (button->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::string filePath = ConvertLPCWSTRToString(filePathW.c_str()); // 경로를 std::string으로 변환
-
-			if (imageTexture.loadFromFile(filePath)) 
-			{ 
-				imageSprite.setTexture(imageTexture);
-				imageSprite.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageTexture.getSize().x / 2,
-					FRAMEWORK.GetWindowSize().y / 2 - imageTexture.getSize().y / 2);
-			}
-			else 
+			std::wstring filePathW = SelectFile();
+			if (!filePathW.empty())
 			{
-				std::cerr << "Image could not be loaded." << std::endl;
+				std::string filePath = ConvertLPCWSTRToString(filePathW.c_str());
+
+				if (imageTexture.loadFromFile(filePath))
+				{
+					imageSprite.setTexture(imageTexture);
+					imageSprite.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageTexture.getSize().x / 2,
+						FRAMEWORK.GetWindowSize().y / 2 - imageTexture.getSize().y / 2);
+				}
+				else
+				{
+					std::cerr << "Image could not be loaded." << std::endl;
+				}
+
 			}
 		}
+	}
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::S))
+	{
+		SaveScene("saved_scene.png");
+	}
+}
+
+void SceneMapTool::SaveScene(const std::string& filePath) {
+	auto& window = FRAMEWORK.GetWindow();
+	sf::Vector2u windowSize = window.getSize();
+
+	sf::RenderTexture renderTexture;
+	if (!renderTexture.create(windowSize.x, windowSize.y)) 
+	{
+		std::cerr << "RenderTexture 생성에 실패했습니다." << std::endl;
+		return;
+	}
+
+	renderTexture.clear();
+	renderTexture.display();
+
+	sf::Texture texture = renderTexture.getTexture();
+	sf::Image image = texture.copyToImage();
+	if (!image.saveToFile(filePath)) 
+	{
+		std::cerr << "이미지 파일을 저장하는 데 실패했습니다: " << filePath << std::endl;
+	}
+	else 
+	{
+		std::cout << "이미지 파일이 성공적으로 저장되었습니다: " << filePath << std::endl;
 	}
 }
 
@@ -154,6 +192,6 @@ void SceneMapTool::FixedUpdate(float dt)
 void SceneMapTool::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	button.Draw(window);
 	window.draw(imageSprite);
+	buttonText.Draw(window);
 }
