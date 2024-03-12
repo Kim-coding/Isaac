@@ -103,11 +103,17 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 					AddGo(boomFly);
 
 
-					AttackFly* attackFly = new AttackFly("monster");
-					attackFly->Init();
-					attackFly->Reset();
-					attackFly->SetPosition(pos);
-					AddGo(attackFly);
+					for (auto obj : mapinfo.monsterList)
+					{
+						if (obj.name == "AttackFly")
+						{
+							AttackFly* attackFly = new AttackFly("monster");
+							attackFly->Init();
+							attackFly->Reset();
+							attackFly->SetPosition(pos + obj.position);
+							AddGo(attackFly);
+						}
+					}
 				}
 				
 			}
@@ -143,20 +149,38 @@ void SceneDev1::Init()
 	};
 
 
+	////////////////////////////////////////
+	mapinfo.LoadFromFile("map/Map.csv");                                      
+
 	//¹æ
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
-	spriteGoBackground->SetTexture("graphics/StartRoom.png");
+	spriteGoBackground->SetTexture(mapinfo.roomTexId);
 	spriteGoBackground->SetOrigin(Origins::MC);
 	spriteGoBackground->SetPosition({ 0.f, 0.f });
 	spriteGoBackground->sortLayer = -1;
 	AddGo(spriteGoBackground);
 
 	spriteGoBackgroundfloor = new SpriteGo("StartRoomFloor");
-	spriteGoBackgroundfloor->SetTexture("graphics/StartRoomFloor.png");
+	spriteGoBackgroundfloor->SetTexture(mapinfo.roomFloorTexId);
 	spriteGoBackgroundfloor->SetOrigin(Origins::MC);
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
+
+	for (auto obj : mapinfo.objectList)
+	{
+		if (obj.name == "rock")
+		{
+			SpriteGo* mapObj = new SpriteGo("");
+			mapObj->SetTexture(obj.TexId);
+			mapObj->SetOrigin(Origins::MC);
+			mapObj->SetPosition(obj.position);
+			AddGo(mapObj);
+		}
+	}
+	
+	///////////////////////////////////////////
+
 
 
 	/////////////////////////////////
@@ -203,7 +227,7 @@ void SceneDev1::Init()
 	player->sortLayer = 1;
 	AddGo(player);
 
-	AddGo(new Dinga("monster"));
+	//AddGo(new Dinga("monster"));
 
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);

@@ -1,0 +1,14 @@
+TYPE,TEXTURE ID,X,Y,NAME
+Room,graphics/StartRoom.png, 0 ,0 ,room
+RoomFloor,graphics/StartRoomFloor.png, 0 ,0 ,roomfloor
+mapObj,graphics/rock.png,100 ,100 ,rock
+mapObj,graphics/rock.png,-100 ,100 ,rock
+mapObj,graphics/rock.png,100 ,-100 ,rock
+mapObj,graphics/rock.png,-100 ,-100 ,rock
+mapObj,graphics/rock.png,300 ,0 ,rock
+mapObj,graphics/rock.png,-300 ,0 ,rock
+monster,graphics/AttackFly.png,200 ,0 ,AttackFly
+monster,graphics/AttackFly.png,-200 ,100 ,AttackFly
+monster,graphics/AttackFly.png,100 ,100 ,AttackFly
+monster,graphics/AttackFly.png,-50 ,100 ,AttackFly
+monster,graphics/Dinga.png,-50 ,100 ,Dinga

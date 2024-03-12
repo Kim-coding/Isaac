@@ -17,7 +17,6 @@ void AttackFly::Reset()
 {
 	MonsterMgr::Reset();
 	animator.Play("animators/AttackFlyMove.csv");
-	SetPosition({100,100});
 	SetOrigin(Origins::MC);
 
 }

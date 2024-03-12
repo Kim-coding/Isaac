@@ -3,11 +3,13 @@
 #include "MapInfo.h"
 
 class SpriteGo;
+class PlayerIsaac;
 
 class SceneTest : public Scene
 {
 protected:
 	MapInfo mapinfo;
+	PlayerIsaac* player;
 
 public:
 	

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "SceneTest.h"
 #include "SpriteGo.h"
+#include "AttackFly.h"
+#include "PlayerIsaac.h"
 
 
 SceneTest::SceneTest(SceneIds id)
@@ -14,7 +16,7 @@ SceneTest::~SceneTest()
 
 void SceneTest::Init()
 {
-	mapinfo.LoadFromFile("animators/Map.csv");
+	mapinfo.LoadFromFile("map/Map.csv");
 
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
 	spriteGoBackground->SetTexture(mapinfo.roomTexId);
@@ -29,6 +31,16 @@ void SceneTest::Init()
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
+
+	for (auto obj : mapinfo.objectList)
+	{
+		SpriteGo* mapObj = new SpriteGo();
+		mapObj->SetTexture(obj.TexId);
+		mapObj->SetOrigin(Origins::MC);
+		mapObj->SetPosition(obj.position);
+		AddGo(mapObj);
+	}
+
 }
 
 void SceneTest::Release()
@@ -46,6 +58,7 @@ void SceneTest::Enter()
 	worldView.setCenter({ 0.f, 0.f });
 	uiView.setSize(windowSize);
 	uiView.setCenter(centerPos);
+
 }
 
 void SceneTest::Exit()

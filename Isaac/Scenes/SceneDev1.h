@@ -1,4 +1,5 @@
 #pragma once
+#include "MapInfo.h"
 
 class SpriteGo;
 class PlayerIsaac;
@@ -19,6 +20,8 @@ public:
 	};
 
 protected:
+	MapInfo mapinfo;
+
 	Status currStatus = Status::Game;
 
 	SpriteGo* spriteGoBackgroundfloor;

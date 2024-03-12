@@ -4,6 +4,7 @@ struct MapObjectInfo
 	std::string objectType;
 	std::string TexId;
 	sf::Vector2f position;
+	std::string name;
 };
 
 struct MonsterInfo
@@ -11,6 +12,7 @@ struct MonsterInfo
 	std::string monsterType;
 	std::string TexId;
 	sf::Vector2f position;
+	std::string name;
 };
 
 struct MapInfo
