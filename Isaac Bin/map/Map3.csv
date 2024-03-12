@@ -1,0 +1,9 @@
+TYPE,TEXTURE ID,X,Y,NAME
+Room,graphics/Catacombs.png, 0 ,0 ,room
+RoomFloor,graphics/CatacombsFloor.png, 0 ,0 ,roomfloor
+monster,graphics/Dip.png,0 ,0 ,Dip
+monster,graphics/Dip.png,0 ,100 ,Dip
+monster,graphics/Dip.png,200 ,100 ,Dip
+monster,graphics/Dip.png,130 ,50 ,Dip
+monster,graphics/Dip.png,100 ,100 ,Dip
+monster,graphics/Dip.png,90 ,160 ,Dip
