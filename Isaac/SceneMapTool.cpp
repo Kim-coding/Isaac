@@ -39,6 +39,8 @@ void SceneMapTool::Init()
 	backGround->sortLayer = -1;
 	AddGo(backGround);
 
+
+
 	button = new SpriteGo("button");
 	button->SetTexture("graphics/button.png");
 	button->SetOrigin(Origins::TL);
@@ -51,14 +53,9 @@ void SceneMapTool::Init()
 	buttonText.SetOrigin(Origins::TL);
 	buttonText.SetPosition({ 0,0 });
 
-	rock = new SpriteGo("");
-	rock->SetTexture("graphics/rock.png");
-	rock->sortLayer = 1;
-	rock->SetOrigin(Origins::MC);
-	rock->SetPosition({ -300.f, -350.f });
-	AddGo(rock);
 
 
+	LoadMapFromCSV(L"animators/Map.csv");
 	Scene::Init();
 }
 
@@ -151,48 +148,49 @@ void SceneMapTool::Update(float dt)
 				}
 			}
 		}
-		if (rock->GetGlobalBounds().contains(mouseWorldPos) && !isDragging)
-		{
-			isDragging = true;
-		}
-	}
-	else
-	{
-		isDragging = false;
-	}
-
-	if (isDragging)
-	{
-		rock->SetPosition(mouseWorldPos);
-
-	}
-
-	if (InputMgr::GetKeyDown(sf::Keyboard::S))
-	{
-		std::wstring filePath = L"rock_position.txt"; 
-		SavePosition(filePath);
 	}
 }
 
-void SceneMapTool::SavePosition(const std::wstring& filePath)
+void SceneMapTool::LoadMapFromCSV(const std::wstring& filePath)
 {
-	
-	HANDLE hFile = CreateFile(filePath.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (hFile == INVALID_HANDLE_VALUE)
+	std::wifstream file(filePath);
+	std::wstring line;
+	std::getline(file, line);
+	while (std::getline(file, line))
 	{
-		std::wcerr << L"Failed to open file for writing.\n";
-		return;
+		std::wistringstream iss(line);
+		std::wstring type, imagePath;
+		float x, y;
+
+		std::getline(iss, type, L',');
+		std::getline(iss, imagePath, L',');
+		iss >> x >> y;
+
+		if (type == L"background")
+		{
+			auto room = new SpriteGo("");
+			room->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
+			room->SetOrigin(Origins::MC);
+			room->SetPosition({ x, y });
+			AddGo(room);
+		}
+		if (type == L"rock")
+		{
+			auto rock = new SpriteGo("");
+			rock->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
+			rock->SetOrigin(Origins::MC);
+			rock->SetPosition({ x, y });
+			AddGo(rock);
+		}
+		if (type == L"monster")
+		{
+			auto monster = new SpriteGo("monster");
+			monster->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
+			monster->SetPosition({ x, y });
+			AddGo(monster);
+		}
+
 	}
-	auto pos = rock->GetPosition();
-	std::wstringstream wss;
-	wss << pos.x << L"," << pos.y;
-	std::wstring data = wss.str();
-
-	DWORD written;
-	WriteFile(hFile, data.c_str(), data.size() * sizeof(wchar_t), &written, NULL);
-
-	CloseHandle(hFile);
-	
 }
 
 

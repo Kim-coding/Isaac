@@ -24,6 +24,7 @@ protected:
 	SpriteGo* spriteGoBackgroundfloor;
 	SpriteGo* regularRoom;
 	SpriteGo* regularRoomfloor;
+	SpriteGo* rock;
 	UiHud* uiHud = nullptr;
 
 	SpriteGo* door;
