@@ -152,7 +152,7 @@ void SceneMapTool::Update(float dt)
 				if (InputMgr::GetKeyDown(sf::Keyboard::S))
 				{
 					//이미지 위에 올린 obj들의 정보를 저장하고 싶었음
-					SavePosition(filePathW);
+					//SavePosition();
 				}
 			}
 		}
@@ -177,6 +177,7 @@ void SceneMapTool::Update(float dt)
 
 void SceneMapTool::SavePosition(const std::wstring& filePath)
 {
+	/*
 	HANDLE hFile = CreateFile(filePath.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
@@ -192,6 +193,7 @@ void SceneMapTool::SavePosition(const std::wstring& filePath)
 	WriteFile(hFile, data.c_str(), data.size() * sizeof(wchar_t), &written, NULL);
 
 	CloseHandle(hFile);
+	*/
 }
 
 
