@@ -1,12 +1,17 @@
 #pragma once
 #include "Scene.h"
+#include "MapInfo.h"
+
+class SpriteGo;
 
 class SceneTest : public Scene
 {
 protected:
-
+	MapInfo mapinfo;
 
 public:
+	
+
 	SceneTest(SceneIds id);
 	virtual ~SceneTest();
 
