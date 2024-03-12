@@ -1,0 +1,6 @@
+TYPE,TEXTURE ID,X,Y
+background,graphics/CatacombsFloor.png, 0 ,0
+rock,graphics/rock.png,200 ,200
+rock,graphics/rock.png,-200 ,200
+rock,graphics/rock.png,200 ,-200
+rock,graphics/rock.png,-200 ,-200

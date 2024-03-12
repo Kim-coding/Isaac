@@ -4,6 +4,7 @@
 #include "SceneDev2.h"
 #include "SceneTitle.h"
 #include "SceneMapTool.h"
+#include "SceneTest.h"
 
 SceneMgr::~SceneMgr()
 {
@@ -12,13 +13,13 @@ SceneMgr::~SceneMgr()
 
 void SceneMgr::Init()
 {
-	Release();
-	
+	Release(); 
+	scenes.push_back(new SceneTest(SceneIds::SceneTest));
 	scenes.push_back(new SceneTitle(SceneIds::SceneTitle));
 	scenes.push_back(new SceneMapTool(SceneIds::SceneMapTool));
 	scenes.push_back(new SceneDev1(SceneIds::SceneDev1));
 	scenes.push_back(new SceneDev2(SceneIds::SceneDev2));
-
+	
 	for (auto scene : scenes)
 	{
 		scene->Init();

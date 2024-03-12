@@ -142,8 +142,8 @@ void SceneDev1::Init()
 		{3, {-1000,0}}
 	};
 
-	//¹æ
 
+	//¹æ
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
 	spriteGoBackground->SetTexture("graphics/StartRoom.png");
 	spriteGoBackground->SetOrigin(Origins::MC);

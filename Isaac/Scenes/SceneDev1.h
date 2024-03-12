@@ -34,7 +34,6 @@ protected:
 	std::vector<SpriteGo*> doors;
 	std::vector<SpriteGo*> Rooms;
 	std::list<GameObject*> monsterList;
-
 public:
 	PlayerIsaac* player;
 

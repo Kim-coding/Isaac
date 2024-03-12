@@ -164,15 +164,23 @@ void SceneMapTool::LoadMapFromCSV(const std::wstring& filePath)
 
 		std::getline(iss, type, L',');
 		std::getline(iss, imagePath, L',');
-		iss >> x >> y;
+		iss >> x >>  y;
 
-		if (type == L"background")
+		if (type == L"Room")
 		{
 			auto room = new SpriteGo("");
 			room->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
 			room->SetOrigin(Origins::MC);
 			room->SetPosition({ x, y });
 			AddGo(room);
+		}
+		if (type == L"RoomFloor")
+		{
+			auto roomFloor = new SpriteGo("");
+			roomFloor->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
+			roomFloor->SetOrigin(Origins::MC);
+			roomFloor->SetPosition({ x, y });
+			AddGo(roomFloor);
 		}
 		if (type == L"rock")
 		{
@@ -208,7 +216,6 @@ void SceneMapTool::FixedUpdate(float dt)
 
 void SceneMapTool::Draw(sf::RenderWindow& window)
 {
-	
 	Scene::Draw(window);
 	window.draw(imageSprite);
 	buttonText.Draw(window);

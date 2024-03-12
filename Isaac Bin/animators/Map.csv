@@ -1,6 +1,6 @@
 TYPE,TEXTURE ID,XY
-background,graphics/StartRoomFloor.png, 0 0
-rock,graphics/rock.png,0 0
+Room,graphics/StartRoom.png, 0 0
+RoomFloor,graphics/StartRoomFloor.png, 0 0
 rock,graphics/rock.png,100 100
 rock,graphics/rock.png,-100 100
 rock,graphics/rock.png,100 -100
@@ -9,5 +9,4 @@ rock,graphics/rock.png,0 150
 rock,graphics/rock.png,0 -150
 rock,graphics/rock.png,150 0
 rock,graphics/rock.png,-150 0
-
 monster,graphics/AttackFly.png,-100 100
