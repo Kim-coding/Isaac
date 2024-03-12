@@ -31,7 +31,7 @@ public:
 	void Exit();
 
 	void Update(float dt);
-
+	void SavePosition(const std::wstring& filePath);
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);
 	void Draw(sf::RenderWindow& window);

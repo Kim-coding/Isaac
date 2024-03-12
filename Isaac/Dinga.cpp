@@ -16,6 +16,7 @@ Dinga::~Dinga()
 void Dinga::Init()
 {
 	MonsterMgr::Init();
+    SetTexture("graphics/Dinga1.png");
 	animator.SetTarget(&sprite);
 	hasHitBox = true;
 
@@ -24,7 +25,7 @@ void Dinga::Init()
 void Dinga::Reset()
 {
 	MonsterMgr::Reset();
-	animator.Play("animators/DingaMove.csv");
+    SetTexture("graphics/Dinga1.png");
 	SetOrigin(Origins::MC);
 	SetFlipX(false);
 }
@@ -79,8 +80,14 @@ void Dinga::Update(float dt)
                 direction.y *= -1;
             if (pos.y == roomBound.y)  //x축 경계와 충돌
                 direction.x *= -1;
-
         }
     }
     SetPosition(pos);
+}
+
+void Dinga::OnDie()
+{
+    animator.Play("animators/DingaMove.csv");
+
+    MonsterMgr::OnDie();
 }
