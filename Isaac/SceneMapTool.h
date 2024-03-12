@@ -11,9 +11,12 @@ protected:
 	SpriteGo* button;
 	TextGo buttonText;
 
+	SpriteGo* rock;
+
 	sf::Texture imageTexture;
 	sf::Sprite imageSprite;
 
+	bool isDragging = false;
 public:
 	SceneMapTool(SceneIds id);
 	~SceneMapTool() override;
@@ -28,7 +31,6 @@ public:
 	void Exit();
 
 	void Update(float dt);
-	void SaveScene(const std::string& filePath);
 
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);

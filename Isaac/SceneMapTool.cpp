@@ -51,6 +51,13 @@ void SceneMapTool::Init()
 	buttonText.SetOrigin(Origins::TL);
 	buttonText.SetPosition({ 0,0 });
 
+	rock = new SpriteGo("");
+	rock->SetTexture("graphics/rock.png");
+	rock->sortLayer = 1;
+	rock->SetOrigin(Origins::MC);
+	rock->SetPosition({ -300.f, -350.f });
+	AddGo(rock);
+
 
 	Scene::Init();
 }
@@ -121,7 +128,8 @@ void SceneMapTool::Update(float dt)
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 	}
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+
+	if (InputMgr::GetMouseButton(sf::Mouse::Left))
 	{
 		if (button->GetGlobalBounds().contains(mouseWorldPos))
 		{
@@ -135,6 +143,7 @@ void SceneMapTool::Update(float dt)
 					imageSprite.setTexture(imageTexture);
 					imageSprite.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageTexture.getSize().x / 2,
 						FRAMEWORK.GetWindowSize().y / 2 - imageTexture.getSize().y / 2);
+					imageSprite.setColor(sf::Color(255, 255, 255, 128));
 				}
 				else
 				{
@@ -143,37 +152,26 @@ void SceneMapTool::Update(float dt)
 
 			}
 		}
+		if (rock->GetGlobalBounds().contains(mouseWorldPos) && !isDragging)
+		{
+			isDragging = true;
+		}
+	}
+	else
+	{
+		isDragging = false;
+	}
+
+	if (isDragging)
+	{
+		rock->SetPosition(mouseWorldPos);
+
 	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::S))
 	{
-		SaveScene("saved_scene.png");
-	}
-}
+		//이미지 위에 올린 obj들의 정보를 저장하고 싶었음
 
-void SceneMapTool::SaveScene(const std::string& filePath) {
-	auto& window = FRAMEWORK.GetWindow();
-	sf::Vector2u windowSize = window.getSize();
-
-	sf::RenderTexture renderTexture;
-	if (!renderTexture.create(windowSize.x, windowSize.y)) 
-	{
-		std::cerr << "RenderTexture 생성에 실패했습니다." << std::endl;
-		return;
-	}
-
-	renderTexture.clear();
-	renderTexture.display();
-
-	sf::Texture texture = renderTexture.getTexture();
-	sf::Image image = texture.copyToImage();
-	if (!image.saveToFile(filePath)) 
-	{
-		std::cerr << "이미지 파일을 저장하는 데 실패했습니다: " << filePath << std::endl;
-	}
-	else 
-	{
-		std::cout << "이미지 파일이 성공적으로 저장되었습니다: " << filePath << std::endl;
 	}
 }
 
@@ -191,7 +189,9 @@ void SceneMapTool::FixedUpdate(float dt)
 
 void SceneMapTool::Draw(sf::RenderWindow& window)
 {
+	
 	Scene::Draw(window);
 	window.draw(imageSprite);
+	//rock->Draw(window);
 	buttonText.Draw(window);
 }
