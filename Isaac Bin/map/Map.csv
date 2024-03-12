@@ -9,6 +9,6 @@ mapObj,graphics/rock.png,300 ,0 ,rock
 mapObj,graphics/rock.png,-300 ,0 ,rock
 monster,graphics/AttackFly.png,200 ,0 ,AttackFly
 monster,graphics/AttackFly.png,-200 ,100 ,AttackFly
-monster,graphics/AttackFly.png,100 ,100 ,AttackFly
-monster,graphics/AttackFly.png,-50 ,100 ,AttackFly
+monster,graphics/Dip.png,100 ,100 ,Dip
+monster,graphics/Charger.png,-50 ,100 ,Charger
 monster,graphics/Dinga.png,-50 ,100 ,Dinga

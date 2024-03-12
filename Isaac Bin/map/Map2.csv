@@ -1,6 +1,11 @@
-TYPE,TEXTURE ID,X,Y
-background,graphics/CatacombsFloor.png, 0 ,0
-rock,graphics/rock.png,200 ,200
-rock,graphics/rock.png,-200 ,200
-rock,graphics/rock.png,200 ,-200
-rock,graphics/rock.png,-200 ,-200
+TYPE,TEXTURE ID,X,Y,NAME
+Room,graphics/Catacombs.png, 0 ,0 ,room
+RoomFloor,graphics/CatacombsFloor.png, 0 ,0 ,roomfloor
+mapObj,graphics/rock.png,200 ,200 ,rock
+mapObj,graphics/rock.png,-200 ,200 ,rock
+mapObj,graphics/rock.png,200 ,-200 ,rock
+mapObj,graphics/rock.png,-200 ,-200 ,rock
+mapObj,graphics/rock.png,200 ,150 ,rock
+mapObj,graphics/rock.png,-200 ,150 ,rock
+mapObj,graphics/rock.png,200 ,-150 ,rock
+mapObj,graphics/rock.png,-200 ,-150 ,rock

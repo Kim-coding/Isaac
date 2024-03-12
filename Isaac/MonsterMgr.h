@@ -7,6 +7,15 @@ class Animator;
 
 class MonsterMgr : public SpriteGo
 {
+public:
+	enum class Types
+	{
+		AttackFly,
+		BoomFly,
+		Charger,
+		Dip,
+		Dinga,
+	};
 protected:
 	Animator animator;
 	SceneDev1* sceneDev1 = nullptr;

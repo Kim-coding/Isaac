@@ -28,7 +28,6 @@ void Dip::Reset()
     MonsterMgr::Reset();
 	animator.Play("animators/DipMove.csv");
 	SetOrigin(Origins::MC);
-	SetPosition({ -100.f,100.f });
 	SetFlipX(false);
 
 }

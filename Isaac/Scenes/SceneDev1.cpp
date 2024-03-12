@@ -84,25 +84,6 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 					sf::Vector2f pos = roomPosition + (roomSize / 2.0f);
 
-					Dip* dip = new Dip("monster");
-					dip->Init();
-					dip->Reset();
-					dip->SetPosition(pos);
-					AddGo(dip);
-					
-					Charger* charger = new Charger("monster");
-					charger->Init();
-					charger->Reset();
-					charger->SetPosition(pos);
-					AddGo(charger);
-
-					BoomFly* boomFly = new BoomFly("monster");
-					boomFly->Init();
-					boomFly->Reset();
-					boomFly->SetPosition(pos);
-					AddGo(boomFly);
-
-
 					for (auto obj : mapinfo.monsterList)
 					{
 						if (obj.name == "AttackFly")
@@ -112,6 +93,49 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							attackFly->Reset();
 							attackFly->SetPosition(pos + obj.position);
 							AddGo(attackFly);
+						}
+						if (obj.name == "Dip")
+						{
+							Dip* dip = new Dip("monster");
+							dip->Init();
+							dip->Reset();
+							dip->SetPosition(pos + obj.position);
+							AddGo(dip);
+						}
+						if (obj.name == "Charger")
+						{
+							Charger* charger = new Charger("monster");
+							charger->Init();
+							charger->Reset();
+							charger->SetPosition(pos + obj.position);
+							AddGo(charger);
+						}
+						if (obj.name == "Dinga")
+						{
+							Dinga* dinga = new Dinga("monster");
+							dinga->Init();
+							dinga->Reset();
+							dinga->SetPosition(pos + obj.position);
+							AddGo(dinga);
+						}
+						if (obj.name == "BoomFly")
+						{
+							BoomFly* boomFly = new BoomFly("monster");
+							boomFly->Init();
+							boomFly->Reset();
+							boomFly->SetPosition(pos + obj.position);
+							AddGo(boomFly);
+						}
+					}
+					for (auto obj : mapinfo.objectList)
+					{
+						if (obj.name == "rock")
+						{
+							SpriteGo* mapObj = new SpriteGo("");
+							mapObj->SetTexture(obj.TexId);
+							mapObj->SetOrigin(Origins::MC);
+							mapObj->SetPosition(pos + obj.position);
+							AddGo(mapObj);
 						}
 					}
 				}
@@ -150,7 +174,7 @@ void SceneDev1::Init()
 
 
 	////////////////////////////////////////
-	mapinfo.LoadFromFile("map/Map.csv");                                      
+	mapinfo.LoadFromFile("map/Map2.csv");                                      
 
 	//¹æ
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
@@ -166,18 +190,6 @@ void SceneDev1::Init()
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
-
-	for (auto obj : mapinfo.objectList)
-	{
-		if (obj.name == "rock")
-		{
-			SpriteGo* mapObj = new SpriteGo("");
-			mapObj->SetTexture(obj.TexId);
-			mapObj->SetOrigin(Origins::MC);
-			mapObj->SetPosition(obj.position);
-			AddGo(mapObj);
-		}
-	}
 	
 	///////////////////////////////////////////
 
