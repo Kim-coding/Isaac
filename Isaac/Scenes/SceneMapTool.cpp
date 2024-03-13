@@ -275,9 +275,13 @@ void SceneMapTool::Draw(sf::RenderWindow& window)
 
 void SceneMapTool::SaveMapCSV()
 {
-	std::cout << "Click Save Button" << std::endl;
-	
-	std::string filePath = "map/Test.csv";
+	std::string fileName;	// = "map/Test.csv";
+
+	std::cout << "File Name : ";
+	std::cin >> fileName;
+	std::cout << "File Path : map/" << fileName << ".csv" << std::endl;
+
+	std::string filePath = "map/" + fileName + ".csv";
 
 	mapInfo.SaveToFile(filePath);
 }

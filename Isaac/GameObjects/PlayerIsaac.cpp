@@ -76,7 +76,7 @@ void PlayerIsaac::Release()
 
 void PlayerIsaac::Reset()
 {
-	animator.Play("animators/IdleDown.csv");
+	animator.Play(IdleDown);
 	SetOrigin(Origins::BC);
 	SetFlipX(false);
 
@@ -207,8 +207,7 @@ void PlayerIsaac::OnDamage(int damage)
 	hp -= damage;
 	timer = 0.5f;
 
-	animator.Stop();
-	animator.Play(DamageMove);    //공격을 받을 때 마다 애니메이션을 변경하고 싶었음.
+	animator.Play(DamageMove); 
 	
 	if (hp <= 0)
 	{

@@ -18,7 +18,6 @@ protected:
 	TextGo SaveButtonText;
 	TextGo ObjButtonText;
 
-	SpriteGo* rock;
 	MapInfo mapInfo;
 
 	sf::Texture imageTexture;
