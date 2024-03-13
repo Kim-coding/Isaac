@@ -23,7 +23,7 @@ struct MapInfo
 	std::vector<MonsterInfo> monsterList;
 
 	void LoadFromFile(std::string path);
-
+	void SaveToFile(std::string path);
 
 };
 

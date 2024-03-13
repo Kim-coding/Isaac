@@ -6,6 +6,16 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "rapidcsv.h"
+#include "MapInfo.h"
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
+std::string SceneMapTool::ToRelativePath(const std::string& originalPath, const std::string& basePath) {
+	fs::path relativePath = fs::relative(fs::path(originalPath), fs::path(basePath));
+	return relativePath.string();
+}
 
 std::string ConvertLPCWSTRToString(LPCWSTR lpcwszStr)
 {
@@ -83,10 +93,12 @@ void SceneMapTool::Init()
 
 std::wstring SceneMapTool::SelectFloor()
 {
+	wchar_t save[260];
+	GetCurrentDirectory(MAX_PATH, save);
+
+
 	OPENFILENAME ofn;
 	wchar_t szFile[260]; 
-
-	
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL; 
@@ -102,19 +114,23 @@ std::wstring SceneMapTool::SelectFloor()
 
 	if (GetOpenFileName(&ofn) == TRUE)
 	{
+		SetCurrentDirectory(save);
 		return ofn.lpstrFile;
 	}
 	else
 	{
+		SetCurrentDirectory(save);
 		return L"";
 	}
 }
 
 std::wstring SceneMapTool::SelectRoom()
 {
+	wchar_t save[260];
+	GetCurrentDirectory(MAX_PATH, save);
+
 	OPENFILENAME ofn;
 	wchar_t szFile[260];
-
 
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
@@ -131,10 +147,12 @@ std::wstring SceneMapTool::SelectRoom()
 
 	if (GetOpenFileName(&ofn) == TRUE)
 	{
+		SetCurrentDirectory(save);
 		return ofn.lpstrFile;
 	}
 	else
 	{
+		SetCurrentDirectory(save);
 		return L"";
 	}
 }
@@ -179,21 +197,22 @@ void SceneMapTool::Update(float dt)
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
 	{
-		if (buttonFloor->GetGlobalBounds().contains(mouseWorldPos))
+		if (buttonFloor->GetGlobalBounds().contains(mouseWorldPos)) 
 		{
 			std::wstring filePathW = SelectFloor();
-			if (!filePathW.empty())
+			if (!filePathW.empty()) 
 			{
 				std::string filePath = ConvertLPCWSTRToString(filePathW.c_str());
-
-				if (imageTexture.loadFromFile(filePath))
+				if (imageTexture.loadFromFile(filePath)) 
 				{
 					spriteFloor.setTexture(imageTexture);
-					spriteFloor.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageTexture.getSize().x / 2,
-						FRAMEWORK.GetWindowSize().y / 2 - imageTexture.getSize().y / 2);
+					spriteFloor.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageTexture.getSize().x / 2, FRAMEWORK.GetWindowSize().y / 2 - imageTexture.getSize().y / 2);
 					spriteFloor.setColor(sf::Color(255, 255, 255, 128));
+
+					std::string relativePath = ToRelativePath(filePath, fs::current_path().string());
+					mapInfo.roomFloorTexId = relativePath;
 				}
-				else
+				else 
 				{
 					std::cerr << "Image could not be loaded." << std::endl;
 				}
@@ -213,6 +232,9 @@ void SceneMapTool::Update(float dt)
 					spriteRoom.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageRoom.getSize().x / 2,
 						FRAMEWORK.GetWindowSize().y / 2 - imageRoom.getSize().y / 2);
 					spriteRoom.setColor(sf::Color(255, 255, 255, 128));
+
+					std::string relativePath = ToRelativePath(filePath, fs::current_path().string());
+					mapInfo.roomTexId = relativePath;
 				}
 				else
 				{
@@ -228,57 +250,6 @@ void SceneMapTool::Update(float dt)
 	}
 
 }
-
-//void SceneMapTool::LoadMapCSV(const std::wstring& filePath)
-//{
-//	std::wifstream file(filePath);
-//	std::wstring line;
-//	std::getline(file, line);
-//	while (std::getline(file, line))
-//	{
-//		std::wistringstream iss(line);
-//		std::wstring type, imagePath;
-//		float x, y;
-//
-//		std::getline(iss, type, L',');
-//		std::getline(iss, imagePath, L',');
-//		iss >> x >>  y;
-//
-//		if (type == L"Room")
-//		{
-//			auto room = new SpriteGo("");
-//			room->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
-//			room->SetOrigin(Origins::MC);
-//			room->SetPosition({ x, y });
-//			AddGo(room);
-//		}
-//		if (type == L"RoomFloor")
-//		{
-//			auto roomFloor = new SpriteGo("");
-//			roomFloor->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
-//			roomFloor->SetOrigin(Origins::MC);
-//			roomFloor->SetPosition({ x, y });
-//			AddGo(roomFloor);
-//		}
-//		if (type == L"rock")
-//		{
-//			auto rock = new SpriteGo("");
-//			rock->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
-//			rock->SetOrigin(Origins::MC);
-//			rock->SetPosition({ x, y });
-//			AddGo(rock);
-//		}
-//		if (type == L"monster")
-//		{
-//			auto monster = new SpriteGo("monster");
-//			monster->SetTexture(ConvertLPCWSTRToString(imagePath.c_str()));
-//			monster->SetPosition({ x, y });
-//			AddGo(monster);
-//		}
-//
-//	}
-//}
-
 
 void SceneMapTool::LateUpdate(float dt)
 {
@@ -305,4 +276,8 @@ void SceneMapTool::Draw(sf::RenderWindow& window)
 void SceneMapTool::SaveMapCSV()
 {
 	std::cout << "Click Save Button" << std::endl;
+	
+	std::string filePath = "map/Test.csv";
+
+	mapInfo.SaveToFile(filePath);
 }

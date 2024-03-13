@@ -35,3 +35,34 @@ void MapInfo::LoadFromFile(std::string path)
 		}
 	}
 }
+
+void MapInfo::SaveToFile(std::string path)
+{
+	rapidcsv::Document doc("", rapidcsv::LabelParams(-1, -1));
+
+	std::vector<std::string> header = { "TYPE", "TEXTUREID", "X", "Y", "NAME" };
+	doc.InsertRow(0, header);
+
+	std::vector<std::string> room = { "Room", roomTexId, "0", "0", "room" };
+	doc.InsertRow(1, room);
+
+	std::vector<std::string> roomf = { "RoomFloor", roomFloorTexId, "0","0", "roomfloor"};
+	doc.InsertRow(2, roomf);
+
+	int row = 3;
+
+	for (auto& obj : objectList)
+	{
+		std::vector<std::string> mapObject = { obj.objectType, obj.TexId, std::to_string(obj.position.x),std::to_string( obj.position.y), obj.name };
+		doc.InsertRow(row, mapObject);
+		row++;
+	}
+	for (auto& go : monsterList)
+	{
+		std::vector<std::string> monster = { go.monsterType, go.TexId, std::to_string(go.position.x), std::to_string(go.position.y), go.name };
+		doc.InsertRow(row, monster);
+		row++;
+	}
+
+	doc.Save(path);
+}

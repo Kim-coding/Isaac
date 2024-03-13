@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "TextGo.h"
+#include "MapInfo.h"
 
 class SpriteGo;
 
@@ -18,6 +19,7 @@ protected:
 	TextGo ObjButtonText;
 
 	SpriteGo* rock;
+	MapInfo mapInfo;
 
 	sf::Texture imageTexture;
 	sf::Texture imageRoom;
@@ -40,12 +42,13 @@ public:
 	void Exit();
 
 	void Update(float dt);
-	//void LoadMapCSV(const std::wstring& filePath);
 
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);
 	void Draw(sf::RenderWindow& window);
 
 	void SaveMapCSV();
+	std::string ToRelativePath(const std::string& originalPath, const std::string& basePath);
+
 };
 
