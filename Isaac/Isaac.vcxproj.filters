@@ -69,7 +69,7 @@
     <ClCompile Include="GameObjects\PlayerIsaac.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
+    <ClCompile Include="Scenes\SceneTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\TileMap.cpp">
@@ -78,37 +78,46 @@
     <ClCompile Include="GameObjects\Tears.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Charger.cpp">
+    <ClCompile Include="GameObjects\Charger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SpriteGoEffect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Dip.cpp">
+    <ClCompile Include="GameObjects\Dip.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MonsterMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="AttackFly.cpp">
+    <ClCompile Include="GameObjects\AttackFly.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BoomFly.cpp">
+    <ClCompile Include="GameObjects\BoomFly.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="UiHud.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Dinga.cpp">
+    <ClCompile Include="GameObjects\Dinga.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMapTool.cpp">
+    <ClCompile Include="Scenes\SceneMapTool.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTest.cpp">
+    <ClCompile Include="Scenes\SceneTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MapInfo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Rock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Web.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Poop.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,7 +185,7 @@
     <ClInclude Include="GameObjects\PlayerIsaac.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
+    <ClInclude Include="Scenes\SceneTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\TileMap.h">
@@ -185,37 +194,46 @@
     <ClInclude Include="GameObjects\Tears.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Charger.h">
+    <ClInclude Include="GameObjects\Charger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SpriteGoEffect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Dip.h">
+    <ClInclude Include="GameObjects\Dip.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MonsterMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AttackFly.h">
+    <ClInclude Include="GameObjects\AttackFly.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BoomFly.h">
+    <ClInclude Include="GameObjects\BoomFly.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UiHud.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Dinga.h">
+    <ClInclude Include="GameObjects\Dinga.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMapTool.h">
+    <ClInclude Include="Scenes\SceneMapTool.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTest.h">
+    <ClInclude Include="Scenes\SceneTest.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MapInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Rock.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Web.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Poop.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

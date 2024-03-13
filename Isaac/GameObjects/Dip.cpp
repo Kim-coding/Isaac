@@ -36,10 +36,13 @@ void Dip::Update(float dt)
 {
     MonsterMgr::Update(dt);
     animator.Update(dt);
-    float randomDirectionX = Utils::RandomValue();    // 0.0f ~ 1.0f
-    float randomDirectionY = Utils::RandomValue();
+    float randomDirectionX = (float)(rand() - RAND_MAX / 2) / (RAND_MAX / 2);    // -1.f ~ 1.f
+    float randomDirectionY = (float)(rand() - RAND_MAX / 2) / (RAND_MAX / 2);
 
     SetScale({ 1.5, 1.5 });
+
+    sf::Vector2f prevPos = position;
+
     sf::Vector2f pos = position + direction * speed * dt;
     if (directionChangeTimer <= 0)
     {
@@ -61,6 +64,20 @@ void Dip::Update(float dt)
             if (pos.y == roomBound.y)  //x축 경계와 충돌
                 direction.x *= -1;
 
+        }
+
+        if (sceneDev1->crashMapobject(pos))
+        {
+            isRock = true;
+        }
+        else
+        {
+            isRock = false;
+        }
+        if (isRock)
+        {
+            direction.x *= -1;
+            direction.y *= -1;
         }
     }
     SetPosition(pos);

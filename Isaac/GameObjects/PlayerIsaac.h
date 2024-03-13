@@ -1,6 +1,7 @@
 #pragma once
 #include "SpriteGo.h"
 #include "Animator.h"
+#include "MapInfo.h"
 
 class SceneDev1;
 
@@ -28,6 +29,7 @@ public:
 
 protected:
 	Animator animator;
+	MapInfo mapinfo;
 	SceneDev1* sceneDev1 = nullptr;
 
 	static std::string IdleDown;
@@ -64,7 +66,7 @@ protected:
 	int tearsDamage = 10;
 
 	bool doorCrash = false;
-
+	bool isRook = false;
 public:
 	PlayerIsaac(const std::string& name = "");
 	~PlayerIsaac() override;
@@ -76,7 +78,8 @@ public:
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
-
+	void SetSpeed(float s) { speed = s; }
+	float GetSpeed() { return speed; }
 	void Cry(sf::Vector2f direction);           //발사체 : 눈물 공격
 
 	void OnDamage(int damage);

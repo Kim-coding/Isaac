@@ -80,6 +80,21 @@ void Dinga::Update(float dt)
                 direction.y *= -1;
             if (pos.y == roomBound.y)  //x축 경계와 충돌
                 direction.x *= -1;
+
+            isDash = false;
+        }
+        if (sceneDev1->crashMapobject(pos))  //게임 오브젝트 충돌
+        {
+            if (direction.x != 0)
+            {
+                direction.x *= -1;
+            }
+            if (direction.y != 0)
+            {
+                direction.y *= -1;
+            }
+
+            isDash = false;
         }
     }
     SetPosition(pos);

@@ -71,7 +71,6 @@ void BoomFly::Update(float dt)
 	if (sceneDev1 != nullptr)
 	{
         sf::Vector2f roomBound = sceneDev1->ClampByMap(pos);
-
         if (pos != roomBound)
         {
             if (pos.x == roomBound.x)  //y축 경계와 충돌

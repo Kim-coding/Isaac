@@ -13,7 +13,6 @@ protected:
 	static std::string tear;
 
 	SceneDev1* sceneDev1;
-
 public:
 	Tears(const std::string& name = "");
 	~Tears() override;

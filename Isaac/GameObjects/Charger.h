@@ -27,6 +27,7 @@ protected:
 	float dashInterval = 2.f;
 
 	bool isDash = false;
+	bool isRook = false;
 
 public:
 	Charger(const std::string& name = "");

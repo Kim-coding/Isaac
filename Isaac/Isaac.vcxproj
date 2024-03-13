@@ -138,12 +138,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="AttackFly.cpp" />
-    <ClCompile Include="BoomFly.cpp" />
+    <ClCompile Include="GameObjects\AttackFly.cpp" />
+    <ClCompile Include="GameObjects\BoomFly.cpp" />
     <ClCompile Include="DataTables\DataTableMgr.cpp" />
     <ClCompile Include="DataTables\DataTable.cpp" />
-    <ClCompile Include="Dinga.cpp" />
-    <ClCompile Include="Dip.cpp" />
+    <ClCompile Include="GameObjects\Dinga.cpp" />
+    <ClCompile Include="GameObjects\Dip.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -158,13 +158,15 @@
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Charger.cpp" />
+    <ClCompile Include="GameObjects\Charger.cpp" />
     <ClCompile Include="MapInfo.cpp" />
     <ClCompile Include="MonsterMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SceneMapTool.cpp" />
+    <ClCompile Include="GameObjects\Rock.cpp" />
+    <ClCompile Include="GameObjects\Poop.cpp" />
+    <ClCompile Include="Scenes\SceneMapTool.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
     <ClCompile Include="Scenes\SceneDev1.cpp" />
@@ -173,20 +175,21 @@
     <ClCompile Include="GameObjects\TextGo.cpp" />
     <ClCompile Include="Framework\SoundMgr.cpp" />
     <ClCompile Include="DataTables\StringTable.cpp" />
-    <ClCompile Include="SceneTest.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="Scenes\SceneTest.cpp" />
+    <ClCompile Include="Scenes\SceneTitle.cpp" />
     <ClCompile Include="SpriteGoEffect.cpp" />
     <ClCompile Include="UiHud.cpp" />
+    <ClCompile Include="GameObjects\Web.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
-    <ClInclude Include="AttackFly.h" />
-    <ClInclude Include="BoomFly.h" />
+    <ClInclude Include="GameObjects\AttackFly.h" />
+    <ClInclude Include="GameObjects\BoomFly.h" />
     <ClInclude Include="DataTables\DataTableMgr.h" />
     <ClInclude Include="DataTables\DataTable.h" />
     <ClInclude Include="DataTables\rapidcsv.h" />
-    <ClInclude Include="Dinga.h" />
-    <ClInclude Include="Dip.h" />
+    <ClInclude Include="GameObjects\Dinga.h" />
+    <ClInclude Include="GameObjects\Dip.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\Defines.h" />
     <ClInclude Include="Framework\InputMgr.h" />
@@ -197,11 +200,13 @@
     <ClInclude Include="GameObjects\PlayerIsaac.h" />
     <ClInclude Include="GameObjects\Tears.h" />
     <ClInclude Include="GameObjects\TileMap.h" />
-    <ClInclude Include="Charger.h" />
+    <ClInclude Include="GameObjects\Charger.h" />
     <ClInclude Include="MapInfo.h" />
     <ClInclude Include="MonsterMgr.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="SceneMapTool.h" />
+    <ClInclude Include="GameObjects\Rock.h" />
+    <ClInclude Include="GameObjects\Poop.h" />
+    <ClInclude Include="Scenes\SceneMapTool.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
     <ClInclude Include="Scenes\SceneDev1.h" />
@@ -210,10 +215,11 @@
     <ClInclude Include="GameObjects\TextGo.h" />
     <ClInclude Include="Framework\SoundMgr.h" />
     <ClInclude Include="DataTables\StringTable.h" />
-    <ClInclude Include="SceneTest.h" />
-    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="Scenes\SceneTest.h" />
+    <ClInclude Include="Scenes\SceneTitle.h" />
     <ClInclude Include="SpriteGoEffect.h" />
     <ClInclude Include="UiHud.h" />
+    <ClInclude Include="GameObjects\Web.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

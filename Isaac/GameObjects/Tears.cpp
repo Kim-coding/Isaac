@@ -2,6 +2,7 @@
 #include "Tears.h"
 #include "SceneDev1.h"
 #include "MonsterMgr.h"
+#include "Poop.h"
 
 Tears::Tears(const std::string& name)
 {
@@ -48,9 +49,10 @@ void Tears::Update(float dt)
 	}
 }
 
-void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府
+void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, mapobject客 面倒 贸府
 {
 	const std::list<GameObject*>& list = sceneDev1->GetMonsterList();
+	const std::vector<SpriteGo*>& obj = sceneDev1->GetMapObject();
 
 	for (auto go : list)
 	{
@@ -68,4 +70,26 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府
 
 		}
 	}
+
+	for (auto& go : obj)
+	{
+
+		if (!go->GetActive())
+			continue;
+
+		if (GetGlobalBounds().intersects(go->GetGlobalBounds()))
+		{
+			if (go->name == "rock")
+			{
+				SetActive(false);
+				sceneDev1->RemoveGo(this);
+			}
+			if (go->name == "poop")
+			{
+				SetActive(false);
+				sceneDev1->RemoveGo(this);
+			}
+		}
+	}
+	
 }

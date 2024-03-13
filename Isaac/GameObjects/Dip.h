@@ -11,7 +11,7 @@ protected:
 	sf::Vector2f direction;
 
 	float attackInterval;
-
+	bool isRock = false;
 public:
 	Dip(const std::string& name = "");
 	~Dip() override;

@@ -104,7 +104,9 @@ void PlayerIsaac::Update(float dt)
 		direction /= mag;
 	}
 
+	sf::Vector2f prevPos = position;
 	sf::Vector2f pos = position + direction * speed * dt;
+
 	if (sceneDev1->crashDoor(pos) && !timer /*&& !monsterCount*/)	//문과 충돌 //타이머 //몬스터 수 체크 후 0이면 충돌 가능
 	{
 		sceneDev1->nextRoom(pos);
@@ -120,14 +122,12 @@ void PlayerIsaac::Update(float dt)
 	{
 		doorCrash = false;
 	}
-	SetPosition(pos);
+	
 
 	if (timer < 0.f) 
 	{
 		timer = 0.f;
 	}
-
-
 
 	if (direction.x != 0.f || direction.y != 0.f)    
 	{
@@ -168,7 +168,21 @@ void PlayerIsaac::Update(float dt)
 			cryTimer = 0;
 		}
 	}
-	
+
+	if (sceneDev1->crashMapobject(pos))
+	{
+		isRook = true;
+	}
+	else
+	{
+		isRook = false;
+	}
+
+	if (sceneDev1->crashMapobject(pos) && isRook)
+	{
+		pos = prevPos;
+	}
+	SetPosition(pos);
 }
 
 void PlayerIsaac::Cry(sf::Vector2f direction) 

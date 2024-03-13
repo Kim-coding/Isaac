@@ -9,3 +9,5 @@ mapObj,graphics/rock.png,200 ,150 ,rock
 mapObj,graphics/rock.png,-200 ,150 ,rock
 mapObj,graphics/rock.png,200 ,-150 ,rock
 mapObj,graphics/rock.png,-200 ,-150 ,rock
+mapObj,graphics/Web.png,0 ,0 ,web
+mapObj,graphics/Poop1.png,0 ,-100 ,poop

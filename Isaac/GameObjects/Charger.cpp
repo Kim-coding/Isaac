@@ -43,7 +43,8 @@ void Charger::Update(float dt)
     MonsterMgr::Update(dt);
 	//animator.Update(dt);
 	int randomDirection = Utils::RandomRange(0, 4);
-	
+    sf::Vector2f prevPos = position;
+
     sf::Vector2f pos = position + direction * speed * dt;
     if (!isDash && directionChangeTimer <= 0)
     {
@@ -115,7 +116,19 @@ void Charger::Update(float dt)
     if (sceneDev1 != nullptr) 
     {
         pos = sceneDev1->ClampByMap(pos); //벽과 충돌
+    }
 
+    if (sceneDev1->crashMapobject(pos))
+    {
+        isRook = true;
+    }
+    else
+    {
+        isRook = false;
+    }
+    if (sceneDev1->crashMapobject(pos) && isRook)
+    {
+        pos = prevPos;
     }
     SetPosition(pos);
 }

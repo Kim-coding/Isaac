@@ -27,7 +27,7 @@ protected:
 	SpriteGo* spriteGoBackgroundfloor;
 	SpriteGo* regularRoom;
 	SpriteGo* regularRoomfloor;
-	SpriteGo* rock;
+	SpriteGo* mapObj;
 	UiHud* uiHud = nullptr;
 
 	SpriteGo* door;
@@ -35,6 +35,7 @@ protected:
 	SpriteGo* currentFloor;
 
 	std::vector<SpriteGo*> doors;
+	std::vector<SpriteGo*> mapObjects;
 	std::vector<SpriteGo*> Rooms;
 	std::list<GameObject*> monsterList;
 public:
@@ -44,9 +45,11 @@ public:
 	virtual ~SceneDev1();
 
 	const std::list<GameObject*>& GetMonsterList() const { return monsterList; }
+	const std::vector<SpriteGo*>& GetMapObject() const { return mapObjects; }
 
 	bool IsInMap(const sf::Vector2f& point);
 	sf::Vector2f ClampByMap(const sf::Vector2f point);
+	bool crashMapobject(const sf::Vector2f point);
 
 	bool crashDoor(const sf::Vector2f point);
 	void nextRoom(const sf::Vector2f point);

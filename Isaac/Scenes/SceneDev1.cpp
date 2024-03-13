@@ -7,6 +7,9 @@
 #include "AttackFly.h"
 #include "BoomFly.h"
 #include "Dinga.h"
+#include "Rock.h"
+#include "Web.h"
+#include "Poop.h"
 #include "UiHud.h"
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
@@ -51,7 +54,23 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 	return false; 
 }
 
-
+bool SceneDev1::crashMapobject(const sf::Vector2f point)  // 面倒 贸府
+{
+	for (auto& obj : mapObjects)
+	{
+		if (obj->name == "rock" || obj->name == "poop")
+		{
+			sf::FloatRect rects = obj->GetGlobalBounds();
+			rects = Utils::ResizeRect(rects, obj->GetSize());
+			if (rects.contains(point))
+			{
+				return true;
+			}
+		}
+		
+	}
+	return false;
+}
 
 void SceneDev1::nextRoom(const sf::Vector2f point)
 {
@@ -83,6 +102,37 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 					sf::Vector2f roomPosition = currentFloor->GetPosition();
 
 					sf::Vector2f pos = roomPosition + (roomSize / 2.0f);
+
+					for (auto obj : mapinfo.objectList)
+					{
+						if (obj.name == "rock")
+						{
+							Rock* mapObj = new Rock("rock");
+							mapObj->SetTexture(obj.TexId);
+							mapObj->SetOrigin(Origins::MC);
+							mapObj->SetPosition(pos + obj.position);
+							AddGo(mapObj);
+							mapObjects.push_back(mapObj);
+						}
+						if (obj.name == "web")
+						{
+							Web* web = new Web("web");
+							web->SetTexture(obj.TexId);
+							web->SetOrigin(Origins::MC);
+							web->SetPosition(pos + obj.position);
+							AddGo(web);
+							mapObjects.push_back(web);
+						}
+						if (obj.name == "poop")
+						{
+							Poop* poop = new Poop("poop");
+							poop->SetTexture(obj.TexId);
+							poop->SetOrigin(Origins::MC);
+							poop->SetPosition(pos + obj.position);
+							AddGo(poop);
+							mapObjects.push_back(poop);
+						}
+					}
 
 					for (auto obj : mapinfo.monsterList)
 					{
@@ -127,17 +177,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							AddGo(boomFly);
 						}
 					}
-					for (auto obj : mapinfo.objectList)
-					{
-						if (obj.name == "rock")
-						{
-							SpriteGo* mapObj = new SpriteGo("");
-							mapObj->SetTexture(obj.TexId);
-							mapObj->SetOrigin(Origins::MC);
-							mapObj->SetPosition(pos + obj.position);
-							AddGo(mapObj);
-						}
-					}
+					
 				}
 				
 			}
@@ -146,8 +186,6 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 	}
 
 }
-
-
 
 
 void SceneDev1::Init()
@@ -174,28 +212,24 @@ void SceneDev1::Init()
 
 
 	////////////////////////////////////////
-	mapinfo.LoadFromFile("map/Map2.csv");                                      
+	mapinfo.LoadFromFile("map/Map.csv");                                      
 
 	//规
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
-	spriteGoBackground->SetTexture(mapinfo.roomTexId);
+	spriteGoBackground->SetTexture("graphics/StartRoom.png");
 	spriteGoBackground->SetOrigin(Origins::MC);
 	spriteGoBackground->SetPosition({ 0.f, 0.f });
 	spriteGoBackground->sortLayer = -1;
 	AddGo(spriteGoBackground);
 
 	spriteGoBackgroundfloor = new SpriteGo("StartRoomFloor");
-	spriteGoBackgroundfloor->SetTexture(mapinfo.roomFloorTexId);
+	spriteGoBackgroundfloor->SetTexture("graphics/StartRoomFloor.png");
 	spriteGoBackgroundfloor->SetOrigin(Origins::MC);
 	spriteGoBackgroundfloor->SetPosition({ 0.f, 0.f });
 	spriteGoBackgroundfloor->sortLayer = -1;
 	AddGo(spriteGoBackgroundfloor);
 	
 	///////////////////////////////////////////
-
-
-
-	/////////////////////////////////
 	int roomNum = Utils::RandomRange(1, 4);
 	for (int i = 0; i < roomNum; ++i)
 	{
@@ -205,14 +239,14 @@ void SceneDev1::Init()
 		sf::Vector2f Roompos = Room[rand];
 
 		regularRoom = new SpriteGo("RegularRoom");
-		regularRoom->SetTexture("graphics/Catacombs.png");
+		regularRoom->SetTexture(mapinfo.roomTexId);
 		regularRoom->SetOrigin(Origins::MC);
 		regularRoom->SetPosition(Roompos);
 		regularRoom->sortLayer = -1;
 		AddGo(regularRoom);
 
 		regularRoomfloor = new SpriteGo("regularRoomfloor");
-		regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+		regularRoomfloor->SetTexture(mapinfo.roomFloorTexId);
 		regularRoomfloor->SetOrigin(Origins::MC);
 		regularRoomfloor->SetPosition(Roompos);
 		regularRoomfloor->sortLayer = -1;
