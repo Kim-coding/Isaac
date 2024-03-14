@@ -58,6 +58,8 @@ public:
 	bool crashDoor(const sf::Vector2f point);
 	void nextRoom(const sf::Vector2f point);
 
+	void LoadRandomMap();
+
 	void Init() override;
 	void Release() override;
 	

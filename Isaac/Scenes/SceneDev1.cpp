@@ -188,6 +188,32 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 }
 
+void SceneDev1::LoadRandomMap() 
+{
+	namespace fs = std::filesystem;
+
+	std::string path = "map/";
+	std::vector<std::string> csvFiles;
+
+	// map 폴더 내의 모든 .csv 파일 나열
+	for (const auto& entry : fs::directory_iterator(path)) 
+	{
+		if (entry.path().extension() == ".csv") 
+		{
+			csvFiles.push_back(entry.path().string()); // CSV 파일 경로 저장
+		}
+	}
+
+	if (!csvFiles.empty()) 
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> distrib(0, csvFiles.size() - 1);
+
+		int index = distrib(gen);
+		mapinfo.LoadFromFile(csvFiles[index]); // 무작위로 선택된 CSV 파일 로드
+	}
+}
 
 void SceneDev1::Init()
 {
@@ -213,29 +239,8 @@ void SceneDev1::Init()
 
 
 	////////////////////////////////////////
-	namespace fs = std::filesystem;
 
-	std::string path = "map/";
-	std::vector<std::string> csvFiles;
-
-	for (const auto& entry : fs::directory_iterator(path))  //map폴더 순회
-	{
-		if (entry.path().extension() == ".csv")
-		{
-			csvFiles.push_back(entry.path().string()); //csv 파일 경로 저장
-		}
-	}
-
-
-	if (!csvFiles.empty())
-	{
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> distrib(0, csvFiles.size() - 1);
-
-		int index = distrib(gen);
-		mapinfo.LoadFromFile(csvFiles[index]);
-	}
+	LoadRandomMap();
 
 	//방
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
