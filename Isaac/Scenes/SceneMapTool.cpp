@@ -110,11 +110,17 @@ void SceneMapTool::Init()
 	buttonDinga->SetPosition({ 140.f, -300.f });
 	AddGo(buttonDinga);
 
-	buttonDelete = new SpriteGo("button");
-	buttonDelete->SetTexture("graphics/button.png");
-	buttonDelete->SetOrigin(Origins::TL);
-	buttonDelete->SetPosition({ -340, 300.f });
-	AddGo(buttonDelete);
+	buttonObjDelete = new SpriteGo("button");
+	buttonObjDelete->SetTexture("graphics/button.png");
+	buttonObjDelete->SetOrigin(Origins::TL);
+	buttonObjDelete->SetPosition({ -340, 300.f });
+	AddGo(buttonObjDelete);
+	
+	buttonMonsterDelete = new SpriteGo("button");
+	buttonMonsterDelete->SetTexture("graphics/button.png");
+	buttonMonsterDelete->SetOrigin(Origins::TL);
+	buttonMonsterDelete->SetPosition({ -180, 300.f });
+	AddGo(buttonMonsterDelete);
 
 	buttonSave = new SpriteGo("button");
 	buttonSave->SetTexture("graphics/button.png");
@@ -418,9 +424,14 @@ void SceneMapTool::Update(float dt)
 		{
 			SaveMapCSV();
 		}
-		if (buttonDelete->GetGlobalBounds().contains(mouseWorldPos))
+		if (buttonObjDelete->GetGlobalBounds().contains(mouseWorldPos))
 		{
 			DeleteObj();
+		}
+		
+		if (buttonMonsterDelete->GetGlobalBounds().contains(mouseWorldPos))
+		{
+			DeleteMonster();
 		}
 
 		for (auto& go : mapObjects)
@@ -525,5 +536,30 @@ void SceneMapTool::SaveMapCSV()
 
 void SceneMapTool::DeleteObj()
 {
-	std::cout << "마지막 obj 삭제 예정" << std::endl;
+	if (!mapObjects.empty()) 
+	{
+		SpriteGo* lastMapObj = mapObjects.back();
+		lastMapObj->SetActive(false);
+		mapObjects.pop_back();
+		//delete lastMapObj;
+	}
+	else 
+	{
+		std::cout << "삭제할 오브젝트가 없습니다." << std::endl;
+	}
+}
+
+void SceneMapTool::DeleteMonster()
+{
+	if (!monsterList.empty())
+	{
+		SpriteGo* lastMonster = monsterList.back();
+		lastMonster->SetActive(false);
+		monsterList.pop_back();
+		//delete lastMonster;
+	}
+	else
+	{
+		std::cout << "삭제할 몬스터가 없습니다." << std::endl;
+	}
 }

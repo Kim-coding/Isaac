@@ -29,7 +29,9 @@ protected:
 	SpriteGo* buttonRoom;
 	
 	SpriteGo* buttonSave;
-	SpriteGo* buttonDelete;
+	SpriteGo* buttonObjDelete;
+	SpriteGo* buttonMonsterDelete;
+
 
 	SpriteGo* buttonRock;
 	SpriteGo* buttonWep;
@@ -89,6 +91,7 @@ public:
 
 	void SaveMapCSV();
 	void DeleteObj();
+	void DeleteMonster();
 	std::string ToRelativePath(const std::string& originalPath, const std::string& basePath);
 
 };
