@@ -49,7 +49,7 @@ protected:
 	std::vector<ClipInfo> clipInfos;
 	ClipInfo currentClipInfo;
 	
-	int maxHp = 60;
+	int maxHp = 90;
 	int hp;
 	bool isAlive = true;
 	bool isNoDamage = false;
@@ -81,6 +81,8 @@ public:
 	void SetSpeed(float s) { speed = s; }
 	float GetSpeed() { return speed; }
 	void Cry(sf::Vector2f direction);           //발사체 : 눈물 공격
+	int GetHp() { return hp; }
+	void ReSetHp() { hp = maxHp; }
 
 	void OnDamage(int damage);
 	void OnDie();

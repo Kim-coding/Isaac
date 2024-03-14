@@ -1,5 +1,6 @@
 #pragma once
 #include "MapInfo.h"
+#include "TextGo.h"
 
 class SpriteGo;
 class PlayerIsaac;
@@ -33,6 +34,7 @@ protected:
 	SpriteGo* door;
 
 	SpriteGo* currentFloor;
+	TextGo GameOverText;
 
 	std::vector<SpriteGo*> doors;
 	std::vector<SpriteGo*> mapObjects;

@@ -105,9 +105,6 @@
     <ClCompile Include="Scenes\SceneMapTool.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\SceneTest.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MapInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -118,6 +115,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\Poop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\SceneIntro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -221,9 +221,6 @@
     <ClInclude Include="Scenes\SceneMapTool.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\SceneTest.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MapInfo.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -234,6 +231,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\Poop.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\SceneIntro.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

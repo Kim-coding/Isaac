@@ -167,6 +167,7 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Rock.cpp" />
     <ClCompile Include="GameObjects\Poop.cpp" />
+    <ClCompile Include="Scenes\SceneIntro.cpp" />
     <ClCompile Include="Scenes\SceneMapTool.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
@@ -176,7 +177,6 @@
     <ClCompile Include="GameObjects\TextGo.cpp" />
     <ClCompile Include="Framework\SoundMgr.cpp" />
     <ClCompile Include="DataTables\StringTable.cpp" />
-    <ClCompile Include="Scenes\SceneTest.cpp" />
     <ClCompile Include="Scenes\SceneTitle.cpp" />
     <ClCompile Include="SpriteGoEffect.cpp" />
     <ClCompile Include="UiHud.cpp" />
@@ -207,6 +207,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameObjects\Rock.h" />
     <ClInclude Include="GameObjects\Poop.h" />
+    <ClInclude Include="Scenes\SceneIntro.h" />
     <ClInclude Include="Scenes\SceneMapTool.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
@@ -216,7 +217,6 @@
     <ClInclude Include="GameObjects\TextGo.h" />
     <ClInclude Include="Framework\SoundMgr.h" />
     <ClInclude Include="DataTables\StringTable.h" />
-    <ClInclude Include="Scenes\SceneTest.h" />
     <ClInclude Include="Scenes\SceneTitle.h" />
     <ClInclude Include="SpriteGoEffect.h" />
     <ClInclude Include="UiHud.h" />

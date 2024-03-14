@@ -1,18 +1,15 @@
 #pragma once
 #include "Scene.h"
+#include "Animator.h"
 
-class SpriteGo;
-
-class SceneTitle : public Scene
+class SceneIntro : public Scene
 {
 protected:
-	SpriteGo* spriteTitle;
+	Animator animator;
 
-	float changSceneTime = 5.f;
-	float timer = 0.f;
 public:
-	SceneTitle(SceneIds id);
-	~SceneTitle() override;
+	SceneIntro(SceneIds id);
+	virtual ~SceneIntro();
 
 	void Init() override;
 	void Release() override;
@@ -21,6 +18,6 @@ public:
 	void Exit() override;
 
 	void Update(float dt) override;
-
+	void Draw(sf::RenderWindow& window);
 };
 

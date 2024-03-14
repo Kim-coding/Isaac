@@ -11,6 +11,8 @@
 #include "Web.h"
 #include "Poop.h"
 #include "UiHud.h"
+#include <filesystem>
+#include <random>
 
 SceneDev1::SceneDev1(SceneIds id) : Scene(id)
 {
@@ -212,7 +214,28 @@ void SceneDev1::Init()
 
 
 	////////////////////////////////////////
-	mapinfo.LoadFromFile("map/Map3.csv");                                      
+	namespace fs = std::filesystem;
+
+	std::string path = "map/";
+	std::vector<std::string> csvFiles;
+
+	for (const auto& entry : fs::directory_iterator(path))  //map폴더 순회
+	{
+		if (entry.path().extension() == ".csv")
+		{
+			csvFiles.push_back(entry.path().string()); //csv 파일 경로 저장
+		}
+	}
+
+	if (!csvFiles.empty())
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> distrib(0, csvFiles.size() - 1);
+
+		int index = distrib(gen);
+		mapinfo.LoadFromFile(csvFiles[index]);
+	}                                 
 
 	//방
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
@@ -251,7 +274,7 @@ void SceneDev1::Init()
 		if (!positionFound)
 		{
 			std::cout << "Available positions exhausted." << std::endl;
-			break; // 모든 위치가 사용되었거나, 충분한 시도 후 위치를 찾지 못한 경우 반복 중지
+			break;
 		}
 
 		sf::Vector2f doorpos = doorPosition[rand * 90];
@@ -319,6 +342,12 @@ void SceneDev1::Enter()
 	currentFloor = spriteGoBackgroundfloor;
 
 	player->SetPosition({ 0.f,0.f });
+
+	//sf::Font& font = RES_MGR_FONT.Get("fonts/Isaac.ttf");
+	//GameOverText.Set(font, "GameOver", 200, sf::Color::Red);
+	//GameOverText.SetOrigin(Origins::MC);
+	//GameOverText.SetPosition(centerPos);
+
 }
 
 void SceneDev1::Exit()
@@ -362,12 +391,15 @@ void SceneDev1::UpdateGame(float dt)
 	}
 	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
 	{
+		player->ReSetHp();
+
 		for (auto go : monsterList)
 		{
 			MonsterMgr* monster = dynamic_cast<MonsterMgr*>(go);
 			monster->OnDie();
 		}
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
+		
 	}
 	if (SCENE_MGR.GetDeveloperMode() && InputMgr::GetKeyDown(sf::Keyboard::Delete))
 	{
@@ -390,6 +422,7 @@ void SceneDev1::UpdateGameOver(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
+		player->ReSetHp();
 		SCENE_MGR.ChangeScene(SceneIds::SceneDev1);
 	}
 }
@@ -405,6 +438,7 @@ void SceneDev1::UpdatePause(float dt)
 void SceneDev1::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	GameOverText.Draw(window);
 }
 
 void SceneDev1::SetStatus(Status newStatus)

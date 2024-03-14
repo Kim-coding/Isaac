@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
+#include "PlayerIsaac.h"
 
 class SceneDev1;
 
@@ -17,7 +18,7 @@ protected:
 	SpriteGo imgHp2;
 
 	TextGo textFps;
-
+	PlayerIsaac* player;
 	SceneDev1* sceneDev1 = nullptr;
 
 public:
@@ -25,8 +26,6 @@ public:
 	~UiHud() override = default;
 
 	void SetResolution(const sf::Vector2f resolution);
-
-	void SetHp(int hp, int max);        // 플레이어의 체력을 받어 갱신
 
 	void SetMessage(const std::string& msg);
 	void SetMessageActive(bool active);
