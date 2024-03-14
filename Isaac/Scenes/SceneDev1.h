@@ -38,6 +38,8 @@ protected:
 	std::vector<SpriteGo*> mapObjects;
 	std::vector<SpriteGo*> Rooms;
 	std::list<GameObject*> monsterList;
+
+	std::set<int> usedPositions;
 public:
 	PlayerIsaac* player;
 

@@ -233,7 +233,27 @@ void SceneDev1::Init()
 	int roomNum = Utils::RandomRange(1, 4);
 	for (int i = 0; i < roomNum; ++i)
 	{
-		int rand = Utils::RandomRange(0, 4);              // 0, 1, 2, 3 선택
+		int attempts = 0;
+		bool positionFound = false;
+		int rand = 0;
+
+		while (!positionFound && attempts < 10)
+		{
+			rand = Utils::RandomRange(0, 4);
+			if (usedPositions.find(rand) == usedPositions.end())
+			{
+				positionFound = true;
+				usedPositions.insert(rand);
+			}
+			attempts++;
+		}
+
+		if (!positionFound)
+		{
+			std::cout << "Available positions exhausted." << std::endl;
+			break; // 모든 위치가 사용되었거나, 충분한 시도 후 위치를 찾지 못한 경우 반복 중지
+		}
+
 		sf::Vector2f doorpos = doorPosition[rand * 90];
 		sf::Vector2f nextdoorpos = nextDoorPosition[rand * 90];
 		sf::Vector2f Roompos = Room[rand];
@@ -272,8 +292,6 @@ void SceneDev1::Init()
 	player = new PlayerIsaac("Isaac");
 	player->sortLayer = 1;
 	AddGo(player);
-
-	//AddGo(new Dinga("monster"));
 
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
@@ -344,6 +362,11 @@ void SceneDev1::UpdateGame(float dt)
 	}
 	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
 	{
+		for (auto go : monsterList)
+		{
+			MonsterMgr* monster = dynamic_cast<MonsterMgr*>(go);
+			monster->OnDie();
+		}
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
 	}
 	if (SCENE_MGR.GetDeveloperMode() && InputMgr::GetKeyDown(sf::Keyboard::Delete))
