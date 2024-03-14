@@ -128,7 +128,6 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 						if (obj.name == "poop")
 						{
 							Poop* poop = new Poop("poop");
-							poop->SetTexture("graphics/Poop1.png");
 							poop->SetOrigin(Origins::MC);
 							poop->SetPosition(pos + obj.position);
 							AddGo(poop);
@@ -227,6 +226,7 @@ void SceneDev1::Init()
 		}
 	}
 
+
 	if (!csvFiles.empty())
 	{
 		std::random_device rd;
@@ -235,7 +235,7 @@ void SceneDev1::Init()
 
 		int index = distrib(gen);
 		mapinfo.LoadFromFile(csvFiles[index]);
-	}                                 
+	}
 
 	//¹æ
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
@@ -342,11 +342,6 @@ void SceneDev1::Enter()
 	currentFloor = spriteGoBackgroundfloor;
 
 	player->SetPosition({ 0.f,0.f });
-
-	//sf::Font& font = RES_MGR_FONT.Get("fonts/Isaac.ttf");
-	//GameOverText.Set(font, "GameOver", 200, sf::Color::Red);
-	//GameOverText.SetOrigin(Origins::MC);
-	//GameOverText.SetPosition(centerPos);
 
 }
 

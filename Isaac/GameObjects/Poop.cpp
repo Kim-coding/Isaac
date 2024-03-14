@@ -14,6 +14,7 @@ Poop::~Poop()
 void Poop::Init()
 {
 	SpriteGo::Init();
+	SetTexture("graphics/Poop1.png");
 	hasHitBox = true;
 }
 
@@ -33,4 +34,21 @@ void Poop::Reset()
 void Poop::Update(float dt)
 {
 	SpriteGo::Update(dt);
+
+	if (count = 4)
+	{
+		SetTexture("graphics/Poop4.png");
+	}
+	if (count = 3)
+	{
+		SetTexture("graphics/Poop3.png");
+	}
+	if (count = 2)
+	{
+		SetTexture("graphics/Poop2.png");
+	}
+	if (count = 1)
+	{
+		SetTexture("graphics/Poop1.png");
+	}
 }

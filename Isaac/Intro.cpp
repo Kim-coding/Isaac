@@ -19,11 +19,12 @@ void Intro::Init()
 void Intro::Reset()
 {
 	animator.Play("animators/Intro.csv");
-	SetOrigin(Origins::BC);
-	SetPosition({ 100.f,0.f });
+	SetOrigin(Origins::MC);
+	SetPosition({ 0.f,-100.f });
 }
 
 void Intro::Update(float dt)
 {
 	SpriteGo::Update(dt);
+	animator.Update(dt);
 }

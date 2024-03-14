@@ -35,40 +35,48 @@ void Dinga::Update(float dt)
 	MonsterMgr::Update(dt);
 	animator.Update(dt);
 
-    float randomDirectionX = Utils::RandomValue();    // 0.0f ~ 1.0f
-    float randomDirectionY = Utils::RandomValue();
 
-    sf::Vector2f pos = position + direction * speed * dt;
-    if (directionChangeTimer <= 0)
-    {
-        direction.x = randomDirectionX;
-        direction.y = randomDirectionY;
-
-        directionChangeTimer = 3.f;
-    }
-    directionChangeTimer -= dt;
  
-
+    sf::Vector2f pos = position + direction * speed * dt;
     
     dashTimer += dt;
-    if (dashTimer > dashInterval)
+    if (dashTimer > 5)
     {
         isDash = true;
     }
+    else
+    {
+        speed = 50;
+        isDash = false;
+
+
+        float randomDirectionX = (float)(rand() - RAND_MAX / 2) / (RAND_MAX / 2);    // -1.f ~ 1.f
+        float randomDirectionY = (float)(rand() - RAND_MAX / 2) / (RAND_MAX / 2);
+
+        if (directionChangeTimer <= 0)
+        {
+            direction.x = randomDirectionX;
+            direction.y = randomDirectionY;
+
+            directionChangeTimer = 3.f;
+        }
+        directionChangeTimer -= dt;
+    }
+
+    if (dashTimer > dashInterval)
+    {
+        dashTimer = 0.f;
+        isDash = false;
+    }
+
     if (isDash)
     {
         direction = player->GetPosition() - position;
         float distance = Utils::Magnitude(direction);
         Utils::Normalize(direction);
         speed = 250;
-        --dashTimer;
     }
-    if (dashInterval < 0.f)
-    {
-        speed = 150;
-        dashTimer = 0.f;
-        isDash = false;
-    }
+    
 
     if (sceneDev1 != nullptr)
     {

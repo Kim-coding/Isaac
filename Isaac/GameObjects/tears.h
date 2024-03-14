@@ -2,6 +2,7 @@
 #include "SpriteGo.h"
 
 class SceneDev1;
+class Poop;
 
 class Tears : public SpriteGo
 {
@@ -13,6 +14,7 @@ protected:
 	static std::string tear;
 
 	SceneDev1* sceneDev1;
+	Poop* poop;
 public:
 	Tears(const std::string& name = "");
 	~Tears() override;

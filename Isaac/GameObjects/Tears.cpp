@@ -88,6 +88,14 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, ma
 			{
 				SetActive(false);
 				sceneDev1->RemoveGo(this);
+
+				auto obj = dynamic_cast<Poop*>(go);
+				if (obj != nullptr)
+				{
+					obj->AddCount();
+					obj->SetTexture("graphics/Poop2.png");
+				}
+					
 			}
 		}
 	}

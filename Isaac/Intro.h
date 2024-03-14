@@ -6,7 +6,7 @@ class Intro : public SpriteGo
 {
 protected:
 	Animator animator;
-
+	Animator animator2;
 public:
 	Intro(const std::string& name = "");
 	~Intro() override;
