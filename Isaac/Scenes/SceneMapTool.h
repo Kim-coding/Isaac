@@ -7,26 +7,67 @@ class SpriteGo;
 
 class SceneMapTool : public Scene
 {
+public:
+	enum mapObjnames
+	{
+		rock,
+		web,
+		poop,
+	};
+	enum monsterNames
+	{
+		attackFly,
+		boomfly,
+		charger,
+		dip,
+		dinga,
+	};
 protected:
 	SpriteGo* backGround;
+
 	SpriteGo* buttonFloor;
 	SpriteGo* buttonRoom;
+	
 	SpriteGo* buttonSave;
-	SpriteGo* buttonObj;
+	SpriteGo* buttonDelete;
+
+	SpriteGo* buttonRock;
+	SpriteGo* buttonWep;
+	SpriteGo* buttonPoop;
+
+	SpriteGo* buttonAFly;
+	SpriteGo* buttonBFly;
+	SpriteGo* buttonCharger;
+	SpriteGo* buttonDip;
+	SpriteGo* buttonDinga;
+
 	TextGo FloorButtonText;
 	TextGo RoomButtonText;
 	TextGo SaveButtonText;
-	TextGo ObjButtonText;
+	TextGo DeleteButtonText;
+	
+	TextGo RockButtonText;
+	TextGo WebButtonText;
+	TextGo PoopButtonText;
+
+	TextGo AFlyButtonText;
+	TextGo BFlyButtonText;
+	TextGo ChargerButtonText;
+	TextGo DipButtonText;
+	TextGo DingaButtonText;
 
 	MapInfo mapInfo;
 
-	sf::Texture imageTexture;
+	sf::Texture imageFloor;
 	sf::Texture imageRoom;
 	sf::Sprite spriteFloor;
 	sf::Sprite spriteRoom;
 
-
+	SpriteGo* selectedObject = nullptr;
 	bool isDragging = false;
+
+	std::vector<SpriteGo*> mapObjects;
+	std::vector<SpriteGo*> monsterList;
 public:
 	SceneMapTool(SceneIds id);
 	~SceneMapTool() override;
@@ -47,6 +88,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	void SaveMapCSV();
+	void DeleteObj();
 	std::string ToRelativePath(const std::string& originalPath, const std::string& basePath);
 
 };

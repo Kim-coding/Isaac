@@ -7,8 +7,8 @@ mapObj,graphics/rock.png,100 ,-100 ,rock
 mapObj,graphics/rock.png,-100 ,-100 ,rock
 mapObj,graphics/rock.png,300 ,0 ,rock
 mapObj,graphics/rock.png,-300 ,0 ,rock
-monster,graphics/AttackFly.png,200 ,0 ,AttackFly
-monster,graphics/AttackFly.png,-200 ,100 ,AttackFly
-monster,graphics/Dip.png,150 ,150 ,Dip
-monster,graphics/Charger.png,-50 ,100 ,Charger
-monster,graphics/Dinga.png,-50 ,100 ,Dinga
+monster,graphics/AttackFly.png,200 ,0 ,attackfly
+monster,graphics/AttackFly.png,-200 ,100 ,attackfly
+monster,graphics/Dip.png,150 ,150 ,dip
+monster,graphics/Charger.png,-50 ,100 ,charger
+monster,graphics/Dinga.png,-50 ,100 ,dinga

@@ -108,7 +108,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 						if (obj.name == "rock")
 						{
 							Rock* mapObj = new Rock("rock");
-							mapObj->SetTexture(obj.TexId);
+							mapObj->SetTexture("graphics/Rock.png");
 							mapObj->SetOrigin(Origins::MC);
 							mapObj->SetPosition(pos + obj.position);
 							AddGo(mapObj);
@@ -117,7 +117,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 						if (obj.name == "web")
 						{
 							Web* web = new Web("web");
-							web->SetTexture(obj.TexId);
+							web->SetTexture("graphics/web.png");
 							web->SetOrigin(Origins::MC);
 							web->SetPosition(pos + obj.position);
 							AddGo(web);
@@ -126,7 +126,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 						if (obj.name == "poop")
 						{
 							Poop* poop = new Poop("poop");
-							poop->SetTexture(obj.TexId);
+							poop->SetTexture("graphics/Poop1.png");
 							poop->SetOrigin(Origins::MC);
 							poop->SetPosition(pos + obj.position);
 							AddGo(poop);
@@ -136,7 +136,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 					for (auto obj : mapinfo.monsterList)
 					{
-						if (obj.name == "AttackFly")
+						if (obj.name == "attackfly")
 						{
 							AttackFly* attackFly = new AttackFly("monster");
 							attackFly->Init();
@@ -144,7 +144,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							attackFly->SetPosition(pos + obj.position);
 							AddGo(attackFly);
 						}
-						if (obj.name == "Dip")
+						if (obj.name == "dip")
 						{
 							Dip* dip = new Dip("monster");
 							dip->Init();
@@ -152,7 +152,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							dip->SetPosition(pos + obj.position);
 							AddGo(dip);
 						}
-						if (obj.name == "Charger")
+						if (obj.name == "charger")
 						{
 							Charger* charger = new Charger("monster");
 							charger->Init();
@@ -160,7 +160,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							charger->SetPosition(pos + obj.position);
 							AddGo(charger);
 						}
-						if (obj.name == "Dinga")
+						if (obj.name == "dinga")
 						{
 							Dinga* dinga = new Dinga("monster");
 							dinga->Init();
@@ -168,7 +168,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							dinga->SetPosition(pos + obj.position);
 							AddGo(dinga);
 						}
-						if (obj.name == "BoomFly")
+						if (obj.name == "boomfly")
 						{
 							BoomFly* boomFly = new BoomFly("monster");
 							boomFly->Init();
@@ -212,7 +212,7 @@ void SceneDev1::Init()
 
 
 	////////////////////////////////////////
-	mapinfo.LoadFromFile("map/Map.csv");                                      
+	mapinfo.LoadFromFile("map/Map3.csv");                                      
 
 	//¹æ
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
