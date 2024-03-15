@@ -146,6 +146,18 @@ float Utils::Angle(const sf::Vector2f& vec)
 	return RadianToDegree(std::atan2f(vec.y, vec.x));
 }
 
+sf::Vector2f Utils::Rotate(const sf::Vector2f& dir, float degrees)
+{
+	float radians = degrees * (3.14159265f / 180.0f); // 각도를 라디안으로 변환
+	float cosTheta = std::cos(radians);
+	float sinTheta = std::sin(radians);
+
+	return sf::Vector2f(
+		dir.x * cosTheta - dir.y * sinTheta,
+		dir.x * sinTheta + dir.y * cosTheta
+	);
+}
+
 float Utils::Lerp(float min, float max, float t)
 {
 	// t: 0.0 ~ 1.0

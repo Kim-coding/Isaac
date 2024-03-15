@@ -5,7 +5,7 @@
 #include "PlayerIsaac.h"
 
 Dinga::Dinga(const std::string& name)
-	:MonsterMgr(name,200,25,100)
+	:MonsterMgr(name,90,25,100)
 {
 }
 

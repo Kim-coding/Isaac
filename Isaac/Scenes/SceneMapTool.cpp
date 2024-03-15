@@ -110,6 +110,12 @@ void SceneMapTool::Init()
 	buttonDinga->SetPosition({ 140.f, -300.f });
 	AddGo(buttonDinga);
 
+	buttonBose = new SpriteGo("button");
+	buttonBose->SetTexture("graphics/button.png");
+	buttonBose->SetOrigin(Origins::TL);
+	buttonBose->SetPosition({ -500.f, -250.f });
+	AddGo(buttonBose);
+
 	buttonObjDelete = new SpriteGo("button");
 	buttonObjDelete->SetTexture("graphics/button.png");
 	buttonObjDelete->SetOrigin(Origins::TL);
@@ -416,7 +422,15 @@ void SceneMapTool::Update(float dt)
 			AddGo(obj);
 			monsterList.push_back(obj);
 		}
-
+		if (buttonBose->GetGlobalBounds().contains(mouseWorldPos))
+		{
+			SpriteGo* obj = new SpriteGo("monstro");
+			obj->SetTexture("graphics/Monstro1.png");
+			obj->SetOrigin(Origins::MC);
+			obj->SetPosition({ 0,0 });
+			AddGo(obj);
+			monsterList.push_back(obj);
+		}
 
 		if (buttonSave->GetGlobalBounds().contains(mouseWorldPos))
 		{

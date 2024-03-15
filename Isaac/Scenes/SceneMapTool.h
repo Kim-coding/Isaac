@@ -42,6 +42,7 @@ protected:
 	SpriteGo* buttonCharger;
 	SpriteGo* buttonDip;
 	SpriteGo* buttonDinga;
+	SpriteGo* buttonBose;
 
 	TextGo FloorButtonText;
 	TextGo RoomButtonText;

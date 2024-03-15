@@ -34,6 +34,7 @@ public:
 	static float DegreeToRadian(float degree);
 
 	static float Angle(const sf::Vector2f& vec);
+	static sf::Vector2f Rotate(const sf::Vector2f& dir, float degrees);                        ////////////////////////개인 프로젝트 Isaac에서 추가한 부분
 
 	static float Lerp(float min, float max, float t);
 	static sf::Vector2f Lerp(const sf::Vector2f& min, const sf::Vector2f& max, float t);

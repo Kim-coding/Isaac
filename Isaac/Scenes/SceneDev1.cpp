@@ -201,6 +201,14 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							boomFly->SetPosition(pos + obj.position);
 							AddGo(boomFly);
 						}
+						if (obj.name == "monstro")
+						{
+							Monstro* monstro = new Monstro("monster");
+							monstro->Init();
+							monstro->Reset();
+							monstro->SetPosition(pos + obj.position);
+							AddGo(monstro);
+						}
 					}
 					
 				}
@@ -350,8 +358,6 @@ void SceneDev1::Init()
 	player->sortLayer = 1;
 	AddGo(player);
 
-	AddGo(new Monstro("monster"));  //보스 몬스터 : monstro 테스트
-
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
 
@@ -397,6 +403,12 @@ void SceneDev1::Update(float dt)
 	for (auto& door : doors) 
 	{
 		door->SetTexture(doorTexture);
+	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	{
+		sf::Vector2f point = player->GetPosition();
+
+		//폭탄 설치
 	}
 
 	switch (currStatus)

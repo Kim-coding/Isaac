@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Monstro.h"
-#include "Tears.h"
+#include "blood.h"
 #include "SceneDev1.h"
 #include "PlayerIsaac.h"
 
@@ -87,12 +87,15 @@ void Monstro::Update(float dt)
 	}
 	SetPosition(pos);
 
-	//////////////////공격 패턴 1 : 플레이어 방향으로 핏방울 분출///////////////////////////////
+	////////////////// 공격 패턴 1 : 플레이어 방향으로 핏방울 분출/////////////////////////////// OK
+	sf::Vector2f dir = player->GetPosition() - position;
+	float distance = Utils::Magnitude(dir);
+	Utils::Normalize(dir);
 
 	AttackTimer += dt;
-	if (AttackTimer > AttackInterval)
+	if (AttackTimer > 1.f)
 	{
-		
+		Fire(dir);
 		AttackTimer = 0.f;
 	}
 
@@ -106,6 +109,22 @@ void Monstro::FixedUpdate(float dt)
 
 void Monstro::Fire(sf::Vector2f dir)
 {
+	float spreadAngle = 45.0f; // 퍼짐 각도
+	int numberOfTears = 12;
+	float angleBetweenTears = spreadAngle / (numberOfTears - 1); // 눈물 사이의 각도
+
+	for (int i = 0; i < numberOfTears; ++i)
+	{
+		float angle = -spreadAngle / 2 + angleBetweenTears * i; // 각 눈물의 각도
+		sf::Vector2f newDir = Utils::Rotate(dir, angle); // Utils에 새로 추가한 함수
+
+		blood* tears = new blood();
+		tears->Init();
+		tears->Reset();
+		tears->SetPosition(position);
+		tears->BloodAttack(newDir, 150 + rand() % 50 - 25, 10); // 약간의 랜덤 속도
+		sceneDev1->AddGo(tears);
+	}
 }
 
 void Monstro::OnDamage(int damage)
