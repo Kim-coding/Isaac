@@ -170,6 +170,7 @@ void PlayerIsaac::Update(float dt)
 		}
 	}
 
+
 	if (sceneDev1->crashMapobject(pos))
 	{
 		isRook = true;

@@ -7,6 +7,7 @@ mapObj,graphics/rock.png,100 ,-100 ,rock
 mapObj,graphics/rock.png,-100 ,-100 ,rock
 mapObj,graphics/rock.png,300 ,0 ,rock
 mapObj,graphics/rock.png,-300 ,0 ,rock
+mapObj,,-39.000004,-49.999996,poop
 monster,graphics/AttackFly.png,200 ,0 ,attackfly
 monster,graphics/AttackFly.png,-200 ,100 ,attackfly
 monster,graphics/Dip.png,150 ,150 ,dip

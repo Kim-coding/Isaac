@@ -83,7 +83,9 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, ma
 			{
 				SetActive(false);
 				sceneDev1->RemoveGo(this);
+
 			}
+
 			if (go->name == "poop")
 			{
 				SetActive(false);
@@ -93,7 +95,6 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, ma
 				if (obj != nullptr)
 				{
 					obj->AddCount();
-					obj->SetTexture("graphics/Poop2.png");
 				}
 					
 			}

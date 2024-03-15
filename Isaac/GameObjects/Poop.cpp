@@ -14,7 +14,6 @@ Poop::~Poop()
 void Poop::Init()
 {
 	SpriteGo::Init();
-	SetTexture("graphics/Poop1.png");
 	hasHitBox = true;
 }
 
@@ -35,20 +34,30 @@ void Poop::Update(float dt)
 {
 	SpriteGo::Update(dt);
 
-	if (count = 4)
+	if (isCount>=7)
+	{
+		SetActive(false);
+	}
+	if (isCount >= 6)
 	{
 		SetTexture("graphics/Poop4.png");
 	}
-	if (count = 3)
+	else if (isCount >= 5)
 	{
 		SetTexture("graphics/Poop3.png");
 	}
-	if (count = 2)
+	else if (isCount >= 4)
 	{
 		SetTexture("graphics/Poop2.png");
 	}
-	if (count = 1)
+	else if (isCount >= 2)
 	{
 		SetTexture("graphics/Poop1.png");
 	}
+} 
+
+
+void Poop::AddCount()
+{
+	++isCount;
 }

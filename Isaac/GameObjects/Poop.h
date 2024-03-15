@@ -11,7 +11,7 @@ protected:
 	SceneDev1* sceneDev1 = nullptr;
 	bool isAlive = true;
 
-	int count = 1;
+	int isCount = 1;
 public:
 	Poop(const std::string& name);
 	~Poop() override;
@@ -20,6 +20,7 @@ public:
 	void Release();
 	void Reset();
 	void Update(float dt);
-	void AddCount() { ++count; }
+	void AddCount();
+	int GetCount() { return isCount; }
 };
 

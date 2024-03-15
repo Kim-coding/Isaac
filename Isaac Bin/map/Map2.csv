@@ -9,5 +9,6 @@ mapObj,graphics/rock.png,200 ,150 ,rock
 mapObj,graphics/rock.png,-200 ,150 ,rock
 mapObj,graphics/rock.png,200 ,-150 ,rock
 mapObj,graphics/rock.png,-200 ,-150 ,rock
+mapObj,,-39.000004,-49.999996,poop
 mapObj,graphics/Web.png,0 ,0 ,web
 mapObj,graphics/Poop1.png,0 ,-100 ,poop

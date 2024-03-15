@@ -62,8 +62,23 @@ bool SceneDev1::crashMapobject(const sf::Vector2f point)
 {
 	for (auto& obj : mapObjects)
 	{
-		if (obj->name == "rock" || obj->name == "poop")
+		if (obj->name == "rock")
 		{
+			sf::FloatRect rects = obj->GetGlobalBounds();
+			rects = Utils::ResizeRect(rects, obj->GetSize());
+			if (rects.contains(point))
+			{
+				return true;
+			}
+		}
+		if (obj->name == "poop")
+		{
+			auto go = dynamic_cast<Poop*>(obj);
+			if (go->GetCount() > 6)
+			{
+				return false;
+			}
+
 			sf::FloatRect rects = obj->GetGlobalBounds();
 			rects = Utils::ResizeRect(rects, obj->GetSize());
 			if (rects.contains(point))
@@ -136,6 +151,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 						if (obj.name == "poop")
 						{
 							Poop* poop = new Poop("poop");
+							poop->SetTexture("graphics/Poop1.png");
 							poop->SetOrigin(Origins::MC);
 							poop->SetPosition(pos + obj.position);
 							AddGo(poop);

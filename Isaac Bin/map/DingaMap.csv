@@ -1,6 +1,7 @@
 TYPE,TEXTUREID,X,Y,NAME
 Room,graphics\Catacombs2.png,0,0,room
 RoomFloor,graphics\CatacombsFloor.png,0,0,roomfloor
+mapObj,,-39.000004,-49.999996,poop
 mapObj,,-366.999969,-201.000015,web
 mapObj,,-321.999969,-201.000015,web
 mapObj,,-370.999969,-159.999985,web
