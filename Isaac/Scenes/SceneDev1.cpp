@@ -358,6 +358,8 @@ void SceneDev1::Init()
 	player->sortLayer = 1;
 	AddGo(player);
 
+	AddGo(new Monstro("monster"));
+
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
 

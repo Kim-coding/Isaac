@@ -5,7 +5,7 @@
 #include "PlayerIsaac.h"
 
 Monstro::Monstro(const std::string& name)
-	:MonsterMgr(name,500,25,100)
+	:MonsterMgr(name,1000,20,130)
 {
 }
 
@@ -93,11 +93,12 @@ void Monstro::Update(float dt)
 	Utils::Normalize(dir);
 
 	AttackTimer += dt;
-	if (AttackTimer > 1.f)
+	if (AttackTimer > 2.5f)
 	{
 		Fire(dir);
 		AttackTimer = 0.f;
 	}
+	///////////////// 공격 패턴 2 : 플레이어 방향으로 작은 점프 후 자신의 주변에 핏방울 분출////////
 
 
 }
@@ -109,8 +110,8 @@ void Monstro::FixedUpdate(float dt)
 
 void Monstro::Fire(sf::Vector2f dir)
 {
-	float spreadAngle = 45.0f; // 퍼짐 각도
-	int numberOfTears = 12;
+	float spreadAngle = 65.0f; // 퍼짐 각도
+	int numberOfTears = 15;
 	float angleBetweenTears = spreadAngle / (numberOfTears - 1); // 눈물 사이의 각도
 
 	for (int i = 0; i < numberOfTears; ++i)
