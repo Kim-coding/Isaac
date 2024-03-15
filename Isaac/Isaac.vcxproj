@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="blood.cpp" />
     <ClCompile Include="GameObjects\AttackFly.cpp" />
     <ClCompile Include="GameObjects\BoomFly.cpp" />
     <ClCompile Include="DataTables\DataTableMgr.cpp" />
@@ -157,12 +158,14 @@
     <ClCompile Include="GameObjects\Tears.cpp" />
     <ClCompile Include="GameObjects\TileMap.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GameObjects\Charger.cpp" />
     <ClCompile Include="MapInfo.cpp" />
     <ClCompile Include="MonsterMgr.cpp" />
+    <ClCompile Include="Monstro.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -185,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="blood.h" />
     <ClInclude Include="GameObjects\AttackFly.h" />
     <ClInclude Include="GameObjects\BoomFly.h" />
     <ClInclude Include="DataTables\DataTableMgr.h" />
@@ -204,8 +208,10 @@
     <ClInclude Include="GameObjects\TileMap.h" />
     <ClInclude Include="GameObjects\Charger.h" />
     <ClInclude Include="Intro.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MapInfo.h" />
     <ClInclude Include="MonsterMgr.h" />
+    <ClInclude Include="Monstro.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameObjects\Rock.h" />
     <ClInclude Include="GameObjects\Poop.h" />

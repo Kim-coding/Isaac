@@ -1,0 +1,7 @@
+TYPE,TEXTUREID,X,Y,NAME
+Room,graphics\Catacombs.png,0,0,room
+RoomFloor,graphics\CatacombsFloor.png,0,0,roomfloor
+monster,,-291.000000,-119.999992,boomfly
+monster,,-134.999985,-36.999992,charger
+monster,,-148.000000,119.999992,dip
+monster,,0.000000,0.000000,dinga

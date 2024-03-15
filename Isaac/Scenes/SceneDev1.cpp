@@ -10,11 +10,13 @@
 #include "Rock.h"
 #include "Web.h"
 #include "Poop.h"
+#include "Monstro.h"
 #include "UiHud.h"
 #include <filesystem>
 #include <random>
 
-SceneDev1::SceneDev1(SceneIds id) : Scene(id)
+SceneDev1::SceneDev1(SceneIds id)
+	: Scene(id)
 {
 }
 
@@ -30,7 +32,7 @@ bool SceneDev1::IsInMap(const sf::Vector2f& point)
 	return rect.contains(point);
 }
 
-sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //방 바닥 경계검사
+sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)
 {
 	sf::FloatRect rect = currentFloor->GetGlobalBounds();
 	rect = Utils::ResizeRect(rect, currentFloor->GetSize());
@@ -42,7 +44,7 @@ sf::Vector2f SceneDev1::ClampByMap(const sf::Vector2f point)   //방 바닥 경계검�
 bool SceneDev1::crashDoor(const sf::Vector2f point)
 {
 	if (!monsterList.empty()) 
-		return false;            // 몬스터가 남아있다면 문과 충돌 X
+		return false;
 
 	for (auto& door : doors)
 	{ 
@@ -56,7 +58,7 @@ bool SceneDev1::crashDoor(const sf::Vector2f point)
 	return false; 
 }
 
-bool SceneDev1::crashMapobject(const sf::Vector2f point)  // 충돌 처리
+bool SceneDev1::crashMapobject(const sf::Vector2f point)
 {
 	for (auto& obj : mapObjects)
 	{
@@ -91,6 +93,12 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 				currentFloor = spriteGoBackgroundfloor;
 				sf::Vector2f centerPosition = spriteGoBackgroundfloor->GetPosition() + (spriteGoBackgroundfloor->GetSize() / 2.0f);
 				worldView.setCenter(centerPosition);
+				for (auto obj : mapObjects)
+				{
+					gameObjects.remove(obj);
+					delete obj;
+				}
+				mapObjects.clear();
 			}
 			else
 			{
@@ -188,14 +196,13 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 }
 
-void SceneDev1::LoadRandomMap() 
+void SceneDev1::LoadRandomMap(/*MapInfo& mapInfo*/)
 {
 	namespace fs = std::filesystem;
 
 	std::string path = "map/";
-	std::vector<std::string> csvFiles;
 
-	// map 폴더 내의 모든 .csv 파일 나열
+	// map 폴더 내의 모든 .csv 파일
 	for (const auto& entry : fs::directory_iterator(path)) 
 	{
 		if (entry.path().extension() == ".csv") 
@@ -211,7 +218,7 @@ void SceneDev1::LoadRandomMap()
 		std::uniform_int_distribution<> distrib(0, csvFiles.size() - 1);
 
 		int index = distrib(gen);
-		mapinfo.LoadFromFile(csvFiles[index]); // 무작위로 선택된 CSV 파일 로드
+		mapinfo.LoadFromFile(csvFiles[index]); // 랜덤한 CSV 파일 로드
 	}
 }
 
@@ -261,6 +268,10 @@ void SceneDev1::Init()
 	int roomNum = Utils::RandomRange(1, 4);
 	for (int i = 0; i < roomNum; ++i)
 	{
+		RoomInfo roomInfo;
+
+		//LoadRandomMap(roomInfo.mapInfo);
+
 		int attempts = 0;
 		bool positionFound = false;
 		int rand = 0;
@@ -287,14 +298,14 @@ void SceneDev1::Init()
 		sf::Vector2f Roompos = Room[rand];
 
 		regularRoom = new SpriteGo("RegularRoom");
-		regularRoom->SetTexture(mapinfo.roomTexId);
+		regularRoom->SetTexture("graphics/Catacombs.png");
 		regularRoom->SetOrigin(Origins::MC);
 		regularRoom->SetPosition(Roompos);
 		regularRoom->sortLayer = -1;
 		AddGo(regularRoom);
 
 		regularRoomfloor = new SpriteGo("regularRoomfloor");
-		regularRoomfloor->SetTexture(mapinfo.roomFloorTexId);
+		regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
 		regularRoomfloor->SetOrigin(Origins::MC);
 		regularRoomfloor->SetPosition(Roompos);
 		regularRoomfloor->sortLayer = -1;
@@ -316,10 +327,14 @@ void SceneDev1::Init()
 		door->SetPosition(nextdoorpos);
 		AddGo(door);
 		doors.push_back(door);
+
+		//roomsInfo.push_back(roomInfo);
 	}  
 	player = new PlayerIsaac("Isaac");
 	player->sortLayer = 1;
 	AddGo(player);
+
+	AddGo(new Monstro("monster"));  //보스 몬스터 : monstro 테스트
 
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
@@ -413,12 +428,19 @@ void SceneDev1::UpdateGame(float dt)
 
 void SceneDev1::UpdateGameOver(float dt)
 {
-	for (auto obj : monsterList)    //플레이어가 사망 시 남아있는 몬스터 삭제  // 이전에는 생성된 몬스터가 죽지 않고 재 시작 시 시작방으로 넘어옴.
+	for (auto obj : monsterList)    //플레이어가 사망 시 남아있는 몬스터 & 오브젝트 삭제 
 	{
 		gameObjects.remove(obj);
 		delete obj;
 	}
 	monsterList.clear();
+	
+	for (auto obj : mapObjects)
+	{
+		gameObjects.remove(obj);
+		delete obj;
+	}
+	mapObjects.clear();
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{

@@ -4,8 +4,6 @@
 class Dip : public MonsterMgr
 {
 protected:
-	//static std::string DipMove;
-
 	float directionChangeTimer;
 
 	sf::Vector2f direction;

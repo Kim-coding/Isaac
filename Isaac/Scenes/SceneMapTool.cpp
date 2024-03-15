@@ -176,9 +176,15 @@ void SceneMapTool::Init()
 	SaveButtonText.SetOrigin(Origins::MC);
 	SaveButtonText.SetPosition({ 75,660 });
 
-	DeleteButtonText.Set(font, "Delete", 25, sf::Color::Red);
-	DeleteButtonText.SetOrigin(Origins::MC);
-	DeleteButtonText.SetPosition({ 235,660 });
+	DeleteMapObjectButtonText.Set(font, "Object", 25, sf::Color::Red);
+	DeleteMapObjectButtonText.SetOrigin(Origins::MC);
+	DeleteMapObjectButtonText.SetPosition({ 235,660 });
+	
+	DeleteMonsterButtonText.Set(font, "Monster", 25, sf::Color::Red);
+	DeleteMonsterButtonText.SetOrigin(Origins::MC);
+	DeleteMonsterButtonText.SetPosition({ 395,660 });
+
+
 
 	Scene::Init();
 }
@@ -283,7 +289,7 @@ void SceneMapTool::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
-		SceneMgr::Instance().ChangeScene(SceneIds::SceneTitle);
+		SceneMgr::Instance().ChangeScene(SceneIds::SceneIntro);
 	}
 
 
@@ -337,7 +343,6 @@ void SceneMapTool::Update(float dt)
 		///////////////////// ¸Ê ¿ÀºêÁ§Æ® /////////////////////////////////
 		if (buttonRock->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Rock" << std::endl;
 			SpriteGo* obj = new SpriteGo("rock");
 			obj->SetTexture("graphics/Rock.png");
 			obj->SetOrigin(Origins::MC);
@@ -347,7 +352,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonWep->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Web" << std::endl;
 			SpriteGo* obj = new SpriteGo("web");
 			obj->SetTexture("graphics/Web.png");
 			obj->SetOrigin(Origins::MC);
@@ -357,7 +361,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonPoop->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Poop" << std::endl;
 			SpriteGo* obj = new SpriteGo("poop");
 			obj->SetTexture("graphics/Poop1.png");
 			obj->SetOrigin(Origins::MC);
@@ -370,7 +373,6 @@ void SceneMapTool::Update(float dt)
 
 		if (buttonAFly->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Attack Fly" << std::endl;
 			SpriteGo* obj = new SpriteGo("attackfly");
 			obj->SetTexture("graphics/AttackFly1.png");
 			obj->SetOrigin(Origins::MC);
@@ -380,7 +382,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonBFly->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Boom Fly" << std::endl;
 			SpriteGo* obj = new SpriteGo("boomfly");
 			obj->SetTexture("graphics/BoomFly1.png");
 			obj->SetOrigin(Origins::MC);
@@ -390,7 +391,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonCharger->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Charger" << std::endl;
 			SpriteGo* obj = new SpriteGo("charger");
 			obj->SetTexture("graphics/Charger1.png");
 			obj->SetOrigin(Origins::MC);
@@ -400,7 +400,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonDip->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Dip" << std::endl;
 			SpriteGo* obj = new SpriteGo("dip");
 			obj->SetTexture("graphics/Dip1.png");
 			obj->SetOrigin(Origins::MC);
@@ -410,7 +409,6 @@ void SceneMapTool::Update(float dt)
 		}
 		if (buttonDinga->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::cout << "Dinga" << std::endl;
 			SpriteGo* obj = new SpriteGo("dinga");
 			obj->SetTexture("graphics/Dinga1.png");
 			obj->SetOrigin(Origins::MC);
@@ -496,7 +494,8 @@ void SceneMapTool::Draw(sf::RenderWindow& window)
 	ChargerButtonText.Draw(window);
 	DipButtonText.Draw(window);
 	DingaButtonText.Draw(window);
-	DeleteButtonText.Draw(window);
+	DeleteMapObjectButtonText.Draw(window);
+	DeleteMonsterButtonText.Draw(window);
 }
 
 void SceneMapTool::SaveMapCSV()

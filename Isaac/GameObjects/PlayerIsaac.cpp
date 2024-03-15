@@ -3,6 +3,7 @@
 #include "Tears.h"
 #include "SpriteGoEffect.h"
 #include "SceneDev1.h"
+#include "Item.h"
 
 std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
 std::string PlayerIsaac::IdleRight = "animators/IdleRight.csv";
@@ -234,4 +235,20 @@ void PlayerIsaac::OnDie()
 
 	isAlive = false;
 	sceneDev1->SetStatus(SceneDev1::Status::GameOver);
+}
+
+void PlayerIsaac::OnItem(Item* item)
+{
+	switch (item->GetType())
+	{
+	case Item::Types::Boom:
+
+		break;
+	case Item::Types::Health:
+
+		break;
+	case Item::Types::Coin:
+
+		break;
+	}
 }

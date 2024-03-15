@@ -1,5 +1,5 @@
 ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
-MonstroMove,10,1,,
+MonstroMove,5,1,,
 ,,,,
 TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
 graphics/Monstro.png,0,0,80,115

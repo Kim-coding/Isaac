@@ -4,6 +4,7 @@
 #include "MapInfo.h"
 
 class SceneDev1;
+class Item;
 
 class PlayerIsaac : public SpriteGo
 {
@@ -87,5 +88,6 @@ public:
 	void OnDamage(int damage);
 	void OnDie();
 
+	void OnItem(Item* item);
 };
 

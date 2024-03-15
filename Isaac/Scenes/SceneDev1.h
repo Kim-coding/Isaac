@@ -6,6 +6,15 @@ class SpriteGo;
 class PlayerIsaac;
 class UiHud;
 
+struct RoomInfo
+{
+	SpriteGo* room;
+	SpriteGo* roomFloor;
+	std::vector<SpriteGo> door;
+	std::vector<SpriteGo*> mapObjects;
+	std::vector<SpriteGo*> monsters;
+	MapInfo mapInfo;
+};
 
 class SceneDev1 : public Scene
 {
@@ -39,7 +48,10 @@ protected:
 	std::vector<SpriteGo*> doors;
 	std::vector<SpriteGo*> mapObjects;
 	std::vector<SpriteGo*> Rooms;
+
 	std::list<GameObject*> monsterList;
+	std::vector<std::string> csvFiles;
+	std::vector<RoomInfo> roomsInfo;
 
 	std::set<int> usedPositions;
 public:
@@ -58,7 +70,7 @@ public:
 	bool crashDoor(const sf::Vector2f point);
 	void nextRoom(const sf::Vector2f point);
 
-	void LoadRandomMap();
+	void LoadRandomMap(/*MapInfo& mapInfo*/);
 
 	void Init() override;
 	void Release() override;

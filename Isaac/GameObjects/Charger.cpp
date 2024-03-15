@@ -24,7 +24,7 @@ void Charger::Init()
 {
     MonsterMgr::Init();
     
-	animator.SetTarget(&sprite);
+
     SetScale({ 3, 3 });
     hasHitBox = true;
 }
