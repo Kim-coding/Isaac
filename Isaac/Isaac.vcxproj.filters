@@ -72,9 +72,6 @@
     <ClCompile Include="Scenes\SceneTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\TileMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjects\Tears.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -123,7 +120,7 @@
     <ClCompile Include="Intro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Monstro.cpp">
+    <ClCompile Include="GameObjects\Monstro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
@@ -200,9 +197,6 @@
     <ClInclude Include="Scenes\SceneTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjects\TileMap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GameObjects\Tears.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -251,7 +245,7 @@
     <ClInclude Include="Intro.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Monstro.h">
+    <ClInclude Include="GameObjects\Monstro.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">

@@ -177,6 +177,10 @@ void SceneMapTool::Init()
 	DingaButtonText.SetOrigin(Origins::TL);
 	DingaButtonText.SetPosition({ 680,55 });
 
+	BoosButtonText.Set(font, "Boos", 25, sf::Color::Red);
+	BoosButtonText.SetOrigin(Origins::TL);
+	BoosButtonText.SetPosition({ 45,105 });
+
 	///////////////////////////////
 	SaveButtonText.Set(font, "Save", 25, sf::Color::Red);
 	SaveButtonText.SetOrigin(Origins::MC);
@@ -508,6 +512,7 @@ void SceneMapTool::Draw(sf::RenderWindow& window)
 	ChargerButtonText.Draw(window);
 	DipButtonText.Draw(window);
 	DingaButtonText.Draw(window);
+	BoosButtonText.Draw(window);
 	DeleteMapObjectButtonText.Draw(window);
 	DeleteMonsterButtonText.Draw(window);
 }

@@ -15,21 +15,21 @@ void MapInfo::LoadFromFile(std::string path)
 		if (row[0] == "mapObj")
 		{
 			MapObjectInfo info;
-			info.objectType = row[0];                      //몬스터인지 mapObject인지 구분
+			info.objectType = row[0];                     
 			info.TexId = row[1];
 			info.position.x = std::stof(row[2]);
 			info.position.y = std::stof(row[3]);
-			info.name = row[4];                            //ex) 폭탄으로 파괴가능한 rock인지 눈물로 파괴가능한 poop인지 구분
+			info.name = row[4];                            
 			objectList.push_back(info);
 		}
 		if (row[0] == "monster")
 		{
 			MonsterInfo info;
-			info.monsterType = row[0];                     //몬스터인지 mapObject인지 구분
+			info.monsterType = row[0];                    
 			info.TexId = row[1];
 			info.position.x = std::stof(row[2]);
 			info.position.y = std::stof(row[3]);
-			info.name = row[4];                            //몬스터 종류 구분 : AttackFly, BoomFly, Charger, Dip, 등
+			info.name = row[4];                          
 			monsterList.push_back(info);
 
 		}

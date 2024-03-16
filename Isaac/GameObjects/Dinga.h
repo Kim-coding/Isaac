@@ -8,7 +8,7 @@ protected:
 
 	bool isDash = false;
 	float dashTimer = 0.f;
-	float dashInterval = 8.f;
+	float dashInterval = 5.f;
 
 public:
 

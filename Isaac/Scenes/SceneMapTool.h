@@ -59,6 +59,7 @@ protected:
 	TextGo ChargerButtonText;
 	TextGo DipButtonText;
 	TextGo DingaButtonText;
+	TextGo BoosButtonText;
 
 	MapInfo mapInfo;
 

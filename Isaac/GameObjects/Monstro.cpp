@@ -112,11 +112,11 @@ void Monstro::Fire(sf::Vector2f dir)
 {
 	float spreadAngle = 65.0f; // 퍼짐 각도
 	int numberOfTears = 15;
-	float angleBetweenTears = spreadAngle / (numberOfTears - 1); // 눈물 사이의 각도
+	float angleBetweenTears = spreadAngle / (numberOfTears - 1); // 사이 각도
 
 	for (int i = 0; i < numberOfTears; ++i)
 	{
-		float angle = -spreadAngle / 2 + angleBetweenTears * i; // 각 눈물의 각도
+		float angle = -spreadAngle / 2 + angleBetweenTears * i; // 각각의 각도
 		sf::Vector2f newDir = Utils::Rotate(dir, angle); // Utils에 새로 추가한 함수
 
 		blood* tears = new blood();
