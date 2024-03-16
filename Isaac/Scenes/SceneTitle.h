@@ -8,7 +8,7 @@ class SceneTitle : public Scene
 protected:
 	SpriteGo* spriteTitle;
 
-	float changSceneTime = 5.f;
+	float changSceneTime = 15.f;
 	float timer = 0.f;
 public:
 	SceneTitle(SceneIds id);

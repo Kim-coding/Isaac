@@ -199,6 +199,8 @@ void PlayerIsaac::Cry(sf::Vector2f direction)
 	tears->SetPosition(pos);
 	tears->Cry(direction, tearsSpeed, tearsDamage);
 	sceneDev1->AddGo(tears);
+
+	SOUND_MGR.PlaySfx("sound/Tears_Fire_0.mp3");
 }
 
 void PlayerIsaac::OnDamage(int damage)

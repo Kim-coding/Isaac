@@ -125,6 +125,8 @@ void Monstro::Fire(sf::Vector2f dir)
 		tears->SetPosition(position);
 		tears->BloodAttack(newDir, 150 + rand() % 50 - 25, 10); // 약간의 랜덤 속도
 		sceneDev1->AddGo(tears);
+
+		SOUND_MGR.PlaySfx("sound/Tears_Fire_2.mp3");
 	}
 }
 

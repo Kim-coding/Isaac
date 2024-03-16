@@ -54,6 +54,7 @@ protected:
 	std::vector<RoomInfo> roomsInfo;
 
 	std::set<int> usedPositions;
+	bool allMonstersDIePrev = false;
 public:
 	PlayerIsaac* player;
 
@@ -70,7 +71,7 @@ public:
 	bool crashDoor(const sf::Vector2f point);
 	void nextRoom(const sf::Vector2f point);
 
-	void LoadRandomMap(/*MapInfo& mapInfo*/);
+	void LoadRandomMap();
 
 	void Init() override;
 	void Release() override;

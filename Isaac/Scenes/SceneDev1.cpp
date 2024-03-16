@@ -209,8 +209,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							monstro->SetPosition(pos + obj.position);
 							AddGo(monstro);
 						}
-					}
-					
+					}					
 				}
 				
 			}
@@ -220,7 +219,7 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 
 }
 
-void SceneDev1::LoadRandomMap(/*MapInfo& mapInfo*/)
+void SceneDev1::LoadRandomMap()
 {
 	namespace fs = std::filesystem;
 
@@ -294,8 +293,6 @@ void SceneDev1::Init()
 	{
 		RoomInfo roomInfo;
 
-		//LoadRandomMap(roomInfo.mapInfo);
-
 		int attempts = 0;
 		bool positionFound = false;
 		int rand = 0;
@@ -351,14 +348,10 @@ void SceneDev1::Init()
 		door->SetPosition(nextdoorpos);
 		AddGo(door);
 		doors.push_back(door);
-
-		//roomsInfo.push_back(roomInfo);
 	}  
 	player = new PlayerIsaac("Isaac");
 	player->sortLayer = 1;
 	AddGo(player);
-
-	AddGo(new Monstro("monster"));
 
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
@@ -399,13 +392,29 @@ void SceneDev1::Update(float dt)
 	Scene::Update(dt);
 	
 	FindGoAll("monster", monsterList, Layers::World);
-
+	////// 몬스터 유무에 따른 문 이미지 교체 및 사운드 설정///////////
 	std::string doorTexture = monsterList.empty() ? "graphics/door.png" : "graphics/closeDoor.png";
+
+	bool allMonstersDIe = monsterList.empty();
+	
+	if (allMonstersDIe && !allMonstersDIePrev)   // 현재 프레임에 모든 몬스터 처치 O & 이전 프레임에 몬스터 처치 X
+	{
+		SOUND_MGR.PlaySfx("sound/Chest_Open.mp3");
+	}
+	
+	if (!allMonstersDIe && allMonstersDIePrev)   // 현재 프레임에 모든 몬스터 처치 X & 이전 프레임에 몬스터 처치 O
+	{
+		SOUND_MGR.PlaySfx("sound/Chest_Drop.mp3");
+
+	}
+	allMonstersDIePrev = allMonstersDIe;
 
 	for (auto& door : doors) 
 	{
 		door->SetTexture(doorTexture);
 	}
+	///////////////////////////////////////////////////////////////////
+
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
 		sf::Vector2f point = player->GetPosition();

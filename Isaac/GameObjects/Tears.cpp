@@ -45,6 +45,8 @@ void Tears::Update(float dt)
 		{
 			SetActive(false);
 			sceneDev1->RemoveGo(this);
+
+			SOUND_MGR.PlaySfx("sound/TearImpacts0.mp3");
 		}
 	}
 }
@@ -67,7 +69,6 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, ma
 			auto monster = dynamic_cast<MonsterMgr*>(go);
 			if (monster != nullptr)
 				monster->OnDamage(damage);
-
 		}
 	}
 
@@ -98,6 +99,8 @@ void Tears::FixedUpdate(float dt)                       //阁胶磐客 面倒 贸府, ma
 				}
 					
 			}
+			
+			SOUND_MGR.PlaySfx("sound/TearImpacts0.mp3");
 		}
 	}
 	

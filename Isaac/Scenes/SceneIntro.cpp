@@ -48,6 +48,7 @@ void SceneIntro::Release()
 void SceneIntro::Enter()
 {
 	Scene::Enter();
+	SOUND_MGR.PlayBgm("sound/Intro.mp3",true);
 }
 
 void SceneIntro::Exit()
@@ -58,29 +59,18 @@ void SceneIntro::Exit()
 void SceneIntro::Update(float dt)
 {
 	Scene::Update(dt);
-
+	
 	sf::Vector2i mousePos = (sf::Vector2i)InputMgr::GetMousePos();
 	sf::Vector2f mouseWorldPos = SCENE_MGR.GetCurrentScene()->ScreenToWorld(mousePos);
 
-	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
-	{
-		if (startText.GetLocalBounds().contains(mouseWorldPos))
-		{
-			SceneMgr::Instance().ChangeScene(SceneIds::SceneDev1);
-		}
-
-		if (mapEditor.GetLocalBounds().contains(mouseWorldPos))
-		{
-			SceneMgr::Instance().ChangeScene(SceneIds::SceneMapTool);
-		}
-	}
-
 	if (InputMgr::GetKeyDown(sf::Keyboard::Num1))
 	{
+		SOUND_MGR.StopBgm();
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneDev1);
 	}
 	if(InputMgr::GetKeyDown(sf::Keyboard::Num2))
 	{
+		SOUND_MGR.StopBgm();
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneMapTool);
 	}
 }

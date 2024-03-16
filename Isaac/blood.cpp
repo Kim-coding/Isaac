@@ -2,6 +2,7 @@
 #include "blood.h"
 #include "SceneDev1.h"
 #include "PlayerIsaac.h"
+#include "Poop.h"
 
 blood::blood(const std::string& name)
 	:SpriteGo(name)
@@ -50,10 +51,44 @@ void blood::Update(float dt)
 
 void blood::FixedUpdate(float dt)              //핏방울 - 플레이어 충돌 처리
 {
+	const std::vector<SpriteGo*>& obj = sceneDev1->GetMapObject();
+
 	if (GetGlobalBounds().intersects(player->GetGlobalBounds()))
 	{
 		player->OnDamage(damage);
 		SetActive(false);
 		sceneDev1->RemoveGo(this);
+	}
+
+	for (auto& go : obj)
+	{
+
+		if (!go->GetActive())
+			continue;
+
+		if (GetGlobalBounds().intersects(go->GetGlobalBounds()))
+		{
+			if (go->name == "rock")
+			{
+				SetActive(false);
+				sceneDev1->RemoveGo(this);
+
+			}
+
+			if (go->name == "poop")
+			{
+				SetActive(false);
+				sceneDev1->RemoveGo(this);
+
+				auto obj = dynamic_cast<Poop*>(go);
+				if (obj != nullptr)
+				{
+					obj->AddCount();
+				}
+
+			}
+
+			SOUND_MGR.PlaySfx("sound/TearImpacts2.mp3");
+		}
 	}
 }
