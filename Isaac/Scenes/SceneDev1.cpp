@@ -208,6 +208,8 @@ void SceneDev1::nextRoom(const sf::Vector2f point)
 							monstro->Reset();
 							monstro->SetPosition(pos + obj.position);
 							AddGo(monstro);
+
+							SOUND_MGR.PlaySfx("sound/7669.mp3");
 						}
 					}					
 				}
@@ -379,7 +381,7 @@ void SceneDev1::Enter()
 	currentFloor = spriteGoBackgroundfloor;
 
 	player->SetPosition({ 0.f,0.f });
-
+	SOUND_MGR.PlayBgm("sound/GameBgm.mp3", true);
 }
 
 void SceneDev1::Exit()

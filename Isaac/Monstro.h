@@ -7,10 +7,10 @@ protected:
 	sf::Vector2f velocity;
 	sf::Vector2f direction;
 
-	float gravity = 100.f;
+	float gravity = 100.f;       
 	bool isGround = true;
 
-	float AttackTimer = 0.f;     //공격 패턴 1 구현을 위함
+	float AttackTimer = 0.f;
 	float AttackInterval = 10.f;
 
 	float directionChangeTimer;

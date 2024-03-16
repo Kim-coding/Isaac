@@ -65,12 +65,10 @@ void SceneIntro::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Num1))
 	{
-		SOUND_MGR.StopBgm();
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneDev1);
 	}
 	if(InputMgr::GetKeyDown(sf::Keyboard::Num2))
 	{
-		SOUND_MGR.StopBgm();
 		SceneMgr::Instance().ChangeScene(SceneIds::SceneMapTool);
 	}
 }

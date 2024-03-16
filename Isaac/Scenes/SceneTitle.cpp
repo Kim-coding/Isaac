@@ -13,8 +13,6 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::Init()
 {
-	SOUND_MGR.PlayBgm("sound/7689.mp3");
-
 	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = windowSize * 0.5f;
 	worldView.setSize(windowSize);
@@ -39,6 +37,7 @@ void SceneTitle::Release()
 void SceneTitle::Enter()
 {
 	Scene::Enter();
+	SOUND_MGR.PlayBgm("sound/7689.mp3");
 }
 
 void SceneTitle::Exit()
