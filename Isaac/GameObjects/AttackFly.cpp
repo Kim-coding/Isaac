@@ -45,3 +45,9 @@ void AttackFly::FixedUpdate(float dt)
 	MonsterMgr::FixedUpdate(dt);
 
 }
+
+void AttackFly::OnDie()
+{
+	MonsterMgr::OnDie();
+	SOUND_MGR.StopAll();
+}

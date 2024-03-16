@@ -74,5 +74,4 @@ void MonsterMgr::OnDie()
 	isAlive = false;
 	SetActive(false);
 	sceneDev1->RemoveGo(this);
-	SOUND_MGR.StopAll();
 }
