@@ -1,11 +1,6 @@
 #pragma once
 #include "SpriteGo.h"
 #include "Animator.h"
-<<<<<<< HEAD
-
-class PlayerIsaac : public SpriteGo
-{
-=======
 #include "MapInfo.h"
 
 class SceneDev1;
@@ -16,7 +11,6 @@ class PlayerIsaac : public SpriteGo
 	std::map<sf::Keyboard::Key, sf::Vector2f> tearDirection;
 	std::map<sf::Keyboard::Key, std::string> cryDirection;
 
->>>>>>> Develop
 public:
 	struct ClipInfo
 	{
@@ -36,8 +30,6 @@ public:
 
 protected:
 	Animator animator;
-<<<<<<< HEAD
-=======
 	MapInfo mapinfo;
 	SceneDev1* sceneDev1 = nullptr;
 
@@ -50,7 +42,6 @@ protected:
 	static std::string MoveLeft;
 	static std::string MoveUp;
 	static std::string DamageMove;
->>>>>>> Develop
 
 
 	sf::Vector2f direction;
@@ -58,28 +49,14 @@ protected:
 
 	std::vector<ClipInfo> clipInfos;
 	ClipInfo currentClipInfo;
-<<<<<<< HEAD
-
-	int maxHp = 1000;
-=======
 	
 	int maxHp = 90;
->>>>>>> Develop
 	int hp;
 	bool isAlive = true;
 	bool isNoDamage = false;
 	float noDamageTime = 0.5f;
 	float noDamageTimer = 0.f;
 
-<<<<<<< HEAD
-	static std::string IdleDown;
-	static std::string IdleSide;
-	static std::string IdleUp;
-	static std::string MoveDown;
-	static std::string MoveSide;
-	static std::string MoveUp;
-
-=======
 	float timer = 0.f;
 	float timerInterval = 3.f;
 
@@ -91,7 +68,6 @@ protected:
 
 	bool doorCrash = false;
 	bool isRook = false;
->>>>>>> Develop
 public:
 	PlayerIsaac(const std::string& name = "");
 	~PlayerIsaac() override;
@@ -100,12 +76,6 @@ public:
 	void TestStaic();
 
 	void Init() override;
-<<<<<<< HEAD
-	void Reset() override;
-	void Update(float dt) override;
-
-	void Cry();           //발사체 : 눈물 공격
-=======
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
@@ -114,14 +84,10 @@ public:
 	void Cry(sf::Vector2f direction);           //발사체 : 눈물 공격
 	int GetHp() { return hp; }
 	void ReSetHp() { hp = maxHp; }
->>>>>>> Develop
 
 	void OnDamage(int damage);
 	void OnDie();
 
-<<<<<<< HEAD
-=======
 	void OnItem(Item* item);
->>>>>>> Develop
 };
 

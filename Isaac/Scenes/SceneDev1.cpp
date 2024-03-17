@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "SceneDev1.h"
 #include "PlayerIsaac.h"
-<<<<<<< HEAD
-=======
 #include "Charger.h"
 #include "SpriteGo.h"
 #include "Dip.h"
@@ -16,7 +14,6 @@
 #include "UiHud.h"
 #include <filesystem>
 #include <random>
->>>>>>> Develop
 
 SceneDev1::SceneDev1(SceneIds id)
 	: Scene(id)
@@ -252,16 +249,6 @@ void SceneDev1::LoadRandomMap()
 
 void SceneDev1::Init()
 {
-<<<<<<< HEAD
-	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
-	sf::Vector2f centerPos = windowSize * 0.5f;
-	worldView.setSize(windowSize);
-	worldView.setCenter({ 0.f, 0.f });
-	uiView.setSize(windowSize);
-	uiView.setCenter(centerPos);
-
-	AddGo(new PlayerIsaac());
-=======
 	doorPosition = {
 		{0, { 0.f, -210.f}},
 		{90, {380.f, 0.f}},
@@ -311,7 +298,6 @@ void SceneDev1::Init()
 	uiHud = new UiHud("UI HUD");
 	AddGo(uiHud, Layers::Ui);
 
->>>>>>> Develop
 	Scene::Init();
 }
 
@@ -435,12 +421,6 @@ void SceneDev1::Update(float dt)
 	}
 	///////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Space))  //모든 몬스터 처치 + 문과 충돌 시 ~
-	//{
-	//	SceneMgr::Instance().ChangeScene(SceneIds::SceneDev2);
-	//}
-=======
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
 		sf::Vector2f point = player->GetPosition();
@@ -545,5 +525,4 @@ void SceneDev1::SetStatus(Status newStatus)
 		FRAMEWORK.SetTimeScale(0.f);
 		break;
 	}
->>>>>>> Develop
 }

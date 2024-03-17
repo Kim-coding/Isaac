@@ -69,8 +69,6 @@
     <ClCompile Include="GameObjects\PlayerIsaac.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
     <ClCompile Include="Scenes\SceneTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -131,7 +129,6 @@
     <ClCompile Include="blood.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
->>>>>>> Develop
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Defines.h">
@@ -197,8 +194,6 @@
     <ClInclude Include="GameObjects\PlayerIsaac.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="Scenes\SceneTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -259,6 +254,5 @@
     <ClInclude Include="blood.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
->>>>>>> Develop
   </ItemGroup>
 </Project>

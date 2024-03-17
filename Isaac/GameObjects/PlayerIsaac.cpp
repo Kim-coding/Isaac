@@ -1,14 +1,5 @@
 #include "pch.h"
 #include "PlayerIsaac.h"
-<<<<<<< HEAD
-
-std::string PlayerIsaac::IdleDown = "animators/IdleDown.csv";
-std::string PlayerIsaac::IdleSide = "animators/IdleSide.csv";
-std::string PlayerIsaac::IdleUp = "animators/IdleUP.csv";
-std::string PlayerIsaac::MoveDown = "animators/MoveDown.csv";
-std::string PlayerIsaac::MoveSide = "animators/MoveSide.csv";
-std::string PlayerIsaac::MoveUp = "animators/MoveUp.csv";
-=======
 #include "Tears.h"
 #include "SpriteGoEffect.h"
 #include "SceneDev1.h"
@@ -23,7 +14,6 @@ std::string PlayerIsaac::MoveRight = "animators/MoveRight.csv";
 std::string PlayerIsaac::MoveLeft = "animators/MoveLeft.csv";
 std::string PlayerIsaac::MoveUp = "animators/MoveUp.csv";
 std::string PlayerIsaac::DamageMove = "animators/DamegeMove.csv";
->>>>>>> Develop
 
 PlayerIsaac::PlayerIsaac(const std::string& name)
 	:SpriteGo(name)
@@ -45,23 +35,6 @@ void PlayerIsaac::TestStaic()
 void PlayerIsaac::Init()
 {
 	SpriteGo::Init();
-<<<<<<< HEAD
-
-	animator.SetTarget(&sprite);
-
-	clipInfos.push_back({ IdleSide, MoveSide, true, Utils::GetNormal({-1,-1}) });
-	clipInfos.push_back({ IdleUp, MoveUp, false, {0, -1} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, Utils::GetNormal({1,-1}) });
-
-	clipInfos.push_back({ IdleSide, MoveSide, true, {-1, 0} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, {1, 0} });
-
-	clipInfos.push_back({ IdleSide, MoveSide, true, Utils::GetNormal({-1,1}) });
-	clipInfos.push_back({ IdleDown, MoveDown, false, {0, 1} });
-	clipInfos.push_back({ IdleSide, MoveSide, false, Utils::GetNormal({1, 1}) });
-
-
-=======
 	hp = maxHp;
 
 	SetScale({ 1.5,1.5 });
@@ -100,19 +73,12 @@ void PlayerIsaac::Init()
 void PlayerIsaac::Release()
 {
 	SpriteGo::Release();
->>>>>>> Develop
 }
 
 void PlayerIsaac::Reset()
 {
 	animator.Play(IdleDown);
 	SetOrigin(Origins::BC);
-<<<<<<< HEAD
-	SetPosition({ 0.f,0.f });
-	SetFlipX(false);
-
-	currentClipInfo = clipInfos[6];
-=======
 	SetFlipX(false);
 
 	isAlive = true;
@@ -121,36 +87,19 @@ void PlayerIsaac::Reset()
 
 	sceneDev1 = dynamic_cast<SceneDev1*>(SCENE_MGR.GetCurrentScene());
 
->>>>>>> Develop
 }
 
 void PlayerIsaac::Update(float dt)
 {
-<<<<<<< HEAD
-	SpriteGo::Update(dt);
-=======
 	if (!isAlive)
 		return;
 
->>>>>>> Develop
 	animator.Update(dt);
 
 	direction.x = InputMgr::GetAxisRaw(Axis::Horizontal);
 	direction.y = InputMgr::GetAxisRaw(Axis::Vertical);
 
 	float mag = Utils::Magnitude(direction);
-<<<<<<< HEAD
-	if (mag > 1.f)            
-	{
-		direction /= mag;
-	}
-	Translate(direction * speed * dt);               
-
-	if (direction.x != 0.f || direction.y != 0.f)     
-	{
-		auto min = std::min_element(clipInfos.begin(), clipInfos.end(),  
-			[this](const ClipInfo& lhs, const ClipInfo& rhs)          
-=======
 	if (mag > 1.f)          
 	{
 		direction /= mag;
@@ -185,35 +134,21 @@ void PlayerIsaac::Update(float dt)
 	{
 		auto min = std::min_element(clipInfos.begin(), clipInfos.end(),  
 			[this](const ClipInfo& lhs, const ClipInfo& rhs)            
->>>>>>> Develop
 			{
 				return Utils::Distance(direction, lhs.point) < Utils::Distance(direction, rhs.point);
 			});
 		currentClipInfo = *min;                                         
 	}
 
-<<<<<<< HEAD
-	SetFlipX(currentClipInfo.filpX);                                 
-
-	const std::string& clipId = (direction.x != 0.f || direction.y != 0.f) ?
-		currentClipInfo.move : currentClipInfo.idle;                 
-=======
 	SetFlipX(currentClipInfo.filpX);                                   
 
 	const std::string& clipId = (direction.x != 0.f || direction.y != 0.f) ?
 		currentClipInfo.move : currentClipInfo.idle;    
->>>>>>> Develop
 
 	if (animator.GetCurrentCilpId() != clipId)
 	{
 		animator.Play(clipId);
 	}
-<<<<<<< HEAD
-}
-
-void PlayerIsaac::Cry() //АјАн
-{
-=======
 
 
 	for (auto& pair : cryDirection)
@@ -266,13 +201,10 @@ void PlayerIsaac::Cry(sf::Vector2f direction)
 	sceneDev1->AddGo(tears);
 
 	SOUND_MGR.PlaySfx("sound/Tears_Fire_0.mp3");
->>>>>>> Develop
 }
 
 void PlayerIsaac::OnDamage(int damage)
 {
-<<<<<<< HEAD
-=======
 	if (!isAlive)
 		return;
 
@@ -297,13 +229,10 @@ void PlayerIsaac::OnDamage(int damage)
 	effectBlood->SetPosition(position);
 
 	sceneDev1->AddGo(effectBlood);
->>>>>>> Develop
 }
 
 void PlayerIsaac::OnDie()
 {
-<<<<<<< HEAD
-=======
 	if (!isAlive)
 		return;
 
@@ -325,5 +254,4 @@ void PlayerIsaac::OnItem(Item* item)
 
 		break;
 	}
->>>>>>> Develop
 }

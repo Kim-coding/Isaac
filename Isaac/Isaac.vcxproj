@@ -155,12 +155,9 @@
     </ClCompile>
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\PlayerIsaac.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="GameObjects\Tears.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Item.cpp" />
->>>>>>> Develop
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -206,8 +203,6 @@
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="GameObjects\PlayerIsaac.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="GameObjects\Tears.h" />
     <ClInclude Include="GameObjects\Charger.h" />
     <ClInclude Include="Intro.h" />
@@ -215,7 +210,6 @@
     <ClInclude Include="MapInfo.h" />
     <ClInclude Include="MonsterMgr.h" />
     <ClInclude Include="GameObjects\Monstro.h" />
->>>>>>> Develop
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameObjects\Rock.h" />
     <ClInclude Include="GameObjects\Poop.h" />
