@@ -139,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="blood.cpp" />
+    <ClCompile Include="GameObjects\blood.cpp" />
     <ClCompile Include="GameObjects\AttackFly.cpp" />
     <ClCompile Include="GameObjects\BoomFly.cpp" />
     <ClCompile Include="DataTables\DataTableMgr.cpp" />
@@ -187,7 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
-    <ClInclude Include="blood.h" />
+    <ClInclude Include="GameObjects\blood.h" />
     <ClInclude Include="GameObjects\AttackFly.h" />
     <ClInclude Include="GameObjects\BoomFly.h" />
     <ClInclude Include="DataTables\DataTableMgr.h" />
