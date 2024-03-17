@@ -53,13 +53,13 @@ void MapInfo::SaveToFile(std::string path)
 
 	for (auto& obj : objectList)
 	{
-		std::vector<std::string> mapObject = { "mapObj", obj.TexId, std::to_string(obj.position.x),std::to_string(obj.position.y), obj.name};
+		std::vector<std::string> mapObject = { "mapObj", obj.TexId, std::to_string((int)obj.position.x),std::to_string((int)obj.position.y), obj.name};
 		doc.InsertRow(row, mapObject);
 		row++;
 	}
 	for (auto& go : monsterList)
 	{
-		std::vector<std::string> monster = { "monster", go.TexId, std::to_string(go.position.x), std::to_string(go.position.y), go.name};
+		std::vector<std::string> monster = { "monster", go.TexId, std::to_string((int)go.position.x), std::to_string((int)go.position.y), go.name};
 		doc.InsertRow(row, monster);
 		row++;
 	}

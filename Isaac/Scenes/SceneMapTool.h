@@ -80,8 +80,7 @@ public:
 	void Init();
 	void Release();
 
-	std::wstring SelectFloor();
-	std::wstring SelectRoom();
+	std::wstring SelectFile();
 
 	void Enter();
 	void Exit();

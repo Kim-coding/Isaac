@@ -1,15 +1,14 @@
 TYPE,TEXTURE ID,X,Y,NAME
 Room,graphics/Catacombs2.png, 0 ,0 ,room
 RoomFloor,graphics/CatacombsFloor.png, 0 ,0 ,roomfloor
-mapObj,graphics/rock.png,100 ,100 ,rock
-mapObj,graphics/rock.png,-100 ,100 ,rock
-mapObj,graphics/rock.png,100 ,-100 ,rock
-mapObj,graphics/rock.png,-100 ,-100 ,rock
-mapObj,graphics/rock.png,300 ,0 ,rock
-mapObj,graphics/rock.png,-300 ,0 ,rock
-mapObj,,-39.000004,-49.999996,poop
-monster,graphics/AttackFly.png,200 ,0 ,attackfly
-monster,graphics/AttackFly.png,-200 ,100 ,attackfly
-monster,graphics/Dip.png,150 ,150 ,dip
-monster,graphics/Charger.png,-50 ,100 ,charger
-monster,graphics/Dinga.png,-50 ,100 ,dinga
+mapObj,,100 ,100 ,rock
+mapObj,,-100 ,100 ,rock
+mapObj,,100 ,-100 ,rock
+mapObj,,-100 ,-100 ,rock
+mapObj,,300 ,0 ,rock
+mapObj,,-300 ,0 ,rock
+monster,,200 ,0 ,attackfly
+monster,,-200 ,100 ,attackfly
+monster,,150 ,150 ,dip
+monster,,-50 ,100 ,charger
+monster,,-50 ,100 ,dinga

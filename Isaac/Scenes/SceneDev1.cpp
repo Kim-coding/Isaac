@@ -272,7 +272,7 @@ void SceneDev1::Init()
 
 	////////////////////////////////////////
 
-	LoadRandomMap();
+	
 
 	//방
 	SpriteGo* spriteGoBackground = new SpriteGo("StartRoom");
@@ -290,6 +290,38 @@ void SceneDev1::Init()
 	AddGo(spriteGoBackgroundfloor);
 	
 	///////////////////////////////////////////
+	
+	player = new PlayerIsaac("Isaac");
+	player->sortLayer = 1;
+	AddGo(player);
+
+	uiHud = new UiHud("UI HUD");
+	AddGo(uiHud, Layers::Ui);
+
+	Scene::Init();
+}
+
+void SceneDev1::Release()
+{
+	Scene::Release();
+}
+
+void SceneDev1::Enter()
+{
+	Scene::Enter();
+	SetStatus(Status::Game);
+
+	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
+	sf::Vector2f centerPos = windowSize * 0.5f;
+	worldView.setSize(windowSize);
+	worldView.setCenter({ 0.f, 0.f });
+	uiView.setSize(windowSize);
+	uiView.setCenter(centerPos);
+
+	currentFloor = spriteGoBackgroundfloor;
+
+	LoadRandomMap();
+
 	int roomNum = Utils::RandomRange(1, 4);
 	for (int i = 0; i < roomNum; ++i)
 	{
@@ -321,14 +353,14 @@ void SceneDev1::Init()
 		sf::Vector2f Roompos = Room[rand];
 
 		regularRoom = new SpriteGo("RegularRoom");
-		regularRoom->SetTexture("graphics/Catacombs.png");
+		regularRoom->SetTexture(mapinfo.roomTexId);
 		regularRoom->SetOrigin(Origins::MC);
 		regularRoom->SetPosition(Roompos);
 		regularRoom->sortLayer = -1;
 		AddGo(regularRoom);
 
 		regularRoomfloor = new SpriteGo("regularRoomfloor");
-		regularRoomfloor->SetTexture("graphics/CatacombsFloor.png");
+		regularRoomfloor->SetTexture(mapinfo.roomFloorTexId);
 		regularRoomfloor->SetOrigin(Origins::MC);
 		regularRoomfloor->SetPosition(Roompos);
 		regularRoomfloor->sortLayer = -1;
@@ -341,8 +373,8 @@ void SceneDev1::Init()
 		door->SetRotation(rand * 90);
 		door->SetPosition(doorpos);
 		AddGo(door);
-		doors.push_back(door);                          
-	
+		doors.push_back(door);
+
 		door = new SpriteGo("door");                       //생성된 문에 맞게 다음 문 생성.
 		door->SetTexture("graphics/door.png");
 		door->SetOrigin(Origins::BC);
@@ -350,35 +382,7 @@ void SceneDev1::Init()
 		door->SetPosition(nextdoorpos);
 		AddGo(door);
 		doors.push_back(door);
-	}  
-	player = new PlayerIsaac("Isaac");
-	player->sortLayer = 1;
-	AddGo(player);
-
-	uiHud = new UiHud("UI HUD");
-	AddGo(uiHud, Layers::Ui);
-
-	Scene::Init();
-}
-
-void SceneDev1::Release()
-{
-	Scene::Release();
-}
-
-void SceneDev1::Enter()
-{
-	Scene::Enter();
-	SetStatus(Status::Game);
-
-	sf::Vector2f windowSize = (sf::Vector2f)FRAMEWORK.GetWindowSize();
-	sf::Vector2f centerPos = windowSize * 0.5f;
-	worldView.setSize(windowSize);
-	worldView.setCenter({ 0.f, 0.f });
-	uiView.setSize(windowSize);
-	uiView.setCenter(centerPos);
-
-	currentFloor = spriteGoBackgroundfloor;
+	}
 
 	player->SetPosition({ 0.f,0.f });
 	SOUND_MGR.PlayBgm("sound/GameBgm.mp3", true);

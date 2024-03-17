@@ -199,7 +199,7 @@ void SceneMapTool::Init()
 	Scene::Init();
 }
 
-std::wstring SceneMapTool::SelectFloor()
+std::wstring SceneMapTool::SelectFile()
 {
 	wchar_t save[260];
 	GetCurrentDirectory(MAX_PATH, save);
@@ -218,39 +218,6 @@ std::wstring SceneMapTool::SelectFloor()
 	ofn.lpstrFileTitle = NULL; 
 	ofn.nMaxFileTitle = 0; 
 	ofn.lpstrInitialDir = NULL; 
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-	if (GetOpenFileName(&ofn) == TRUE)
-	{
-		SetCurrentDirectory(save);
-		return ofn.lpstrFile;
-	}
-	else
-	{
-		SetCurrentDirectory(save);
-		return L"";
-	}
-}
-
-std::wstring SceneMapTool::SelectRoom()
-{
-	wchar_t save[260];
-	GetCurrentDirectory(MAX_PATH, save);
-
-	OPENFILENAME ofn;
-	wchar_t szFile[260];
-
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = NULL;
-	ofn.lpstrFile = szFile;
-	ofn.lpstrFile[0] = L'\0';
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = L"All Files\0*.*\0Text Files\0*.TXT\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
 	if (GetOpenFileName(&ofn) == TRUE)
@@ -307,14 +274,15 @@ void SceneMapTool::Update(float dt)
 	{
 		if (buttonFloor->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::wstring filePathW = SelectFloor();
+			std::wstring filePathW = SelectFile();
 			if (!filePathW.empty())
 			{
 				std::string filePath = ConvertLPCWSTRToString(filePathW.c_str());
 				if (imageFloor.loadFromFile(filePath))
 				{
 					spriteFloor.setTexture(imageFloor);
-					spriteFloor.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageFloor.getSize().x / 2, FRAMEWORK.GetWindowSize().y / 2 - imageFloor.getSize().y / 2);
+					spriteFloor.setPosition(FRAMEWORK.GetWindowSize().x / 2 - imageFloor.getSize().x / 2, 
+						FRAMEWORK.GetWindowSize().y / 2 - imageFloor.getSize().y / 2);
 					spriteFloor.setColor(sf::Color(255, 255, 255, 50));
 
 					std::string relativePath = ToRelativePath(filePath, fs::current_path().string());
@@ -329,7 +297,7 @@ void SceneMapTool::Update(float dt)
 
 		if (buttonRoom->GetGlobalBounds().contains(mouseWorldPos))
 		{
-			std::wstring filePathW = SelectFloor();
+			std::wstring filePathW = SelectFile();
 			if (!filePathW.empty())
 			{
 				std::string filePath = ConvertLPCWSTRToString(filePathW.c_str());
@@ -559,7 +527,6 @@ void SceneMapTool::DeleteObj()
 		SpriteGo* lastMapObj = mapObjects.back();
 		lastMapObj->SetActive(false);
 		mapObjects.pop_back();
-		//delete lastMapObj;
 	}
 	else 
 	{
@@ -574,7 +541,6 @@ void SceneMapTool::DeleteMonster()
 		SpriteGo* lastMonster = monsterList.back();
 		lastMonster->SetActive(false);
 		monsterList.pop_back();
-		//delete lastMonster;
 	}
 	else
 	{
