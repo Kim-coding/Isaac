@@ -186,9 +186,9 @@ void SceneMapTool::Init()
 	SaveButtonText.SetOrigin(Origins::MC);
 	SaveButtonText.SetPosition({ 75,660 });
 
-	DeleteMapObjectButtonText.Set(font, "Object", 25, sf::Color::Red);
-	DeleteMapObjectButtonText.SetOrigin(Origins::MC);
-	DeleteMapObjectButtonText.SetPosition({ 235,660 });
+	DeleteObstacleButtonText.Set(font, "Obstacle", 25, sf::Color::Red);
+	DeleteObstacleButtonText.SetOrigin(Origins::MC);
+	DeleteObstacleButtonText.SetPosition({ 230,660 });
 	
 	DeleteMonsterButtonText.Set(font, "Monster", 25, sf::Color::Red);
 	DeleteMonsterButtonText.SetOrigin(Origins::MC);
@@ -481,7 +481,7 @@ void SceneMapTool::Draw(sf::RenderWindow& window)
 	DipButtonText.Draw(window);
 	DingaButtonText.Draw(window);
 	BoosButtonText.Draw(window);
-	DeleteMapObjectButtonText.Draw(window);
+	DeleteObstacleButtonText.Draw(window);
 	DeleteMonsterButtonText.Draw(window);
 }
 

@@ -47,7 +47,7 @@ protected:
 	TextGo FloorButtonText;
 	TextGo RoomButtonText;
 	TextGo SaveButtonText;
-	TextGo DeleteMapObjectButtonText;
+	TextGo DeleteObstacleButtonText;
 	TextGo DeleteMonsterButtonText;
 	
 	TextGo RockButtonText;
