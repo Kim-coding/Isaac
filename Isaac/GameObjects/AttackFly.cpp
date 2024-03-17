@@ -6,7 +6,6 @@
 AttackFly::AttackFly(const std::string& name)
 	:MonsterMgr(name, 50, 10, 150.f)
 {
-	SOUND_MGR.PlaySfx("sound/Fly_Buzz.mp3",true);
 }
 
 AttackFly::~AttackFly()

@@ -45,6 +45,8 @@ void blood::Update(float dt)
 		{
 			SetActive(false);
 			sceneDev1->RemoveGo(this);
+
+			SOUND_MGR.PlaySfx("sound/TearImpacts2.mp3");
 		}
 	}
 }
@@ -58,6 +60,8 @@ void blood::FixedUpdate(float dt)              //핏방울 - 플레이어 충돌 처리
 		player->OnDamage(damage);
 		SetActive(false);
 		sceneDev1->RemoveGo(this);
+
+		SOUND_MGR.PlaySfx("sound/TearImpacts2.mp3");
 	}
 
 	for (auto& go : obj)
@@ -88,7 +92,6 @@ void blood::FixedUpdate(float dt)              //핏방울 - 플레이어 충돌 처리
 
 			}
 
-			SOUND_MGR.PlaySfx("sound/TearImpacts2.mp3");
 		}
 	}
 }
