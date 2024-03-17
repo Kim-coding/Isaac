@@ -1,0 +1,11 @@
+TYPE,TEXTUREID,X,Y,NAME
+Room,graphics\Catacombs.png,0,0,room
+RoomFloor,graphics\CatacombsFloor.png,0,0,roomfloor
+mapObj,,-148,-100,rock
+mapObj,,115,-103,rock
+mapObj,,-143,82,rock
+mapObj,,132,68,rock
+monster,,-11,-83,charger
+monster,,-139,-12,charger
+monster,,129,-13,charger
+monster,,0,86,charger

@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+BoomFlyMove,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Boomfly.png,2,64,24,26
+graphics/Boomfly.png,34,64,24,26

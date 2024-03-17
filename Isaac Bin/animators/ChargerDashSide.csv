@@ -1,6 +1,5 @@
 ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
-MoveSide,10,1,,
+ChargerDashSide,10,1,,
 ,,,,
 TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
-graphics/Isaac2.png,0,128,96,64
-graphics/Isaac2.png,192,128,96,64
+graphics/Charger.png,36,100,24,17

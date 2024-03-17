@@ -6,6 +6,8 @@ protected:
 	sf::Sprite sprite;
 	std::string textureId;
 
+	sf::Vector2f size;
+
 	bool hasHitBox = false;
 
 public:
@@ -13,6 +15,7 @@ public:
 
 	virtual sf::FloatRect GetLocalBounds() override;
 	virtual sf::FloatRect GetGlobalBounds() override;
+	virtual sf::Vector2f GetSize() { return size; }
 
 	void SetTexture(const std::string& textureId);
 
@@ -24,6 +27,7 @@ public:
 	void SetScale(const sf::Vector2f& scale) override;
 	void SetFlipX(bool filp) override;
 	void SetFlipY(bool filp) override;
+	
 
 	void Reset() override;
 	void Draw(sf::RenderWindow& window) override;

@@ -111,9 +111,12 @@ void SoundMgr::PlayBgm(std::string id, bool crossFade)
 void SoundMgr::StopBgm()
 {
 	isFading = false;
-	for (auto sound : bgm)
-	{
-		sound.stop();
+	//for (auto sound : bgm)
+	//{
+	//	sound.stop();
+	//}
+	for (int i = 0; i < 2; ++i) {
+		bgm[i].stop();
 	}
 }
 

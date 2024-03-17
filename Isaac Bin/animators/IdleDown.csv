@@ -2,4 +2,8 @@ ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
 IdleDown,10,0,,
 ,,,,
 TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+<<<<<<< HEAD
 graphics/Isaac2.png,96,0,96,64
+=======
+graphics/Isaac2.png,129,21,28,34
+>>>>>>> Develop

@@ -1,0 +1,13 @@
+TYPE,TEXTURE ID,X,Y,NAME
+Room,graphics/Catacombs.png, 0 ,0 ,room
+RoomFloor,graphics/CatacombsFloor.png, 0 ,0 ,roomfloor
+mapObj,graphics/rock.png,100 ,100 ,rock
+mapObj,graphics/rock.png,-100 ,-100 ,rock
+mapObj,graphics/rock.png,-50 ,150 ,rock
+mapObj,graphics/Poop1.png,50 ,50 ,poop
+monster,graphics/Dip.png,0 ,0 ,dip
+monster,graphics/Dip.png,0 ,100 ,dip
+monster,graphics/Dip.png,200 ,100 ,dip
+monster,graphics/Dip.png,130 ,50 ,dip
+monster,graphics/Dip.png,100 ,0 ,dip
+monster,graphics/Dip.png,90 ,160 ,dip

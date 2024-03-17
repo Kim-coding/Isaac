@@ -5,7 +5,11 @@ class Scene;
 
 enum class SceneIds
 {
+<<<<<<< HEAD
 	None = -1, SceneDev1, SceneDev2, Count,
+=======
+	None = -1, SceneTitle, SceneIntro, SceneMapTool, SceneDev1, SceneDev2, Count,
+>>>>>>> Develop
 };
 
 class SceneMgr : public Singleton<SceneMgr>
@@ -15,9 +19,9 @@ class SceneMgr : public Singleton<SceneMgr>
 protected:
 	std::vector<Scene*> scenes;
 
-	SceneIds startScene = SceneIds::SceneDev1;
+	SceneIds startScene = SceneIds::SceneTitle;
 	SceneIds currentScene = startScene;
-
+	SceneIds nextScene = SceneIds::None;
 	bool isDeveloperMode = false;
 
 	SceneMgr() = default;
@@ -32,7 +36,7 @@ public:
 	Scene* GetCurrentScene() { return scenes[(int)currentScene]; }
 	bool GetDeveloperMode() { return isDeveloperMode; }
 
-	void Update(float dt);
+	bool Update(float dt);
 	void LateUpdate(float dt);
 	void FixedUpdate(float dt);
 	void Draw(sf::RenderWindow& window);

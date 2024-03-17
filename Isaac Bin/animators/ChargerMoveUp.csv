@@ -1,0 +1,8 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+ChargerMoveUp,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Charger.png,8,34,16,25
+graphics/Charger.png,41,34,14,25
+graphics/Charger.png,73,34,14,25
+graphics/Charger.png,104,34,16,25

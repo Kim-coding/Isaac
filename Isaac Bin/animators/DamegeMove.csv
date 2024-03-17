@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+DamegeMove,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Isaac2.png,33,267,28,32
+graphics/Isaac2.png,131,267,28,32

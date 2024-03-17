@@ -1,0 +1,17 @@
+TYPE,TEXTUREID,X,Y,NAME
+Room,graphics\Catacombs.png,0,0,room
+RoomFloor,graphics\CatacombsFloor.png,0,0,roomfloor
+mapObj,,-236.999969,-4.000008,rock
+mapObj,,244.000000,0.999981,rock
+mapObj,,0.000000,0.000000,rock
+monster,,-353.999969,-188.999985,attackfly
+monster,,353.999939,-193.000000,attackfly
+monster,,-360.999969,188.999985,attackfly
+monster,,342.999969,179.999985,attackfly
+monster,,-259.999969,-120.999992,attackfly
+monster,,282.999969,-125.000000,attackfly
+monster,,-261.999969,113.000000,attackfly
+monster,,257.000000,115.000000,attackfly
+monster,,-166.000000,-66.999992,attackfly
+monster,,175.999985,-41.000000,attackfly
+monster,,-147.000000,50.000019,attackfly

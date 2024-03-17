@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+Intro,10,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Intro.png,0,0,484,300
+graphics/Intro.png,490,0,494,300

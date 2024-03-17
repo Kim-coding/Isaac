@@ -1,0 +1,6 @@
+ID,FPS,"LOOPTYPE(0 : Single, 1 : Loop, 2: PingPong)",,
+DingaMove,5,1,,
+,,,,
+TEXTURE ID,LEET,TOP,WIDTH,HEIGHT
+graphics/Dinga.png,38,41,52,50
+graphics/Dinga.png,164,41,57,50
